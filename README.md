@@ -1,4 +1,9 @@
 SparkOS - Sistema simples de Ordem de Serviço ainda em desenvolvimento. 
+DEMO: http://sparkos.my-style.in/auth/entrar/desconectado
+
+Usuário: admin@admin.com
+Senha: 123456
+
 
 ### Instalação
 
