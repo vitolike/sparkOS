@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 17-Maio-2019 às 16:38
+-- Generation Time: 19-Maio-2019 às 05:05
 -- Versão do servidor: 10.1.38-MariaDB
 -- versão do PHP: 5.6.40
 
@@ -49,6 +49,21 @@ INSERT INTO `admins` (`adminid`, `nome`, `telefone`, `email`, `senha`, `obs`, `s
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `auth_login`
+--
+
+CREATE TABLE `auth_login` (
+  `idauth_login` int(11) NOT NULL,
+  `tipo` varchar(45) DEFAULT NULL,
+  `data` datetime DEFAULT NULL,
+  `ip` varchar(45) DEFAULT NULL,
+  `usuario` text,
+  `logs` longtext
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `clientes`
 --
 
@@ -71,13 +86,6 @@ CREATE TABLE `clientes` (
   `criado` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `clientes`
---
-
-INSERT INTO `clientes` (`clientesid`, `nome`, `sobrenome`, `email`, `telefone`, `endereco`, `numero`, `bairro`, `cidade`, `uf`, `documento`, `tipo_documento`, `cep`, `log_alteracao`, `log_criacao`, `criado`) VALUES
-(15, 'Regina', 'Moraes Felipe', 'bryanfelipemanoelcortereal-96@detorsul.com', '', 'Rua Coronel César Eugênio Piedade', '979', 'Jardim Itália', 'Itapetininga', 'SP', '4454541312', 'CPF', '18201790', NULL, 'Criado em 2019-05-17T15:24:19+02:00 Pelo usuário: Bryan', '2019-05-17 15:24:00');
-
 -- --------------------------------------------------------
 
 --
@@ -98,6 +106,28 @@ CREATE TABLE `definicoes` (
 
 INSERT INTO `definicoes` (`iddefinicoes`, `sysname`, `email`, `cnpj`, `nome_fantasia`) VALUES
 (0, 'SparkOS', 'sparkos@gmail.com', '1234568900123', 'SparkOS');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `os`
+--
+
+CREATE TABLE `os` (
+  `idos` int(11) NOT NULL,
+  `data_inicial` date DEFAULT NULL,
+  `data_final` date DEFAULT NULL,
+  `garantia` varchar(45) DEFAULT NULL,
+  `descricao` text,
+  `defeito` text,
+  `status` varchar(45) DEFAULT NULL,
+  `observacoes` text,
+  `laudo_tecnico` text,
+  `valor_total` varchar(45) DEFAULT NULL,
+  `cliente` varchar(300) DEFAULT NULL,
+  `protocolo` varchar(30) DEFAULT NULL,
+  `tecnico` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -140,13 +170,6 @@ CREATE TABLE `servicos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `servicos`
---
-
-INSERT INTO `servicos` (`servicosid`, `codigo`, `nome`, `descricao`, `preco`) VALUES
-(2, NULL, 'Formatação de PC', 'Formatação de PC', '15.00');
-
---
 -- Indexes for dumped tables
 --
 
@@ -155,6 +178,12 @@ INSERT INTO `servicos` (`servicosid`, `codigo`, `nome`, `descricao`, `preco`) VA
 --
 ALTER TABLE `admins`
   ADD PRIMARY KEY (`adminid`);
+
+--
+-- Indexes for table `auth_login`
+--
+ALTER TABLE `auth_login`
+  ADD PRIMARY KEY (`idauth_login`);
 
 --
 -- Indexes for table `clientes`
@@ -167,6 +196,12 @@ ALTER TABLE `clientes`
 --
 ALTER TABLE `definicoes`
   ADD PRIMARY KEY (`iddefinicoes`);
+
+--
+-- Indexes for table `os`
+--
+ALTER TABLE `os`
+  ADD PRIMARY KEY (`idos`);
 
 --
 -- Indexes for table `produtos`
@@ -191,10 +226,22 @@ ALTER TABLE `admins`
   MODIFY `adminid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
+-- AUTO_INCREMENT for table `auth_login`
+--
+ALTER TABLE `auth_login`
+  MODIFY `idauth_login` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `clientes`
 --
 ALTER TABLE `clientes`
   MODIFY `clientesid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `os`
+--
+ALTER TABLE `os`
+  MODIFY `idos` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `produtos`
