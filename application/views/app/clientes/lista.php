@@ -259,7 +259,7 @@
              url: "<?php echo site_url('clientes/delete/')?>"+id,
              type: 'DELETE',
              error: function() {
-                alert('Ocorreu um erro');
+                swal("Error", "Ocorreu um erro, contate o administrador", "error");
              },
              success: function(data) {
                   $("#"+id).remove();

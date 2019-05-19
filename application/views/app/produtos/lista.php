@@ -106,7 +106,7 @@
   
   <div class="form-group">
     <label for="inputAddress">Descrição</label>
-    <input type="text" class="form-control" id="descricao" name="descricao">
+    <input type="text" class="form-control" id="descricao" name="descricao" required="required">
   </div>
     <div class="form-row">
    <div class="form-group"><label for="formControlRange">Tipo de Movimento</label></div>
@@ -130,13 +130,13 @@
   	<div class="form-group col-md-6">
     <div class="form-group">
   <label for="inputAddress2">Preço de Venda</label>
-    <input type="text" class="form-control" id="preco_venda" name="preco_venda">
+    <input type="text" class="form-control" id="preco_venda" name="preco_venda" required="required">
   </div>
 	</div>
  	 <div class="form-group col-md-6">
      <div class="form-group">
     <label for="inputAddress2">Preço de Compra</label>
-    <input type="text" class="form-control" id="preco_compra" name="preco_compra">
+    <input type="text" class="form-control" id="preco_compra" name="preco_compra" required="required">
   </div>
 	 </div>
  </div>
@@ -155,12 +155,12 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">Estoque</label>
-      <input type="number" class="form-control" id="estoque" name="estoque">
+      <input type="number" class="form-control" id="estoque" name="estoque" required="required">
     </div>
   
     <div class="form-group col-md-6">
       <label for="inputZip">Estoque Mínimo</label>
-      <input type="number" class="form-control" id="estoque_minimo" name="estoque_minimo">
+      <input type="number" class="form-control" id="estoque_minimo" name="estoque_minimo" required="required">
     </div>
   </div>
   
@@ -199,7 +199,7 @@
              url: "<?php echo site_url('produtos/delete/')?>"+id,
              type: 'DELETE',
              error: function() {
-                alert('Ocorreu um erro');
+                swal("Error", "Ocorreu um erro, contate o administrador", "error");
              },
              success: function(data) {
                   $("#"+id).remove();

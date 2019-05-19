@@ -109,15 +109,12 @@
     <label for="formGroupExampleInput2">Senha nova</label>
     <input type="password" class="form-control" id="senha_nova" name="senha_nova"  placeholder="Senha nova">
   </div>
-
-      </div>
-      <div class="modal-footer">
+  <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
         <button type="submit" class="btn btn-primary">Salvar</button></form>
       </div>
     </div>
   </div>
-</div>
 <!-- Modal novo -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">

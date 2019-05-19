@@ -53,6 +53,16 @@ class Auth extends CI_Controller {
 			$dados['id'] = $data['admins'][0]->adminid;
 			$dados['logado'] = true;
 			$this->session->set_userdata($dados);
+			
+			$log = array(
+			    'tipo' => 'ENTRADA',
+				'data' => date('Y-m-d\TH:i:sP'),
+				'ip' => $_SERVER['REMOTE_ADDR'],
+				'usuario' => $data['admins'][0]->nome.' '.$data['admins'][0]->email,
+				'logs' => $_SERVER['HTTP_USER_AGENT']);
+				
+			$this->db->insert('auth_login',$log);
+			
 			redirect('app/home');
 		}
 		else{
@@ -62,6 +72,14 @@ class Auth extends CI_Controller {
 	}
 	public function sair()
 	{
+		$log = array(
+			    'tipo' => 'SAIDA',
+				'data' => date('Y-m-d\TH:i:sP'),
+				'ip' => $_SERVER['REMOTE_ADDR'],
+				'usuario' => $this->session->nome,
+				'logs' => $_SERVER['HTTP_USER_AGENT']);
+				
+			$this->db->insert('auth_login',$log);
 		$this->session->sess_destroy();
 		redirect('auth/entrar/desconectado');
 	}

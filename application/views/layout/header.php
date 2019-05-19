@@ -10,7 +10,9 @@
 <script src="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.js"></script>
 <link rel="stylesheet" href="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.css" />
 <link href="<?= base_url(); ?>public/css/app.css" rel="stylesheet">
+
 <link href="<?= base_url(); ?>public/css/fontawesome-all.css" rel="stylesheet">
+<script type="text/javascript" src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
  
 
 </head>
@@ -46,7 +48,7 @@
                                 
                                  <li><a class="dropdown-item"  href="<?= base_url(); ?>servicos/lista"><i class="fas fa-screwdriver"></i> Serviços</a></li>
                                  
-                                 <li><a class="dropdown-item"  href="<?= base_url(); ?>servicos/lista"><i class="fas fa-sticky-note"></i> Ordens de Serviço</a></li>
+                                 <li><a class="dropdown-item"  href="<?= base_url(); ?>os/lista"><i class="fas fa-sticky-note"></i> Ordens de Serviço</a></li>
                                 
                               
                             </ul>
@@ -85,7 +87,7 @@
       
       <p><strong>Versão:</strong> <?php echo $this->config->item('sys_ver'); ?></p>
     
-        ...
+        Criado por Victor Oliveira. Codigo Aberto (link <a href="https://github.com/vitolike/sparkOS">github</a>)
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary btn-lg btn-block" data-dismiss="modal">Fechar</button>

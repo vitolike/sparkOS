@@ -3,8 +3,8 @@
       <nav class="nav nav-underline">
         <a class="nav-link active red-text" href="<?= base_url(); ?>app/home"><i class="fas fa-home navbar-text"></i></a>
          <a class="nav-link active red-text" onclick="history.back()"><i class="fas fa-arrow-left navbar-text"></i></a>
-        <a class="nav-link red-text" href="#" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-plus navbar-text"></i>
-          &nbsp; Adicionar novo serviço
+        <a class="nav-link red-text" href="<?= base_url(); ?>os/novo"><i class="fas fa-plus navbar-text"></i>
+          &nbsp; Adicionar nova OS
         </a>
        
       </nav>
@@ -41,24 +41,28 @@
     
     
       <div class="my-3 p-3 bg-white rounded box-shadow">
-    <h5 class="card-title">Serviços</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Lista de serviços cadastrados.
+    <h5 class="card-title">Ordens de Serviço</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Lista de ordens de serviço.
 </h6>
         
         
         <table class="table">
   <thead>
     <tr>
-      <th scope="col">Nome</th>
-      <th scope="col">Descrição</th>
-      <th  scope="col">Preço</th>
+    <th scope="col">#</th>
+      <th scope="col">Cliente</th>
+      <th scope="col">Responsável</th>
+      <th  scope="col">Data Inicial</th>
+      <th  scope="col">Data Final</th>
+      <th  scope="col">Status</th>
       <th scope="col"></th>
     </tr>
   </thead>
 <?php if(!$query){?>
  <tbody>
                     <tr>
-                        <td colspan="5"> <center><p class="texto_pequeno">Nenhum serviço cadastrado</p></center></td>
+                        <td colspan="5"> <center>
+                          <p class="texto_pequeno">Nenhuma ordem de serviço cadastrada</p></center></td>
                     </tr>
                 </tbody>
                 
@@ -66,14 +70,18 @@
  <tbody> <?php foreach($query as $prop) {?>
   
 
-     <tr id="<?= $prop->servicosid; ?>">  
-      <td><?= $prop->nome; ?></td>
-      <td><?= $prop->descricao; ?></td>
-      <td><?= $prop->preco; ?></td>
+     <tr id="<?= $prop->idos; ?>"> 
+      
+      <td><?= $prop->protocolo; ?></td>
+      <td><?= $prop->cliente; ?></td>
+      <td><?= $prop->tecnico; ?></td>
+      <td><?= $prop->data_inicial; ?></td>
+      <td><?= $prop->data_final; ?></td>
+      <td><?= $prop->status; ?></td>
      
 
       <td>
-<a href="<?= base_url(); ?>servicos/editar/<?= $prop->servicosid; ?>"><button type="button" class="btn btn-success"><i class="fas fa-user-edit"></i></button></a>
+<a href="<?= base_url(); ?>os/editar/<?= $prop->idos; ?>"><button type="button" class="btn btn-success"><i class="fas fa-user-edit"></i></button></a>
 <button type="submit" class="btn btn-danger remove"><i class="fas fa-trash-alt"></i></button>  
       </td>
     </tr> <?php }?>
@@ -88,47 +96,9 @@
     </main>
     
     
-    
-    <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle"><i class="fas fa-edit"></i>&nbsp;&nbsp;Cadastro de serviços
-</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       
-       <form method="post" class="p-t-15" role="form" action="<?= base_url(); ?>servicos/adicionar">
-       
- 
-   <div class="form-group">
-    <label for="inputAddress">Nome</label>
-    <input type="text" class="form-control" id="nome" name="nome" required="required">
-  </div>
-  
-   <div class="form-group">
-    <label for="inputAddress">Descrição</label>
-    <input type="text" class="form-control" id="descricao" name="descricao">
-  </div>
-  
-  <div class="form-group">
-    <label for="inputAddress">Preço</label>
-    <input type="text" class="form-control" id="preco" name="preco" required="required">
-  </div>
-  
-  
-  <button type="submit" class="btn btn-primary btn-lg btn-block"><i class="fas fa-plus"></i> Adicionar </button>
-</form>
-       
-    </div>
-  </div>
-</div>
 
-<script type="text/javascript">
+
+    <script type="text/javascript">
     $(".remove").click(function(){
 
         var id = $(this).parents("tr").attr("id");
@@ -153,20 +123,20 @@
 
           $.ajax({
 
-             url: "<?php echo site_url('servicos/delete/')?>"+id,
+             url: "<?php echo site_url('os/delete/')?>"+id,
              type: 'DELETE',
              error: function() {
                 swal("Error", "Ocorreu um erro, contate o administrador", "error");
              },
              success: function(data) {
                   $("#"+id).remove();
-                  swal("Apagado!", "Serviço apagado com sucesso.", "success");
+                  swal("Apagado!", "Os apagada com sucesso.", "success");
              }
 
           });
 
         } else {
-          swal("Cancelado", "Seu serviço não foi apagado.", "error");
+          swal("Cancelado", "Sua OS não foi apagado.", "error");
         }
 
       });
