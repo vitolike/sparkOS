@@ -49,6 +49,7 @@
         <table class="table">
   <thead>
     <tr>
+		<th scope="col">Foto</th>
       <th scope="col">Nome</th>
       <th scope="col">Estoque</th>
       <th  scope="col">Preço</th>
@@ -67,6 +68,11 @@
   
 
      <tr id="<?= $prop->produtosid; ?>">  
+	<td>
+		 
+		 <?php if ($query[0]->foto == null): ?><img src="https://www.buritama.sp.leg.br/imagens/parlamentares-2013-2016/sem-foto.jpg/image" class="rounded mx-auto d-block img-fluid" width="64" >
+		<?php else: ?><img src="<?= base_url(); ?>public/uploads/<?= $prop->foto; ?>" class="img-fluid" width="64">
+		<?php endif; ?></td>
       <td><?= $prop->descricao; ?></td>
       <td><?= $prop->estoque; ?></td>
       <td><?= $prop->preco_venda; ?></td>
@@ -102,8 +108,14 @@
       </div>
       <div class="modal-body">
        
-       <form method="post" class="p-t-15" role="form" action="<?= base_url(); ?>produtos/adicionar">
+       <form method="post" enctype="multipart/form-data" class="p-t-15" role="form" action="<?= base_url(); ?>produtos/adicionar">
   
+	<div class="form-group">	   
+<div class="custom-file">
+  <input type="file" class="custom-file-input" id="foto" name="foto" size="20">
+  <label class="custom-file-label" for="customFile" >Escolher foto do produto</label>
+</div></div>
+		   
   <div class="form-group">
     <label for="inputAddress">Descrição</label>
     <input type="text" class="form-control" id="descricao" name="descricao" required="required">
@@ -163,7 +175,10 @@
       <input type="number" class="form-control" id="estoque_minimo" name="estoque_minimo" required="required">
     </div>
   </div>
-  
+		   
+
+  <div class="row">&nbsp;</div>
+  <div class="row">&nbsp;</div>
   <button type="submit" class="btn btn-primary btn-lg btn-block"><i class="fas fa-plus"></i> Adicionar </button>
 </form>
        

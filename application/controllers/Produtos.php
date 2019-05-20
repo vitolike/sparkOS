@@ -30,20 +30,50 @@ class Produtos extends CI_Controller {
 		public function adicionar()
 	{
 		
-			$data = array(
-			    'descricao' => $this->input->post('descricao'),
-				'entrada' => $this->input->post('entrada'),
-                'saida' => $this->input->post('saida'),
-                'preco_venda' => $this->input->post('preco_venda'),
-				'preco_compra' => $this->input->post('preco_compra'),
-				'unidade' => $this->input->post('unidade'),
-				'estoque' => $this->input->post('estoque'),
-			    'estoque_minimo' => $this->input->post('estoque_minimo'),
-				'criado'  => date('Y-m-d H:i'));
+			
+		$foto    = $_FILES['foto'];
+    	$configuracao = array(
+        'upload_path'   => realpath('./public/uploads'),
+        'allowed_types' => 'gif|jpg|png',
+		'file_name'     => md5($this->input->post('foto')),
+		'max_size'      => '1000'
+	   	);      
+	    $this->load->library('upload');
+	    $this->upload->initialize($configuracao);
+			
+//		var_dump($foto);
+			
+			  if ($this->upload->do_upload('foto')){
+                        
+				  		 $upload_data = $this->upload->data();
+				  
+
+					
+					    $data = array(
+							'descricao' => $this->input->post('descricao'),
+							'entrada' => $this->input->post('entrada'),
+							'saida' => $this->input->post('saida'),
+							'preco_venda' => $this->input->post('preco_venda'),
+							'preco_compra' => $this->input->post('preco_compra'),
+							'unidade' => $this->input->post('unidade'),
+							'estoque' => $this->input->post('estoque'),
+							'estoque_minimo' => $this->input->post('estoque_minimo'),
+							'foto' => $upload_data['file_name'],
+							'criado'  => date('Y-m-d H:i'));
+			
 		
-		if($this->db->insert('produtos',$data)){
-			redirect('produtos/lista/novo');
-		}
+
+							if($this->db->insert('produtos',$data)){
+								redirect('produtos/lista/novo');
+							}
+			  }else{
+				  redirect('produtos/lista/erro');
+				  
+			  }
+      
+			
+			
+			
 		
 	}
 	public function delete($id)
@@ -68,25 +98,47 @@ class Produtos extends CI_Controller {
 	public function update()
 	
 	{	
-		$uid =  $this->input->post('produtosid');
-		 $data = array(
-			       'descricao' => $this->input->post('descricao'),
-				'entrada' => $this->input->post('entrada'),
-                'saida' => $this->input->post('saida'),
-                'preco_venda' => $this->input->post('preco_venda'),
-				'preco_compra' => $this->input->post('preco_compra'),
-				'unidade' => $this->input->post('unidade'),
-				'estoque' => $this->input->post('estoque'),
-			    'estoque_minimo' => $this->input->post('estoque_minimo'),
-				'criado'  => date('Y-m-d H:i')
-		);
 		
-		
-		$this->db->where('produtosid', $uid);
-		if($this->db->update('produtos', $data)){
-			redirect('produtos/lista/update');
-		}
-		else{};
+		$foto    = $_FILES['foto'];
+    	$configuracao = array(
+        'upload_path'   => realpath('./public/uploads'),
+        'allowed_types' => 'gif|jpg|png',
+		'file_name'     => md5($this->input->post('foto')),
+		'max_size'      => '1000'
+	   	);      
+	    $this->load->library('upload');
+	    $this->upload->initialize($configuracao);
+			
+//		var_dump($foto);
+			
+			  if ($this->upload->do_upload('foto')){
+                        
+				  		 $upload_data = $this->upload->data();
+				  
+
+					
+					  			 $uid =  $this->input->post('produtosid');
+								 $data = array(
+										'descricao' => $this->input->post('descricao'),
+										'entrada' => $this->input->post('entrada'),
+										'saida' => $this->input->post('saida'),
+										'preco_venda' => $this->input->post('preco_venda'),
+										'preco_compra' => $this->input->post('preco_compra'),
+										'unidade' => $this->input->post('unidade'),
+										'estoque' => $this->input->post('estoque'),
+									 	'foto' => $upload_data['file_name'],
+										'estoque_minimo' => $this->input->post('estoque_minimo')
+								);
+
+
+								$this->db->where('produtosid', $uid);
+								if($this->db->update('produtos', $data)){
+									redirect('produtos/editar/'.$uid);
+								}
+			  }else{
+				  redirect('produtos/lista/erro');
+				  
+			  }
 		
 	}
 }

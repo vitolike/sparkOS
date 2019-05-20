@@ -18,10 +18,16 @@
     <h5 class="card-title">Dados do produto</h5>
     
     <div class="row">&nbsp;</div>
+	
     
     <div class="card">
   		<div class="card-header"></div>
           <div class="card-body">
+			  
+				<?php if ($query[0]->foto == null): ?><img src="https://www.buritama.sp.leg.br/imagens/parlamentares-2013-2016/sem-foto.jpg/image" class="rounded mx-auto d-block" >
+		<?php else: ?><img src="<?= base_url(); ?>public/uploads/<?= $query[0]->foto; ?>" class="img-fluid" width="250" >
+		<?php endif; ?>  
+			  <div class="row">&nbsp;</div>
             <p class="card-text"><b><strong>Descrição</strong>:</b> <?= $query[0]->descricao; ?>&nbsp; <br />
               <b>Unidade:</b> 
               <?= $query[0]->unidade; ?> - <?php if ($query[0]->unidade == 'Un'): ?>Unidade
@@ -69,9 +75,13 @@
         </button>
       </div>
       <div class="modal-body">
-       
-       <form method="post" class="p-t-15" role="form" action="<?= base_url(); ?>produtos/adicionar">
+       <form method="post" enctype="multipart/form-data" class="p-t-15" role="form" action="<?= base_url(); ?>produtos/adicionar">
   
+	<div class="form-group">	   
+<div class="custom-file">
+  <input type="file" class="custom-file-input" id="foto" name="foto" size="20">
+  <label class="custom-file-label" for="customFile" >Escolher foto do produto</label>
+</div></div>
   <div class="form-group">
     <label for="inputAddress">Descrição</label>
     <input type="text" class="form-control" id="descricao" name="descricao">
@@ -151,8 +161,15 @@
         </button>
       </div>
       <div class="modal-body">
-          <form method="post" class="p-t-15" role="form" action="<?= base_url(); ?>produtos/update">
-         <input type="hidden" class="form-control" id="iddefinicoes" name="clientesid" value="<?= $query[0]->produtosid; ?>">
+          <form method="post" class="p-t-15" enctype="multipart/form-data" role="form" action="<?= base_url(); ?>produtos/update">
+         <input type="hidden" class="form-control" id="iddefinicoes" name="produtosid" value="<?= $query[0]->produtosid; ?>">
+			  
+<div class="form-group">	   
+ <div class="custom-file">
+  <input type="file" class="custom-file-input" id="foto" name="foto" size="20">
+  <label class="custom-file-label" for="customFile" >Escolher foto do produto</label>
+ </div>
+</div>
  <div class="form-group">
     <label for="inputAddress">Descrição</label>
     <input type="text" class="form-control" id="descricao" name="descricao" value="<?= $query[0]->descricao; ?>">
@@ -170,7 +187,7 @@
 </div>
   <div class="form-group col-md-6">
   <div class="custom-control custom-switch">
-  <input type="checkbox" class="custom-control-input" value="1" id="saida" name="saida" <?=($query[0]->saida == 1)?'Saida':''?>>
+  <input type="checkbox" class="custom-control-input" value="1" id="saida" name="saida" <?=($query[0]->saida == 1)?'checked':''?>>
   <label class="custom-control-label" for="saida">Saida</label>
   </div>
 </div>
