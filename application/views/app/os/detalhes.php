@@ -22,7 +22,8 @@
   <div class="card-body">
 	  <h5 class="card-title texto">Protocolo: #<?= $query[0]->protocolo; ?></h5>
 	  <div class="row">&nbsp;</div>
-   <form method="post" class="p-t-15" role="form" action="<?= base_url(); ?>os/adicionar"><form>
+   <form method="post" class="p-t-15" role="form" action="<?= base_url(); ?>os/atualizar">
+	   <input type="hidden" value="<?= $query[0]->idos; ?>" name="idos" />
   <div class="form-row">
     <div class="form-group col-md-6"><label for="cliente">Cliente</label>
     <div class="input-group">
@@ -50,8 +51,8 @@
         <option value="ORÇAMENTO" <?= $query[0]->status=='ORÇAMENTO'?'selected':'' ?>>Orçamento</option>
         <option value="ABERTO" <?= $query[0]->status=='ABERTO'?'selected':'' ?>>Aberto</option>
         <option value="EM ANDAMENTO" <?= $query[0]->status=='EM ANDAMENTO'?'selected':'' ?>>Em Andamento</option>
-		  <option value="FINALIZADO">Finalizado</option>
-		  <option value="CANCELADO">Cancelado</option>
+		  <option value="FINALIZADO" <?= $query[0]->status=='FINALIZADO'?'selected':'' ?>>Finalizado</option>
+		  <option value="CANCELADO" <?= $query[0]->status=='CANCELADO'?'selected':'' ?>>Cancelado</option>
 		  
       </select>
     </div>

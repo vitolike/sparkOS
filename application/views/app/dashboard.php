@@ -21,57 +21,126 @@
           <div class="my-3 p-3 bg-white rounded box-shadow">
        <h6 class="card-title"><b>Produtos com estoque mínimo</b></h6>
            <div class="row">&nbsp;</div>
-        <table class="table">
-  <thead>
+        <table class="table" id="produtos">
+   <thead>
     <tr>
-      <th scope="col">#</th>
+		<th scope="col">Foto</th>
       <th scope="col">Nome</th>
       <th scope="col">Em estoque</th>
-      <th scope="col">Estoque mínimo</th>
-      <th scope="col">Ações</th>
+      <th  scope="col">Estoque mínimo</th>
+      <th scope="col"></th>
     </tr>
   </thead>
-  <tbody>
-       <tr>
-                        <td colspan="5"> <center><p class="texto_pequeno">Nenhum produto com estoque mínimo</p></center></td>
+<?php if(!$prod){?>
+ <tbody>
+                    <tr>
+                        <td colspan="5"> <center><p class="texto_pequeno">Nenhum produto cadastrado</p></center></td>
                     </tr>
-  </tbody>
+                </tbody>
+                
+ <?php }else{ ?>
+ <tbody> <?php foreach($prod as $p) {?>
+  
+
+     <tr id="<?= $p->produtosid; ?>">  
+	<td>
+		 
+		 <?php if ($p->foto == null): ?><img src="<?= base_url(); ?>public/images/image.jpg" class="rounded mx-auto d-block img-fluid" width="64" >
+		<?php else: ?><img src="<?= base_url(); ?>public/uploads/<?= $p->foto; ?>" class="rounded mx-auto d-block img-fluid" width="64">
+		<?php endif; ?></td>
+      <td><?= $p->descricao; ?></td>
+      <td><?= $p->estoque; ?></td>
+      <td><?= $p->estoque_minimo; ?></td>
+     
+
+      <td>
+<a href="<?= base_url(); ?>produtos/editar/<?= $p->produtosid; ?>"><button type="button" class="btn btn-success"><i class="fas fa-user-edit"></i> Ver</button></a>
+     </td>
+    </tr> <?php }?>
+    <?php }?>
+  </tbody>  
 </table>
         
         <div class="media text-muted pt-3">
           
         </div>
-        <small class="d-block text-right mt-3">
-        <a href="#">Ver tudo</a></small>
       </div>
 
                 <div class="my-3 p-3 bg-white rounded box-shadow">
        <h6 class="card-title"><b>Ordens de Serviço em aberto</b></h6>
            <div class="row">&nbsp;</div>
-        <table class="table">
+       <table  class="table table-hover" id="OS_abertas">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Data Inicial</th>
-      <th scope="col">Data Final</th>
+    <th scope="col">#</th>
       <th scope="col">Cliente</th>
-      <th scope="col">Ações</th>
+      <th scope="col">Responsável</th>
+      <th  scope="col">Data Inicial</th>
+      <th  scope="col">Data Final</th>
+      <th  scope="col">Status</th>
+      <th scope="col"></th>
     </tr>
   </thead>
-  <tbody>
-       <tr>
-                        <td colspan="5"> <center><p class="texto_pequeno">Não há Ordem de serviço em aberto</p></center></td>
+<?php if(!$query){?>
+ <tbody>
+                    <tr>
+                        <td colspan="5"> <center>
+                          <p class="texto_pequeno">Não há Ordem de serviço em aberto</p></center></td>
                     </tr>
-  </tbody>
+                </tbody>
+                
+ <?php }else{ ?>
+ <tbody> <?php foreach($query as $prop) {?>
+  
+
+     <tr id="<?= $prop->idos; ?>"> 
+      
+      <td><?= $prop->protocolo; ?></td>
+      <td><?= $prop->cliente; ?></td>
+      <td><?= $prop->tecnico; ?></td>
+      <td><?= $prop->data_inicial; ?></td>
+      <td><?= $prop->data_final; ?></td>
+      <td><?= $prop->status; ?></td>
+     
+
+      <td>
+<a href="<?= base_url(); ?>os/detalhes/<?= $prop->idos; ?>"><button type="button" class="btn btn-success"><i class="fas fa-user-edit"></i> Ver</button></a>
+  
+      </td>
+    </tr> <?php }?>
+    <?php }?>
+  </tbody>  
 </table>
         
         <div class="media text-muted pt-3">
           
         </div>
-        <small class="d-block text-right mt-3">
-        <a href="#">Ver tudo</a></small>
+        
       </div>
     </main>
 
-
+<script>
+$(document).ready(function() {
+	
+	  $('#OS_abertas').DataTable( {
+	   "dom": 'Bfrtip',
+        "info":     false,
+	    "searching": false,
+		  "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json"
+        }
+    } );
+} );</script>
+<script>
+$(document).ready(function() {
+	
+	  $('#produtos').DataTable( {
+	   "dom": 'Bfrtip',
+        "info":     false,
+	    "searching": false,
+		  "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json"
+        }
+    } );
+} );</script>
 

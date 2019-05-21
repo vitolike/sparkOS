@@ -117,7 +117,7 @@
         </button>
       </div>
       <div class="modal-body">
-         <table class="table table-sm">
+         <table class="table table-sm" id="clientes">
   <thead>
     <tr>
       <th scope="col">Nome</th>
@@ -170,7 +170,7 @@
         </button>
       </div>
       <div class="modal-body">
-                 <table class="table table-sm">
+                 <table class="table table-sm" id="tecnicos">
   <thead>
    <tr>
       <th scope="col">Nome</th>
@@ -258,3 +258,15 @@ $(function() {
 });
 
 </script>
+		<script>
+			if ( ! $.fn.DataTable.isDataTable( '#clientes' ) ) {
+  $('#clientes').dataTable({
+	   "dom": 'Bfrtip',
+        "info":     false,
+		  "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json"
+        }
+    } );
+}
+</script>
+		

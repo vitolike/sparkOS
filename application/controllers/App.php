@@ -16,9 +16,15 @@ class App extends CI_Controller {
 	}
 	public function home()
 	{
+		$sql = "SELECT * FROM os WHERE status IN ('ABERTO','ORÇAMENTO', 'EM ANDAMENTO')";
 		
-		$this->db->select('*');
-		$query['OS'] = $this->db->count_all('os');
+		$sql_produtos = "SELECT * FROM produtos where estoque_minimo >= estoque";
+		
+		$query_sql = $this->db->query($sql);
+		$query_prod = $this->db->query($sql_produtos);
+		$query['OS'] = $query_sql->num_rows();  
+		$query['query'] = $query_sql->result();
+		$query['prod'] = $query_prod->result();
 		
 		$this->login_model->verifica_sessao();
 		$query['sysname'] =  $this->login_model->sysname();

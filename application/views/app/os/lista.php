@@ -46,7 +46,7 @@
 </h6>
         
         
-        <table class="table">
+        <table class="table" id="OS">
   <thead>
     <tr>
     <th scope="col">#</th>
@@ -146,3 +146,15 @@
     
 
 </script>
+<script>
+$(document).ready(function() {
+    $('#OS').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+		 "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json"
+        }
+    } );
+} );</script>

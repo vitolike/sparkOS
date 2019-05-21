@@ -16,7 +16,10 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
 <script src="https://code.jquery.com/jquery-1.8.2.js"></script>
 <script src="https://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
-	
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" />
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
 
  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -51,7 +54,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-logo mx-auto logo-fonte">
       <li class="nav-item">
-        <a class="navbar-brand logo" href="#"><i class="fab fa-codepen fa-2x "></i></a>
+        <a class="navbar-brand logo" href="<?= base_url(); ?>app"><i class="fab fa-codepen fa-2x "></i></a>
       </li>
     </ul>
     <ul class="nav navbar-nav pull-sm-right">

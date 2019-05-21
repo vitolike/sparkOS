@@ -24,6 +24,7 @@ class Os extends CI_Controller {
 		$query['query'] = $this->db->get('os')->result();
 		$this->load->view('layout/header', $query);
 		$this->load->view('app/os/lista', $query);
+		$this->load->view('layout/datatablejs');
 		$this->load->view('layout/footer');
 	}
 	
@@ -86,6 +87,27 @@ class Os extends CI_Controller {
 		$this->load->view('layout/header', $query);
 		$this->load->view('app/os/detalhes', $query);
 		$this->load->view('layout/footer');
+	}
+	public function atualizar()
+	{
+		$uid =  $this->input->post('idos');
+			$data = array(
+			    'data_inicial' => $this->input->post('data_inicial'),
+				'data_final' => $this->input->post('data_final'),
+                'garantia' => $this->input->post('garantia'),
+                'descricao' => $this->input->post('descricao'),
+				'defeito' => $this->input->post('defeito'),
+				'laudo_tecnico' => $this->input->post('laudo_tecnico'),
+				'observacoes' => $this->input->post('observacoes'),
+			    'cliente' => $this->input->post('cliente'),
+				'tecnico' => $this->input->post('tecnico'),
+				'status' => $this->input->post('status')
+			);
+		$this->db->where('idos', $uid);
+		if($this->db->update('os',$data)){
+			redirect('os/detalhes/'.$uid);
+		}
+		
 	}
 	
 }
