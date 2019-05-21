@@ -37,6 +37,14 @@
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
+</div>
+		
+<?php elseif ($msg == 'erro'): ?>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong><i class="fas fa-exclamation-triangle"></i>&nbsp;</strong> O arquivo da foto não é suportado.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div><?php endif; ?>
     
     
@@ -70,8 +78,8 @@
      <tr id="<?= $prop->produtosid; ?>">  
 	<td>
 		 
-		 <?php if ($query[0]->foto == null): ?><img src="https://www.buritama.sp.leg.br/imagens/parlamentares-2013-2016/sem-foto.jpg/image" class="rounded mx-auto d-block img-fluid" width="64" >
-		<?php else: ?><img src="<?= base_url(); ?>public/uploads/<?= $prop->foto; ?>" class="img-fluid" width="64">
+		 <?php if ($prop->foto == null): ?><img src="<?= base_url(); ?>public/images/image.jpg" class="rounded mx-auto d-block img-fluid" width="64" >
+		<?php else: ?><img src="<?= base_url(); ?>public/uploads/<?= $prop->foto; ?>" class="rounded mx-auto d-block img-fluid" width="64">
 		<?php endif; ?></td>
       <td><?= $prop->descricao; ?></td>
       <td><?= $prop->estoque; ?></td>

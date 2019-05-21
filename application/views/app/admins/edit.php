@@ -72,7 +72,7 @@
     <div class="form-group col-md-4">
       <label for="tipo">Tipo de acesso</label>
       <select id="tipo" class="form-control" name="tipo">
-        <option value="1" <?= $query[0]->tipo==1?'selected':'' ?>>Moderador</option>
+        <option value="1" <?= $query[0]->tipo==1?'selected':'' ?>>Funcionario</option>
         <option value="2" <?= $query[0]->tipo==2?'selected':'' ?>>Administrador</option>
         <option value="3" <?= $query[0]->tipo==3?'selected':'' ?>>Super Administrador</option>
       </select>

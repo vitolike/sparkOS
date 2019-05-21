@@ -41,15 +41,13 @@ class Produtos extends CI_Controller {
 	    $this->load->library('upload');
 	    $this->upload->initialize($configuracao);
 			
-//		var_dump($foto);
 			
-			  if ($this->upload->do_upload('foto')){
+			
+		if ($this->upload->do_upload('foto')){
                         
-				  		 $upload_data = $this->upload->data();
+	  		 $upload_data = $this->upload->data();
 				  
-
-					
-					    $data = array(
+			 $data = array(
 							'descricao' => $this->input->post('descricao'),
 							'entrada' => $this->input->post('entrada'),
 							'saida' => $this->input->post('saida'),
@@ -70,7 +68,6 @@ class Produtos extends CI_Controller {
 				  redirect('produtos/lista/erro');
 				  
 			  }
-      
 			
 			
 			

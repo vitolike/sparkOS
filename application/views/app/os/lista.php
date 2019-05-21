@@ -81,7 +81,7 @@
      
 
       <td>
-<a href="<?= base_url(); ?>os/editar/<?= $prop->idos; ?>"><button type="button" class="btn btn-success"><i class="fas fa-user-edit"></i></button></a>
+<a href="<?= base_url(); ?>os/detalhes/<?= $prop->idos; ?>"><button type="button" class="btn btn-success"><i class="fas fa-user-edit"></i></button></a>
 <button type="submit" class="btn btn-danger remove"><i class="fas fa-trash-alt"></i></button>  
       </td>
     </tr> <?php }?>

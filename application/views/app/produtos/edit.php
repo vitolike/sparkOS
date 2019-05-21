@@ -24,7 +24,7 @@
   		<div class="card-header"></div>
           <div class="card-body">
 			  
-				<?php if ($query[0]->foto == null): ?><img src="https://www.buritama.sp.leg.br/imagens/parlamentares-2013-2016/sem-foto.jpg/image" class="rounded mx-auto d-block" >
+				<?php if ($query[0]->foto == null): ?><img src="<?= base_url(); ?>public/images/image.jpg" class="rounded mx-auto d-block" >
 		<?php else: ?><img src="<?= base_url(); ?>public/uploads/<?= $query[0]->foto; ?>" class="img-fluid" width="250" >
 		<?php endif; ?>  
 			  <div class="row">&nbsp;</div>

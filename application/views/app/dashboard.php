@@ -5,7 +5,9 @@
         <a class="nav-link red-text" href="<?= base_url(); ?>clientes/lista"><i class="fas fa-users navbar-text"></i>
           Clientes
         </a>
-        <a class="nav-link red-text" href="#"><i class="fas fa-sticky-note navbar-text"></i> Ordens de Serviço         <span class="badge badge-pill bg-danger text-white align-text-bottom ">27</span>
+        <a class="nav-link red-text" href="<?= base_url(); ?>os/lista"><i class="fas fa-sticky-note navbar-text"></i> Ordens de Serviço 
+			
+			<?php if ($OS != null): ?><span class="badge badge-pill bg-danger text-white align-text-bottom "><?= $OS; ?></span><?php else: ?><?php endif; ?>
 </a>
 		<a class="nav-link red-text"  href="<?= base_url(); ?>produtos/lista"><i class="fas fa-store navbar-text"></i> Produtos</a>
         <a class="nav-link red-text" href="<?= base_url(); ?>servicos/lista"><i class="fas fa-screwdriver navbar-text"></i> Serviços</a>
@@ -70,3 +72,6 @@
         <a href="#">Ver tudo</a></small>
       </div>
     </main>
+
+
+

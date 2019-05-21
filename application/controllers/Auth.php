@@ -32,9 +32,20 @@ class Auth extends CI_Controller {
 	
 	public function entrar($id=null)
 	{
+		
+		$log = array(
+			    'tipo' => 'VISITANTE',
+				'data' => date('Y-m-d\TH:i:sP'),
+				'ip' => $_SERVER['REMOTE_ADDR'],
+				'usuario' => 'Alguem entrou',
+				'logs' => $_SERVER['HTTP_USER_AGENT']);
+				
+		$this->db->insert('auth_login',$log);
+		
 		$query['msg'] = $id;
 		$query['sysname'] =  $this->login_model->sysname();
 		$this->load->view('login/login', $query);
+		
 				
 	}
 	
@@ -66,6 +77,17 @@ class Auth extends CI_Controller {
 			redirect('app/home');
 		}
 		else{
+			
+			
+			$log = array(
+			    'tipo' => 'ERRO',
+				'data' => date('Y-m-d\TH:i:sP'),
+				'ip' => $_SERVER['REMOTE_ADDR'],
+				'usuario' => 'Algum mané '.$email,
+				'logs' => $_SERVER['HTTP_USER_AGENT']);
+				
+			$this->db->insert('auth_login',$log);
+			
 			redirect('auth/entrar/login_erro');
 		}
 		

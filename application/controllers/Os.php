@@ -33,6 +33,12 @@ class Os extends CI_Controller {
 		$this->login_model->verifica_sessao();
 		$query['sysname'] =  $this->login_model->sysname();
 		$query['appname'] = 'Nova OS';
+			
+		$this->db->select('*');
+		$query['query'] = $this->db->get('clientes')->result();
+			
+		$this->db->select('*');
+		$query['admins'] = $this->db->get('admins')->result();
 		$this->load->view('layout/header', $query);
 		$this->load->view('app/os/novo', $query);
 		$this->load->view('layout/footer');
@@ -42,62 +48,44 @@ class Os extends CI_Controller {
 	{
 		
 			$data = array(
-			    'descricao' => $this->input->post('descricao'),
-				'entrada' => $this->input->post('entrada'),
-                'saida' => $this->input->post('saida'),
-                'preco_venda' => $this->input->post('preco_venda'),
-				'preco_compra' => $this->input->post('preco_compra'),
-				'unidade' => $this->input->post('unidade'),
-				'estoque' => $this->input->post('estoque'),
-			    'estoque_minimo' => $this->input->post('estoque_minimo'),
-				'criado'  => date('Y-m-d H:i'));
+			    'data_inicial' => $this->input->post('data_inicial'),
+				'data_final' => $this->input->post('data_final'),
+                'garantia' => $this->input->post('garantia'),
+                'descricao' => $this->input->post('descricao'),
+				'defeito' => $this->input->post('defeito'),
+				'laudo_tecnico' => $this->input->post('laudo_tecnico'),
+				'observacoes' => $this->input->post('observacoes'),
+			    'cliente' => $this->input->post('cliente'),
+				'tecnico' => $this->input->post('tecnico'),
+				'status' => $this->input->post('status'),
+				'protocolo' => rand('5').date('dmYHis')
+			);
 		
-		if($this->db->insert('produtos',$data)){
-			redirect('produtos/lista/novo');
+		if($this->db->insert('os',$data)){
+			$osid = $this->db->insert_id();
+			redirect('os/detalhes/'.$osid);
 		}
 		
 	}
 	public function delete($id)
 	
 	{
-		$this->db->where('produtosid', $id);
-		$this->db->delete('produtos');
+		$this->db->where('idos', $id);
+		$this->db->delete('os');
 		echo 'Deleted successfully.';
 	}
-	public function editar($id=null)
+	
+	public function detalhes($id=null)
 	
 	{
 		$this->login_model->verifica_sessao();
 		$query['sysname'] =  $this->login_model->sysname();
-		$query['appname'] = 'Dados do Produto';
-		$this->db->where('produtosid', $id);
-		$query['query'] = $this->db->get('produtos')->result();
+		$query['appname'] = 'Detalhes da OS';
+		$this->db->where('idos', $id);
+		$query['query'] = $this->db->get('os')->result();
 		$this->load->view('layout/header', $query);
-		$this->load->view('app/produtos/edit', $query);
+		$this->load->view('app/os/detalhes', $query);
 		$this->load->view('layout/footer');
 	}
-	public function update()
 	
-	{	
-		$uid =  $this->input->post('produtosid');
-		 $data = array(
-			       'descricao' => $this->input->post('descricao'),
-				'entrada' => $this->input->post('entrada'),
-                'saida' => $this->input->post('saida'),
-                'preco_venda' => $this->input->post('preco_venda'),
-				'preco_compra' => $this->input->post('preco_compra'),
-				'unidade' => $this->input->post('unidade'),
-				'estoque' => $this->input->post('estoque'),
-			    'estoque_minimo' => $this->input->post('estoque_minimo'),
-				'criado'  => date('Y-m-d H:i')
-		);
-		
-		
-		$this->db->where('produtosid', $uid);
-		if($this->db->update('produtos', $data)){
-			redirect('produtos/lista/update');
-		}
-		else{};
-		
-	}
 }

@@ -43,7 +43,7 @@
 
       <div class="my-3 p-3 bg-white rounded box-shadow">
     <h5 class="card-title">Usuários do sistema</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Usuários administrativos do sistema.</h6>
+    <h6 class="card-subtitle mb-2 text-muted">Usuários e tecnicos do sistema.</h6>
         
         
         <table class="table">
@@ -140,7 +140,7 @@
       <label for="tipo">Tipo</label>
       <select id="tipo" class="form-control" name="tipo">
         <option selected value="1">Selecione...</option>
-        <option value="1">Moderador</option>
+        <option value="1">Funcionario</option>
         <option value="2">Administrador</option>
         <option value="3">Super Administrador</option>
       </select>
