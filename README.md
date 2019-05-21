@@ -1,6 +1,6 @@
 SparkOS - Sistema simples de Ordem de Serviço ainda em desenvolvimento. 
 
-DEMO: http://sparkos.my-style.in/
+DEMO: https://sparkos.tk (Servidor Novo).
 
 Usuário: admin@admin.com
 Senha: 123456
@@ -26,7 +26,7 @@ Senha: 123456
 
 
 ### Requerimentos
-* PHP >= 5.5.0
+* PHP >= 5.6
 * MySQL
 
 
