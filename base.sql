@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 19-Maio-2019 às 05:05
+-- Generation Time: 21-Maio-2019 às 22:13
 -- Versão do servidor: 10.1.38-MariaDB
 -- versão do PHP: 5.6.40
 
@@ -61,6 +61,16 @@ CREATE TABLE `auth_login` (
   `logs` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `auth_login`
+--
+
+INSERT INTO `auth_login` (`idauth_login`, `tipo`, `data`, `ip`, `usuario`, `logs`) VALUES
+(1, 'VISITANTE', '2019-05-21 19:12:57', '127.0.0.1', 'Alguem entrou', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0'),
+(2, 'ENTRADA', '2019-05-21 19:13:00', '127.0.0.1', 'Victor Oliveira admin@admin.com', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0'),
+(3, 'VISITANTE', '2019-05-21 20:07:27', '127.0.0.1', 'Alguem entrou', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0'),
+(4, 'ENTRADA', '2019-05-21 20:07:29', '127.0.0.1', 'Victor Oliveira admin@admin.com', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0');
+
 -- --------------------------------------------------------
 
 --
@@ -85,6 +95,13 @@ CREATE TABLE `clientes` (
   `log_criacao` longtext,
   `criado` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `clientes`
+--
+
+INSERT INTO `clientes` (`clientesid`, `nome`, `sobrenome`, `email`, `telefone`, `endereco`, `numero`, `bairro`, `cidade`, `uf`, `documento`, `tipo_documento`, `cep`, `log_alteracao`, `log_criacao`, `criado`) VALUES
+(1, 'Victor Oliveira', 'Del', 'victor_oliveira@gmail.com', '123456789', 'Rua Coronel César Eugênio Piedade', '560', 'Jardim Itália', 'Itapetininga', 'SP', '156599853', 'CPF', '18201790', NULL, 'Criado em 2019-05-21T14:53:09+02:00 Pelo usuário: Victor Oliveira', '2019-05-21 14:53:00');
 
 -- --------------------------------------------------------
 
@@ -145,15 +162,9 @@ CREATE TABLE `produtos` (
   `estoque_minimo` int(11) DEFAULT NULL,
   `saida` tinyint(1) DEFAULT NULL,
   `entrada` tinyint(1) DEFAULT NULL,
-  `criado` datetime DEFAULT NULL
+  `criado` datetime DEFAULT NULL,
+  `foto` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `produtos`
---
-
-INSERT INTO `produtos` (`produtosid`, `descricao`, `unidade`, `preco_compra`, `preco_venda`, `estoque`, `estoque_minimo`, `saida`, `entrada`, `criado`) VALUES
-(5, 'Celular', 'Un', '20.00', '15.00', 25, 5, 1, 1, '2019-05-17 14:47:00');
 
 -- --------------------------------------------------------
 
@@ -223,37 +234,37 @@ ALTER TABLE `servicos`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `adminid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `adminid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `auth_login`
 --
 ALTER TABLE `auth_login`
-  MODIFY `idauth_login` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idauth_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `clientesid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `clientesid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `os`
 --
 ALTER TABLE `os`
-  MODIFY `idos` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `produtosid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `produtosid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `servicos`
 --
 ALTER TABLE `servicos`
-  MODIFY `servicosid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `servicosid` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
