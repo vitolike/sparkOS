@@ -20,15 +20,17 @@
     <div class="row">&nbsp;</div>
 	
     
-    <div class="card">
-  		<div class="card-header"></div>
-          <div class="card-body">
-			  
-				<?php if ($query[0]->foto == null): ?><img src="<?= base_url(); ?>public/images/image.jpg" class="rounded mx-auto d-block" >
-		<?php else: ?><img src="<?= base_url(); ?>public/uploads/<?= $query[0]->foto; ?>" class="img-fluid" width="250" >
+   <div class="card mb-3">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+     <?php if ($query[0]->foto == null): ?><img src="<?= base_url(); ?>public/images/image.jpg" class="card-img" >
+		<?php else: ?><img src="<?= base_url(); ?>public/uploads/<?= $query[0]->foto; ?>" class="card-img" width="250" >
 		<?php endif; ?>  
-			  <div class="row">&nbsp;</div>
-            <p class="card-text"><b><strong>Descrição</strong>:</b> <?= $query[0]->descricao; ?>&nbsp; <br />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+		  <h5 class="card-title"><strong>Detalhes</strong></h5>
+       <p class="card-text"><b><strong>Descrição</strong>:</b> <?= $query[0]->descricao; ?>&nbsp; <br />
               <b>Unidade:</b> 
               <?= $query[0]->unidade; ?> - <?php if ($query[0]->unidade == 'Un'): ?>Unidade
               <?php elseif ($query[0]->unidade == 'Lt'): ?>Litro
@@ -50,18 +52,21 @@
               <b>Data de Cadastro:</b>
               <?= $query[0]->criado; ?>
             </p>
-          </div>
-	</div>
-    <div class="row">&nbsp;</div>
-    
-            
-  <div class="btn-group btn-group btn-block" role="group" aria-label="..."><button type="button" class="btn btn-primary " data-toggle="modal" data-target="#editar"><i class="far fa-edit"></i> Editar dados
+      </div>
+    </div>
+  </div>
+</div>    <div class="row">&nbsp;</div>
+		<div class="btn-group btn-group btn-block" role="group" aria-label="..."><button type="button" class="btn btn-primary " data-toggle="modal" data-target="#editar"><i class="far fa-edit"></i> Editar dados
 </button>
 <button type="button" class="btn btn-secondary " data-toggle="modal" data-target="#novo"><i class="fas fa-user-plus"></i> Criar novo produto
 </button></div>
+	</div>
+
+    
+            
+  
         
-       
-    </div></main>
+</main>
 
  <!-- Modal -->
 <div class="modal fade" id="novo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

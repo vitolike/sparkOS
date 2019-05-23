@@ -77,7 +77,9 @@
       <td><?= $prop->tecnico; ?></td>
       <td><?= $prop->data_inicial; ?></td>
       <td><?= $prop->data_final; ?></td>
-      <td><?= $prop->status; ?></td>
+      <td><?php if ($prop->status == 'FINALIZADO'): ?><span class="badge badge-warning">FINALIZADO</span>
+      <?php elseif ($prop->status == 'CANCELADO'): ?><span class="badge badge-danger">CANCELADO</span>
+      <?php else: ?><span class="badge badge-success"><?= $prop->status; ?></span><?php endif; ?></td>
      
 
       <td>

@@ -29,6 +29,7 @@ class Clientes extends CI_Controller {
 		$query['query'] = $this->db->get('clientes')->result();
 		$this->load->view('layout/header', $query);
 		$this->load->view('app/clientes/lista', $query);
+		$this->load->view('layout/datatablejs');
 		$this->load->view('layout/footer');
 	}
 	
@@ -114,6 +115,16 @@ class Clientes extends CI_Controller {
 		$this->db->where('clientesid', $id);
 		$this->db->delete('clientes');
 		echo 'Deleted successfully.';
+	}
+	
+	public function buscar($id)
+	
+	{
+
+		   	$sql = 'SELECT * FROM clientes WHERE clientesid = '.$id;
+			$query = $this->db->query($sql);
+			header('Content-Type: application/json');
+	 		echo json_encode($query->result());
 	}
 	
 }

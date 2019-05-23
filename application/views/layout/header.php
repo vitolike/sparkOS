@@ -90,6 +90,10 @@
       <p><strong>Versão:</strong> <?php echo $this->config->item('sys_ver'); ?></p>
     
         Criado por Victor Oliveira. Codigo Aberto (link <a href="https://github.com/vitolike/sparkOS">github</a>)
+		  <p>&nbsp;</p>
+		  
+		  <p>Nós ajude doando R$5 &nbsp;
+<!-- INICIO DO BOTAO PAGSEGURO --><a href="javascript:void(0)" onclick="PagSeguroLightbox('9578ADE9080827DAA43A9F9DD12AF5D9'); return false;"><img src="//assets.pagseguro.com.br/ps-integration-assets/botoes/pagamentos/205x30-pagar-preto.gif" alt="Pague com PagSeguro - é rápido, grátis e seguro!" /></a><script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script><!-- FIM DO BOTAO PAGSEGURO --></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary btn-lg btn-block" data-dismiss="modal">Fechar</button>

@@ -24,6 +24,7 @@ class Produtos extends CI_Controller {
 		$query['query'] = $this->db->get('produtos')->result();
 		$this->load->view('layout/header', $query);
 		$this->load->view('app/produtos/lista', $query);
+		$this->load->view('layout/datatablejs');
 		$this->load->view('layout/footer');
 	}
 		

@@ -23,28 +23,22 @@
   <div class="card-body">
    <form method="post" class="p-t-15" role="form" action="<?= base_url(); ?>os/adicionar"><form>
   <div class="form-row">
-    <div class="form-group col-md-6"><label for="cliente">Cliente</label>
-    <div class="input-group">
-      
-      <input type="text" class="form-control" id="cliente" name="cliente" required>
-      
-    <div class="input-group-btn">
-        <button class="btn btn-outline-dark" type="button" data-toggle="modal" data-target="#procurarClientes"><i class="fas fa-search"></i> Procurar</button>
-    </div>
-    </div>
+    <div class="form-group col-md-6"><label for="cliente">Cliente</label><div class="input-group mb-3">
+
+  <input type="text" class="form-control" id="cliente" name="cliente" required>
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#procurarClientes"><i class="fas fa-search"></i> Procurar</button>
+  </div>
+</div>
     
     </div>
-    <div class="form-group col-md-6">
-      <label for="tecnico">Técnico / Responsável</label>
-      
-       <div class="input-group">
-      
-      <input type="text" class="form-control" id="tecnico" name="tecnico" required>
-      
-    <div class="input-group-btn">
-        <button class="btn btn-outline-dark" type="button" data-toggle="modal" data-target="#procurarTecnico" ><i class="fas fa-search"></i> Procurar</button>
-    </div>
-    </div>
+	
+		    <div class="form-group col-md-6"><label for="cliente">Técnico / Responsável</label><div class="input-group mb-3">
+  <input type="text" class="form-control" id="tecnico" name="tecnico"  required>
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#procurarTecnico"><i class="fas fa-search"></i> Procurar</button>
+  </div>
+</div>
     </div>
   </div>
  

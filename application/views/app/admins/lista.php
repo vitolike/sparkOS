@@ -46,7 +46,7 @@
     <h6 class="card-subtitle mb-2 text-muted">Usuários e tecnicos do sistema.</h6>
         
         
-        <table class="table">
+        <table class="table" id="tabela">
   <thead>
     <tr>
       <th scope="col">Nome</th>
@@ -210,3 +210,16 @@
     
 
 </script>
+	
+<script>
+$(document).ready(function() {
+    $('#tabela').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+		 "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese.json"
+        }
+    } );
+} );</script>

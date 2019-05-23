@@ -24,6 +24,7 @@ class Servicos extends CI_Controller {
 		$query['query'] = $this->db->get('servicos')->result();
 		$this->load->view('layout/header', $query);
 		$this->load->view('app/servicos/lista', $query);
+		$this->load->view('layout/datatablejs');
 		$this->load->view('layout/footer');
 	}
 		
