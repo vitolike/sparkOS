@@ -123,5 +123,18 @@ class Admins extends CI_Controller {
 		$this->db->delete('admins');
 		echo 'Deleted successfully.';
 	}
+	public function buscar($id)
+	
+	{
+
+		$this->db->where('adminid', $id);
+		$query = $this->db->get('admins')->result();
+		
+		$data = array('nome'=> $query[0]->nome);
+		
+		
+			header('Content-Type: application/json');
+	 		echo json_encode($data);
+	}
 	
 }

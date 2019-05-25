@@ -56,6 +56,7 @@
 
 		<i class="fab fa-codepen fa-9x"></i>
         <p>&nbsp;</p>
+		<p>Usuário de demonstração: admin@admin.com e senha: 123456</p>
      <h1 class="h3 mb-3 font-weight-normal">ENTRAR NO <b><?php echo $sysname ?></b> </h1>
         <p>Entre com seus dados de acesso.</p>
       </div>
@@ -73,6 +74,9 @@
       <button class="btn btn-lg btn-danger btn-block" type="submit"><i class="fas fa-check"></i> Entrar</button>
       <p class="mt-5 mb-3 text-muted text-center"><?php echo $sysname ?> Copyright &copy; <?php echo date('Y');?></p>
     </form>
+	
+	
+	
   </body>
 </html>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

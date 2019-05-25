@@ -31,7 +31,7 @@ class Servicos extends CI_Controller {
 		public function adicionar()
 	{
 		
-			$data = array(
+			$data = array('codigo' =>rand(5,100).date('dmYHis'),
 				'nome' => $this->input->post('nome'),
 			    'descricao' => $this->input->post('descricao'),
 				'preco' => $this->input->post('preco'));

@@ -75,7 +75,7 @@
     <th scope="col">#</th>
       <th scope="col">Cliente</th>
       <th scope="col">Responsável</th>
-      <th  scope="col">Data Inicial</th>
+      <th  scope="col">Descrição</th>
       <th  scope="col">Data Final</th>
       <th  scope="col">Status</th>
       <th scope="col"></th>
@@ -96,9 +96,9 @@
      <tr id="<?= $prop->idos; ?>"> 
       
       <td><?= $prop->protocolo; ?></td>
-      <td><?= $prop->cliente; ?></td>
-      <td><?= $prop->tecnico; ?></td>
-      <td><?= $prop->data_inicial; ?></td>
+      <td><?= $prop->nome_cliente; ?></td>
+      <td><?= $prop->nome_tecnico; ?></td>
+      <td><?= $prop->descricao; ?></td>
       <td><?= $prop->data_final; ?></td>
        <td><?php if ($prop->status == 'FINALIZADO'): ?><span class="badge badge-warning">FINALIZADO</span>
       <?php elseif ($prop->status == 'CANCELADO'): ?><span class="badge badge-danger">CANCELADO</span>

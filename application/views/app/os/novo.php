@@ -25,7 +25,8 @@
   <div class="form-row">
     <div class="form-group col-md-6"><label for="cliente">Cliente</label><div class="input-group mb-3">
 
-  <input type="text" class="form-control" id="cliente" name="cliente" required>
+  <input type="hidden" class="form-control" id="cliente" name="cliente">
+		 <input type="text" class="form-control" id="nome_cliente" name="nome_cliente" readonly>
   <div class="input-group-append">
     <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#procurarClientes"><i class="fas fa-search"></i> Procurar</button>
   </div>
@@ -34,7 +35,8 @@
     </div>
 	
 		    <div class="form-group col-md-6"><label for="cliente">Técnico / Responsável</label><div class="input-group mb-3">
-  <input type="text" class="form-control" id="tecnico" name="tecnico"  required>
+  <input type="hidden" class="form-control" id="tecnico" name="tecnico"  required>
+				 <input type="text" class="form-control" id="nome_tecnico" name="nome_tecnico"  readonly>
   <div class="input-group-append">
     <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#procurarTecnico"><i class="fas fa-search"></i> Procurar</button>
   </div>
@@ -138,7 +140,7 @@
       <td><?= $prop->telefone; ?></td>
       <td><?= $prop->cidade; ?> - <?= $prop->uf; ?></td>
 
-      <td>  <button type="button" class="btn btn-outline-primary" value="<?= $prop->clientesid; ?> - <?= $prop->nome; ?>&nbsp;<?= $prop->sobrenome; ?>" id="btn_clientes" data-dismiss="modal"><i class="fas fa-plus-square"></i> </td>
+      <td>  <button type="button" class="btn btn-outline-primary" value="<?= $prop->clientesid; ?>" id="btn_clientes" data-dismiss="modal"><i class="fas fa-plus-square"></i> </td>
     </tr> <?php }?>
     <?php }?>
   </tbody>  
@@ -186,7 +188,7 @@
       <?php elseif($a->status == 2): ?><span class="badge badge-success">Ativo</span><?php endif; ?>
       
       </td>
-      <td>  <button type="button" class="btn btn-outline-primary" value="<?= $a->adminid; ?> - <?= $a->nome; ?>" id="btn_admins" data-dismiss="modal"><i class="fas fa-plus-square"></i> </td>
+      <td>  <button type="button" class="btn btn-outline-primary" value="<?= $a->adminid; ?>" id="btn_admins" data-dismiss="modal"><i class="fas fa-plus-square"></i> </td>
     </tr> <?php }?>
   </tbody>  
 </table>
@@ -205,8 +207,7 @@
 		
 		
 		
-		
-
+	
 <script>
 		window.onload = function() {
     	document.getElementById('btn_garantia').addEventListener('click', function(){
@@ -217,14 +218,40 @@
 		document.getElementById('garantia').value = '';
         document.getElementById('garantia').value = document.getElementById('garantia').value + document.getElementById('btn_garantia1').value;
 		});
+			
 		document.getElementById('btn_clientes').addEventListener('click', function(){
 		document.getElementById('cliente').value = '';
         document.getElementById('cliente').value = document.getElementById('cliente').value + document.getElementById('btn_clientes').value;
+		$.ajax({
+
+			url: '<?php echo site_url('clientes/buscar/')?>'+$(this).val(),
+
+			dataType: 'json',
+
+			success: function(resposta){
+
+				$("#nome_cliente").val(resposta.nome+' '+resposta.sobrenome) ;
+			}
+		});
 		});
 		document.getElementById('btn_admins').addEventListener('click', function(){
 		document.getElementById('tecnico').value = '';
         document.getElementById('tecnico').value = document.getElementById('tecnico').value + document.getElementById('btn_admins').value;
+		$.ajax({
+
+			url: '<?php echo site_url('admins/buscar/')?>'+$(this).val(),
+
+			dataType: 'json',
+
+			success: function(resposta){
+
+				$("#nome_tecnico").val(resposta.nome) ;
+			}
 		});
+		
+		});
+			
+				
 		
 	 
 }
@@ -262,5 +289,6 @@ $(function() {
         }
     } );
 }
-</script>
+		</script>
+
 		

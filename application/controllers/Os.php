@@ -59,7 +59,9 @@ class Os extends CI_Controller {
 			    'cliente' => $this->input->post('cliente'),
 				'tecnico' => $this->input->post('tecnico'),
 				'status' => $this->input->post('status'),
-				'protocolo' => rand('5').date('dmYHis')
+				'protocolo' => rand(5,100).date('dmYHis'),
+				'nome_cliente' => $this->input->post('nome_cliente'),
+				'nome_tecnico' => $this->input->post('nome_tecnico')
 			);
 		
 		if($this->db->insert('os',$data)){
@@ -84,6 +86,13 @@ class Os extends CI_Controller {
 		$query['appname'] = 'Detalhes da OS';
 		$this->db->where('idos', $id);
 		$query['query'] = $this->db->get('os')->result();
+		
+		$SQL = "SELECT codigo,produtosid as id,descricao,preco_venda as preco FROM sistema.produtos UNION SELECT codigo,servicosid,nome,preco FROM sistema.servicos";
+		$query['produtos'] = $this->db->query($SQL)->result();
+		
+		$SQL2 = 'SELECT * FROM sistema.os_linhas where idos ='.$id;
+		$query['linhas'] = $this->db->query($SQL2)->result();
+		
 		$this->load->view('layout/header', $query);
 		$this->load->view('app/os/detalhes', $query);
 		$this->load->view('layout/footer');
@@ -101,13 +110,37 @@ class Os extends CI_Controller {
 				'observacoes' => $this->input->post('observacoes'),
 			    'cliente' => $this->input->post('cliente'),
 				'tecnico' => $this->input->post('tecnico'),
-				'status' => $this->input->post('status')
+				'status' => $this->input->post('status'),
+				'nome_cliente' => $this->input->post('nome_cliente'),
+				'nome_tecnico' => $this->input->post('nome_tecnico')
 			);
 		$this->db->where('idos', $uid);
 		if($this->db->update('os',$data)){
 			redirect('os/detalhes/'.$uid);
 		}
 		
+	}
+	public function add_produto()
+	{
+			$osid = $this->input->post('idos');
+			$data = array(
+			    'idos' => $this->input->post('idos'),
+				'descricao' => $this->input->post('descricao'),
+                'quantidade' => $this->input->post('quantidade'),
+                'preco' => $this->input->post('preco'),
+			);
+		
+		if($this->db->insert('os_linhas',$data)){
+			redirect('os/detalhes/'.$osid);
+		}
+		
+	}
+	public function delete_linha($id)
+	
+	{
+		$this->db->where('idos_linhas', $id);
+		$this->db->delete('os_linhas');
+		echo 'Deleted successfully.';
 	}
 	
 }

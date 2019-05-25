@@ -49,6 +49,7 @@ class Produtos extends CI_Controller {
 	  		 $upload_data = $this->upload->data();
 				  
 			 $data = array(
+				 		'codigo' =>rand(5,100).date('dmYHis'),	
 							'descricao' => $this->input->post('descricao'),
 							'entrada' => $this->input->post('entrada'),
 							'saida' => $this->input->post('saida'),

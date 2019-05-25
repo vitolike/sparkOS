@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+date_default_timezone_set('America/Sao_Paulo');
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -523,4 +525,4 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 
 $config['key_id'] ='ABC-123.456';
-$config['sys_ver'] ='0.1 Alpha';
+$config['sys_ver'] ='0.1.1 Alpha';

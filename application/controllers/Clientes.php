@@ -121,10 +121,15 @@ class Clientes extends CI_Controller {
 	
 	{
 
-		   	$sql = 'SELECT * FROM clientes WHERE clientesid = '.$id;
-			$query = $this->db->query($sql);
+		$this->db->where('clientesid', $id);
+		$query = $this->db->get('clientes')->result();
+		
+		$data = array('nome'=> $query[0]->nome,
+					  'sobrenome' => $query[0]->sobrenome
+					 );
+		
+		
 			header('Content-Type: application/json');
-	 		echo json_encode($query->result());
+	 		echo json_encode($data);
 	}
-	
 }

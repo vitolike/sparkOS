@@ -73,8 +73,8 @@
      <tr id="<?= $prop->idos; ?>"> 
       
       <td><?= $prop->protocolo; ?></td>
-      <td><?= $prop->cliente; ?></td>
-      <td><?= $prop->tecnico; ?></td>
+      <td><?= $prop->nome_cliente; ?></td>
+      <td><?= $prop->nome_tecnico; ?></td>
       <td><?= $prop->data_inicial; ?></td>
       <td><?= $prop->data_final; ?></td>
       <td><?php if ($prop->status == 'FINALIZADO'): ?><span class="badge badge-warning">FINALIZADO</span>
