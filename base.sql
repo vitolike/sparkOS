@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 21-Maio-2019 às 22:13
+-- Generation Time: 25-Maio-2019 às 05:32
 -- Versão do servidor: 10.1.38-MariaDB
 -- versão do PHP: 5.6.40
 
@@ -61,16 +61,6 @@ CREATE TABLE `auth_login` (
   `logs` longtext
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `auth_login`
---
-
-INSERT INTO `auth_login` (`idauth_login`, `tipo`, `data`, `ip`, `usuario`, `logs`) VALUES
-(1, 'VISITANTE', '2019-05-21 19:12:57', '127.0.0.1', 'Alguem entrou', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0'),
-(2, 'ENTRADA', '2019-05-21 19:13:00', '127.0.0.1', 'Victor Oliveira admin@admin.com', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0'),
-(3, 'VISITANTE', '2019-05-21 20:07:27', '127.0.0.1', 'Alguem entrou', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0'),
-(4, 'ENTRADA', '2019-05-21 20:07:29', '127.0.0.1', 'Victor Oliveira admin@admin.com', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0');
-
 -- --------------------------------------------------------
 
 --
@@ -101,7 +91,7 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`clientesid`, `nome`, `sobrenome`, `email`, `telefone`, `endereco`, `numero`, `bairro`, `cidade`, `uf`, `documento`, `tipo_documento`, `cep`, `log_alteracao`, `log_criacao`, `criado`) VALUES
-(1, 'Victor Oliveira', 'Del', 'victor_oliveira@gmail.com', '123456789', 'Rua Coronel César Eugênio Piedade', '560', 'Jardim Itália', 'Itapetininga', 'SP', '156599853', 'CPF', '18201790', NULL, 'Criado em 2019-05-21T14:53:09+02:00 Pelo usuário: Victor Oliveira', '2019-05-21 14:53:00');
+(2, 'Regina', 'Moraes Felipe', 'admin@admin.com', '', 'Rua Coronel César Eugênio Piedade', '', 'Jardim Itália', 'Itapetininga', 'SP', '111', 'CNPJ', '18201790', NULL, 'Criado em 2019-05-22T00:55:37+02:00 Pelo usuário: Victor Oliveira', '2019-05-22 00:55:00');
 
 -- --------------------------------------------------------
 
@@ -143,7 +133,30 @@ CREATE TABLE `os` (
   `valor_total` varchar(45) DEFAULT NULL,
   `cliente` varchar(300) DEFAULT NULL,
   `protocolo` varchar(30) DEFAULT NULL,
-  `tecnico` varchar(45) DEFAULT NULL
+  `tecnico` varchar(45) DEFAULT NULL,
+  `nome_cliente` text,
+  `nome_tecnico` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `os`
+--
+
+INSERT INTO `os` (`idos`, `data_inicial`, `data_final`, `garantia`, `descricao`, `defeito`, `status`, `observacoes`, `laudo_tecnico`, `valor_total`, `cliente`, `protocolo`, `tecnico`, `nome_cliente`, `nome_tecnico`) VALUES
+(13, '2019-05-24', '2019-05-27', '', 'Teste', 'teste', 'ORÇAMENTO', 'teste', 'teste', NULL, '2', '3024052019224943', '1', 'Regina Moraes Felipe', 'Victor Oliveira');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `os_linhas`
+--
+
+CREATE TABLE `os_linhas` (
+  `idos_linhas` int(11) NOT NULL,
+  `idos` int(11) DEFAULT NULL,
+  `descricao` varchar(45) DEFAULT NULL,
+  `quantidade` int(11) DEFAULT NULL,
+  `preco` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -163,7 +176,8 @@ CREATE TABLE `produtos` (
   `saida` tinyint(1) DEFAULT NULL,
   `entrada` tinyint(1) DEFAULT NULL,
   `criado` datetime DEFAULT NULL,
-  `foto` longtext
+  `foto` longtext,
+  `codigo` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -174,7 +188,7 @@ CREATE TABLE `produtos` (
 
 CREATE TABLE `servicos` (
   `servicosid` int(11) NOT NULL,
-  `codigo` int(11) DEFAULT NULL,
+  `codigo` varchar(50) DEFAULT NULL,
   `nome` varchar(45) DEFAULT NULL,
   `descricao` varchar(45) DEFAULT NULL,
   `preco` decimal(10,2) DEFAULT NULL
@@ -215,6 +229,12 @@ ALTER TABLE `os`
   ADD PRIMARY KEY (`idos`);
 
 --
+-- Indexes for table `os_linhas`
+--
+ALTER TABLE `os_linhas`
+  ADD PRIMARY KEY (`idos_linhas`);
+
+--
 -- Indexes for table `produtos`
 --
 ALTER TABLE `produtos`
@@ -240,19 +260,25 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `auth_login`
 --
 ALTER TABLE `auth_login`
-  MODIFY `idauth_login` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idauth_login` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `clientesid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `clientesid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `os`
 --
 ALTER TABLE `os`
-  MODIFY `idos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `os_linhas`
+--
+ALTER TABLE `os_linhas`
+  MODIFY `idos_linhas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `produtos`
