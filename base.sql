@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 25-Maio-2019 às 05:32
+-- Generation Time: 05-Jun-2019 às 09:28
 -- Versão do servidor: 10.1.38-MariaDB
 -- versão do PHP: 5.6.40
 
@@ -86,13 +86,6 @@ CREATE TABLE `clientes` (
   `criado` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `clientes`
---
-
-INSERT INTO `clientes` (`clientesid`, `nome`, `sobrenome`, `email`, `telefone`, `endereco`, `numero`, `bairro`, `cidade`, `uf`, `documento`, `tipo_documento`, `cep`, `log_alteracao`, `log_criacao`, `criado`) VALUES
-(2, 'Regina', 'Moraes Felipe', 'admin@admin.com', '', 'Rua Coronel César Eugênio Piedade', '', 'Jardim Itália', 'Itapetininga', 'SP', '111', 'CNPJ', '18201790', NULL, 'Criado em 2019-05-22T00:55:37+02:00 Pelo usuário: Victor Oliveira', '2019-05-22 00:55:00');
-
 -- --------------------------------------------------------
 
 --
@@ -113,6 +106,24 @@ CREATE TABLE `definicoes` (
 
 INSERT INTO `definicoes` (`iddefinicoes`, `sysname`, `email`, `cnpj`, `nome_fantasia`) VALUES
 (0, 'SparkOS', 'sparkos@gmail.com', '1234568900123', 'SparkOS');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `movimentacoes`
+--
+
+CREATE TABLE `movimentacoes` (
+  `idmovimentacoes` int(11) NOT NULL,
+  `tipo` varchar(45) DEFAULT NULL,
+  `id` varchar(45) DEFAULT NULL,
+  `finalidade` text,
+  `observacoes` longtext,
+  `valor` int(11) DEFAULT NULL,
+  `relacionado` varchar(45) DEFAULT NULL,
+  `data` date DEFAULT NULL,
+  `appid` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -138,13 +149,6 @@ CREATE TABLE `os` (
   `nome_tecnico` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `os`
---
-
-INSERT INTO `os` (`idos`, `data_inicial`, `data_final`, `garantia`, `descricao`, `defeito`, `status`, `observacoes`, `laudo_tecnico`, `valor_total`, `cliente`, `protocolo`, `tecnico`, `nome_cliente`, `nome_tecnico`) VALUES
-(13, '2019-05-24', '2019-05-27', '', 'Teste', 'teste', 'ORÇAMENTO', 'teste', 'teste', NULL, '2', '3024052019224943', '1', 'Regina Moraes Felipe', 'Victor Oliveira');
-
 -- --------------------------------------------------------
 
 --
@@ -156,7 +160,8 @@ CREATE TABLE `os_linhas` (
   `idos` int(11) DEFAULT NULL,
   `descricao` varchar(45) DEFAULT NULL,
   `quantidade` int(11) DEFAULT NULL,
-  `preco` varchar(45) DEFAULT NULL
+  `preco` varchar(45) DEFAULT NULL,
+  `idps` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -223,6 +228,12 @@ ALTER TABLE `definicoes`
   ADD PRIMARY KEY (`iddefinicoes`);
 
 --
+-- Indexes for table `movimentacoes`
+--
+ALTER TABLE `movimentacoes`
+  ADD PRIMARY KEY (`idmovimentacoes`);
+
+--
 -- Indexes for table `os`
 --
 ALTER TABLE `os`
@@ -266,19 +277,25 @@ ALTER TABLE `auth_login`
 -- AUTO_INCREMENT for table `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `clientesid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `clientesid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `movimentacoes`
+--
+ALTER TABLE `movimentacoes`
+  MODIFY `idmovimentacoes` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `os`
 --
 ALTER TABLE `os`
-  MODIFY `idos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idos` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `os_linhas`
 --
 ALTER TABLE `os_linhas`
-  MODIFY `idos_linhas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idos_linhas` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `produtos`
