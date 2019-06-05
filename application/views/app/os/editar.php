@@ -17,7 +17,8 @@
     <div class="my-3 p-3 bg-white rounded box-shadow">
     <h5 class="card-title">Cadastro de ordem de serviço</h5>
     <h6 class="card-subtitle mb-2 text-muted">Nova ordem de serviço.</h6>
-    <hr class="my-4">
+		
+<hr class="my-4">
     
  <div class="row">
   <div class="card-body">
@@ -26,7 +27,7 @@
     <div class="form-group col-md-6"><label for="cliente">Cliente</label><div class="input-group mb-3">
 
   <input type="hidden" class="form-control" id="cliente" name="cliente">
-		 <input type="text" class="form-control" id="nome_cliente" name="nome_cliente" required>
+		 <input type="text" class="form-control" id="nome_cliente" value="<?= $query[0]->nome_cliente; ?>" name="nome_cliente">
   <div class="input-group-append">
     <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#procurarClientes"><i class="fas fa-search"></i> Procurar</button>
   </div>
@@ -36,7 +37,7 @@
 	
 		    <div class="form-group col-md-6"><label for="cliente">Técnico / Responsável</label><div class="input-group mb-3">
   <input type="hidden" class="form-control" id="tecnico" name="tecnico"  required>
-				 <input type="text" class="form-control" id="nome_tecnico" name="nome_tecnico"  required>
+				 <input type="text" class="form-control" id="nome_tecnico" value="<?= $query[0]->nome_tecnico; ?>" name="nome_tecnico">
   <div class="input-group-append">
     <button class="btn btn-outline-secondary" type="button" data-toggle="modal" data-target="#procurarTecnico"><i class="fas fa-search"></i> Procurar</button>
   </div>
@@ -47,24 +48,25 @@
   <div class="form-row">
     <div class="form-group col-md-3">
       <label for="inputState">Status</label>
-      <select id="inputState" class="form-control" name="status" required>
-        <option value="" selected>Escolha...</option>
-        <option value="ORÇAMENTO">Orçamento</option>
-        <option value="ABERTO">Aberto</option>
-        <option value="EM ANDAMENTO">Em Andamento</option>
+      <select id="inputState" class="form-control" name="status">
+        <option value="ORÇAMENTO" <?= $query[0]->status=='ORÇAMENTO'?'selected':'' ?>>Orçamento</option>
+        <option value="ABERTO" <?= $query[0]->status=='ABERTO'?'selected':'' ?>>Aberto</option>
+        <option value="EM ANDAMENTO" <?= $query[0]->status=='EM ANDAMENTO'?'selected':'' ?>>Em Andamento</option>
+		  <option value="FINALIZADO" <?= $query[0]->status=='FINALIZADO'?'selected':'' ?>>Finalizado</option>
+		  <option value="CANCELADO" <?= $query[0]->status=='CANCELADO'?'selected':'' ?>>Cancelado</option>
       </select>
     </div>
     <div class="form-group col-md-3">
       <label for="inputZip">Data Inicial</label>
-      <input type="text" class="form-control" data-provide="datepicker" value="<?= date('Y-m-d') ?>" data-date-format="DD-MM-YYYY" id="data_inicial" name="data_inicial" required>
+      <input type="text" class="form-control" data-provide="datepicker" value="<?= $query[0]->data_inicial; ?>" data-date-format="DD-MM-YYYY" id="data_inicial" name="data_inicial" required>
     </div>
       <div class="form-group col-md-3">
       <label for="inputZip">Data Final</label>
-      <input type="text" class="form-control" data-provide="datepicker" data-date-format="DD-MM-YYYY" id="data_final" name="data_final" required>
+      <input type="text" class="form-control" data-provide="datepicker" data-date-format="DD-MM-YYYY" value="<?= $query[0]->data_final; ?>" id="data_final" name="data_final" required>
     </div>
       <div class="form-group col-md-1">
       <label for="garantia">Garantia</label>
-      <input type="number" class="form-control" id="garantia" name="garantia" max="999" maxlength="2">
+      <input type="number" class="form-control" id="garantia" name="garantia" max="999" maxlength="2" value="<?= $query[0]->garantia; ?>">
       </div>
        <div class="form-group col-md-2">
      <button type="button" class="btn btn-outline-primary" value="15" id="btn_garantia">15 Dias</button>   <button type="button" class="btn btn-outline-primary" value="30" id="btn_garantia1">30 Dias</button>
@@ -73,28 +75,28 @@
    <div class="form-row">
   <div class="form-group col-md-6">
    <label for="exampleFormControlTextarea1">Descrição Produto/Serviço</label>
-   <textarea class="form-control" name="descricao" rows="5" required></textarea>
+   <textarea class="form-control" name="descricao" rows="5" required><?= $query[0]->descricao; ?></textarea>
   </div>
    <div class="form-group col-md-6">
    <label for="exampleFormControlTextarea1">Defeito</label>
-   <textarea class="form-control" name="defeito" rows="5" required></textarea>
+   <textarea class="form-control" name="defeito" rows="5" required><?= $query[0]->defeito; ?></textarea>
   </div>
   </div>
   <div class="form-row">
    <div class="form-group col-md-6">
    <label for="exampleFormControlTextarea1">Observações</label>
-   <textarea class="form-control" name="observacoes" rows="5" required></textarea>
+   <textarea class="form-control" name="observacoes" rows="5" required><?= $query[0]->observacoes; ?></textarea>
   </div>
    <div class="form-group col-md-6">
    <label for="exampleFormControlTextarea1">Laudo Técnico</label>
-   <textarea class="form-control" name="laudo_tecnico" rows="5" required></textarea>
+   <textarea class="form-control" name="laudo_tecnico" rows="5" required><?= $query[0]->laudo_tecnico; ?></textarea>
   </div>
   
   </div>
   <div class="row">&nbsp;</div>
     
             
- <button type="submit" class="btn btn-primary btn-lg btn-block texto" >Continuar <i class="fas fa-angle-double-right"></i>
+ <button type="submit" class="btn btn-primary btn-lg btn-block" >Salvar
 </button></form>
         
        
@@ -123,7 +125,7 @@
       <th scope="col"></th>
     </tr>
   </thead>
-<?php if(!$query){?>
+<?php if(!$clientes){?>
  <tbody>
                     <tr>
                         <td colspan="5"> <center><p class="texto_pequeno">Nenhum Cliente Cadastrado</p></center></td>
@@ -131,16 +133,16 @@
                 </tbody>
                 
  <?php }else{ ?>
- <tbody> <?php foreach($query as $prop) {?>
+ <tbody> <?php foreach($clientes as $c) {?>
   
 
-     <tr id="<?= $prop->clientesid; ?>">  
-      <td><?= $prop->nome; ?>&nbsp;<?= $prop->sobrenome; ?></td>
-      <td><?= $prop->tipo_documento; ?>&nbsp;<?= $prop->documento; ?></td>
-      <td><?= $prop->telefone; ?></td>
-      <td><?= $prop->cidade; ?> - <?= $prop->uf; ?></td>
+     <tr id="<?= $c->clientesid; ?>">  
+      <td><?= $c->nome; ?>&nbsp;<?= $c->sobrenome; ?></td>
+      <td><?= $c->tipo_documento; ?>&nbsp;<?= $c->documento; ?></td>
+      <td><?= $c->telefone; ?></td>
+      <td><?= $c->cidade; ?> - <?= $c->uf; ?></td>
 
-      <td>  <button type="button" class="btn btn-outline-primary" value="<?= $prop->clientesid; ?>" id="btn_clientes" data-dismiss="modal"><i class="fas fa-plus-square"></i> </td>
+      <td>  <button type="button" class="btn btn-outline-primary" value="<?= $c->clientesid; ?>" id="btn_clientes" data-dismiss="modal"><i class="fas fa-plus-square"></i> </td>
     </tr> <?php }?>
     <?php }?>
   </tbody>  

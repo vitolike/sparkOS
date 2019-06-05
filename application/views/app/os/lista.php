@@ -82,9 +82,13 @@
       <?php else: ?><span class="badge badge-success"><?= $prop->status; ?></span><?php endif; ?></td>
      
 
-      <td>
-<a href="<?= base_url(); ?>os/detalhes/<?= $prop->idos; ?>"><button type="button" class="btn btn-success"><i class="fas fa-user-edit"></i></button></a>
-<button type="submit" class="btn btn-danger remove"><i class="fas fa-trash-alt"></i></button>  
+		 
+ <td class="text-right">
+
+<div class="btn-group " role="group">
+  <a class="btn btn-primary" href="<?= base_url(); ?>os/detalhes/<?= $prop->idos; ?>"><i class="fas fa-search"></i></a>
+  <button type="button" class="btn btn-danger remove"><i class="fas fa-trash-alt"></i></button>
+</div>		 
       </td>
     </tr> <?php }?>
     <?php }?>

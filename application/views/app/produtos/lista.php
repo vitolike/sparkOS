@@ -58,10 +58,10 @@
   <thead>
     <tr>
 		<th scope="col">Foto</th>
-      <th scope="col">Nome</th>
-      <th scope="col">Estoque</th>
-      <th  scope="col">Preço</th>
-      <th scope="col"></th>
+      <th scope="col col-lg-5">Nome</th>
+      <th scope="col col-lg-2">Estoque</th>
+      <th  scope="col col-lg-2">Preço</th>
+      <th scope="col col-lg-1"></th>
     </tr>
   </thead>
 <?php if(!$query){?>
@@ -86,9 +86,17 @@
       <td><?= $prop->preco_venda; ?></td>
      
 
-      <td>
-<a href="<?= base_url(); ?>produtos/editar/<?= $prop->produtosid; ?>"><button type="button" class="btn btn-success"><i class="fas fa-user-edit"></i></button></a>
-<button type="submit" class="btn btn-danger remove"><i class="fas fa-trash-alt"></i></button>  
+      <td class="text-right">
+
+<div class="btn-group " role="group" aria-label="Button group with nested dropdown">
+  <a class="btn btn-primary" href="<?= base_url(); ?>produtos/editar/<?= $prop->produtosid; ?>"><i class="fas fa-search"></i></a>
+  <button type="button" class="btn btn-danger remove"><i class="fas fa-trash-alt"></i></button>
+</div>
+		  
+		  
+		  
+		  
+		  
       </td>
     </tr> <?php }?>
     <?php }?>
@@ -116,14 +124,7 @@
       </div>
       <div class="modal-body">
        
-       <form method="post" enctype="multipart/form-data" class="p-t-15" role="form" action="<?= base_url(); ?>produtos/adicionar">
-  
-	<div class="form-group">	   
-<div class="custom-file">
-  <input type="file" class="custom-file-input" id="foto" name="foto" size="20">
-  <label class="custom-file-label" for="customFile" >Escolher foto do produto</label>
-</div></div>
-		   
+       <form method="post" enctype="multipart/form-data" class="p-t-15" role="form" action="<?= base_url(); ?>produtos/adicionar">		   
   <div class="form-group">
     <label for="inputAddress">Descrição</label>
     <input type="text" class="form-control" id="descricao" name="descricao" required="required">
@@ -164,7 +165,7 @@
    <div class="form-group">
       <label for="unidade">Unidade</label>
       <select id="unidade" name="unidade" class="form-control">
-        <option selected>Escolha...</option>
+        <option selected value="Un">Escolha...</option>
         <option value="Kg">Kilograma</option>
         <option value="Lt">Litro</option>
         <option value="Cx">Caixa</option>
@@ -242,6 +243,7 @@
     
 
 </script>
+	
 	
 	
 	<script>

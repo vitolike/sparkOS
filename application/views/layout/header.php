@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" />
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src="<?= base_url(); ?>public/js/qrcode.js"></script>
 
 
  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
