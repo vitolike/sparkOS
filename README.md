@@ -1,11 +1,5 @@
 SparkOS - Sistema simples de Ordem de Serviço ainda em desenvolvimento. 
 
-DEMO: http://sparkos.tk (Servidor Novo).
-
-Usuário: admin@admin.com
-Senha: 123456
-
-
 ### Instalação
 
 1. Faça o download dos arquivos.
