@@ -1,5 +1,7 @@
 SparkOS - Sistema simples de Ordem de Serviço ainda em desenvolvimento. 
 
+COMEÇOU O DESENVOLVIMENTO DA V2 (Veja a Branch v2 para mais informações).
+
 ### Instalação
 
 1. Faça o download dos arquivos.
