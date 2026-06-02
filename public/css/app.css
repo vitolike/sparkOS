@@ -600,6 +600,28 @@ label {
   background-color: rgba(99, 102, 241, 0.02) !important;
 }
 
+/* Clean Modern Alerts (moved from app-login.css for internal pages) */
+.alert-modern {
+  border-radius: 14px;
+  border: none;
+  font-size: 13px;
+  text-align: left;
+  padding: 14px 20px;
+  margin-bottom: 24px;
+}
+
+.alert-danger-modern {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fee2e2;
+}
+
+.alert-success-modern {
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #d1fae5;
+}
+
 /* Styling for SweetAlert to look premium */
 .sweet-alert {
   background-color: white !important;

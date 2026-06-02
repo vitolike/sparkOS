@@ -66,24 +66,26 @@ class Os extends CI_Controller {
 		
 		if($this->db->insert('os',$data)){
 			$osid = $this->db->insert_id();
-			redirect('os/detalhes/'.$osid);
+			redirect('os/detalhes/'.$osid.'/criado');
 		}
 		
 	}
 	public function delete($id)
 	
 	{
+		$this->login_model->verifica_sessao();
 		$this->db->where('idos', $id);
 		$this->db->delete('os');
 		echo 'Deleted successfully.';
 	}
 	
-	public function detalhes($id=null)
+	public function detalhes($id=null, $msg=null)
 	
 	{
 		$this->login_model->verifica_sessao();
 		$query['sysname'] =  $this->login_model->sysname();
 		$query['appname'] = 'Detalhes da OS';
+		$query['msg'] = $msg;
 		$this->db->where('idos', $id);
 		$query['query'] = $this->db->get('os')->result();
 		
@@ -116,7 +118,7 @@ class Os extends CI_Controller {
 			);
 		$this->db->where('idos', $uid);
 		if($this->db->update('os',$data)){
-			redirect('os/detalhes/'.$uid);
+			redirect('os/detalhes/'.$uid.'/atualizado');
 		}
 		
 	}
@@ -226,6 +228,7 @@ class Os extends CI_Controller {
 	public function delete_linha($id)
 	
 	{
+		$this->login_model->verifica_sessao();
 		$SQL = 'SELECT * FROM os_linhas WHERE idos_linhas='.$id;
 		$SQL_R = $this->db->query($SQL)->row_array();
 		
@@ -262,7 +265,7 @@ class Os extends CI_Controller {
 		
 		$this->db->where('idos', $uid);
 		if($this->db->update('os',$data)){
-			redirect('os/detalhes/'.$uid);
+			redirect('os/detalhes/'.$uid.'/status');
 		}
 	}
 	public function editar($id=null)

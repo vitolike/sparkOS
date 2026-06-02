@@ -10,29 +10,7 @@
     
     <div role="main" class="container-fluid px-md-5">
         
-        <!-- Alerts and Toast notifications -->
-        <?php if ($msg == 'sucesso_ticket'): ?>
-            <div class="alert alert-modern alert-success-modern alert-dismissible fade show mb-4" role="alert">
-                <strong><i class="fas fa-check-circle"></i>&nbsp; Sucesso!</strong> Novo ticket de suporte aberto no Help Desk.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: inherit; opacity: 0.7;">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php elseif ($msg == 'sucesso_resolvido'): ?>
-            <div class="alert alert-modern alert-success-modern alert-dismissible fade show mb-4" role="alert">
-                <strong><i class="fas fa-check-circle"></i>&nbsp; Sucesso!</strong> Ticket de suporte marcado como resolvido e encerrado.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: inherit; opacity: 0.7;">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php elseif ($msg == 'sucesso_atendimento'): ?>
-            <div class="alert alert-modern alert-success-modern alert-dismissible fade show mb-4" role="alert">
-                <strong><i class="fas fa-check-circle"></i>&nbsp; Sucesso!</strong> Ticket atualizado para "Em Atendimento".
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: inherit; opacity: 0.7;">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php endif; ?>
+        <?php $this->load->view('layout/notifications', ['notify_view' => 'helpdesk']); ?>
         
         <!-- Helpdesk Header and Global Metrics Card -->
         <div class="my-3 p-4 rounded box-shadow">

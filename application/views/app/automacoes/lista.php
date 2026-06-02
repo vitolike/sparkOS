@@ -10,22 +10,7 @@
     
     <div role="main" class="container-fluid px-md-5">
         
-        <!-- Alerts and Toast notifications -->
-        <?php if ($msg == 'sucesso_automacao'): ?>
-            <div class="alert alert-modern alert-success-modern alert-dismissible fade show mb-4" role="alert">
-                <strong><i class="fas fa-check-circle"></i>&nbsp; Sucesso!</strong> Nova regra de automação e workflow adicionada com sucesso.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: inherit; opacity: 0.7;">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php elseif ($msg == 'sucesso_status'): ?>
-            <div class="alert alert-modern alert-success-modern alert-dismissible fade show mb-4" role="alert">
-                <strong><i class="fas fa-check-circle"></i>&nbsp; Sucesso!</strong> Status do fluxo de automação alterado.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: inherit; opacity: 0.7;">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php endif; ?>
+        <?php $this->load->view('layout/notifications', ['notify_view' => 'automacoes']); ?>
         
         <!-- Automacoes Header and Global Metrics Card -->
         <div class="my-3 p-4 rounded box-shadow">

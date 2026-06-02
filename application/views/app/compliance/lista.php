@@ -10,29 +10,7 @@
     
     <div role="main" class="container-fluid px-md-5">
         
-        <!-- Alerts and Toast notifications -->
-        <?php if ($msg == 'sucesso_nova'): ?>
-            <div class="alert alert-modern alert-success-modern alert-dismissible fade show mb-4" role="alert">
-                <strong><i class="fas fa-check-circle"></i>&nbsp; Sucesso!</strong> Novo evento de conformidade e auditoria registrado com sucesso.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: inherit; opacity: 0.7;">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php elseif ($msg == 'sucesso_resolvido'): ?>
-            <div class="alert alert-modern alert-success-modern alert-dismissible fade show mb-4" role="alert">
-                <strong><i class="fas fa-check-circle"></i>&nbsp; Sucesso!</strong> Evento de compliance resolvido. Níveis de risco operacional reduzidos.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: inherit; opacity: 0.7;">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php elseif ($msg == 'sucesso_recalculo'): ?>
-            <div class="alert alert-modern alert-success-modern alert-dismissible fade show mb-4" role="alert">
-                <strong><i class="fas fa-check-circle"></i>&nbsp; Sucesso!</strong> Score de risco do usuário recalculado e ajustado com sucesso.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: inherit; opacity: 0.7;">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php endif; ?>
+        <?php $this->load->view('layout/notifications', ['notify_view' => 'compliance']); ?>
         
         <!-- CRM Header and Global Metrics Card -->
         <div class="my-3 p-4 rounded box-shadow">

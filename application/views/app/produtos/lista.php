@@ -12,36 +12,7 @@
     </div>
 
     <main role="main" class="container">
-        <!-- Message Alerts -->
-        <?php if ($msg == 'novo'): ?>
-            <div class="alert alert-modern alert-success-modern alert-dismissible fade show mb-4" role="alert">
-                <strong><i class="fas fa-check-circle"></i>&nbsp; Sucesso!</strong> O novo produto foi cadastrado com sucesso.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: inherit; opacity: 0.7;">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php elseif ($msg == 'update'): ?>
-            <div class="alert alert-modern alert-success-modern alert-dismissible fade show mb-4" role="alert">
-                <strong><i class="fas fa-check-circle"></i>&nbsp; Sucesso!</strong> Cadastro do produto atualizado com sucesso.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: inherit; opacity: 0.7;">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php elseif ($msg == 'deletar'): ?>
-            <div class="alert alert-modern alert-success-modern alert-dismissible fade show mb-4" role="alert">
-                <strong><i class="fas fa-trash-alt"></i>&nbsp; Sucesso!</strong> O produto foi apagado com sucesso do sistema.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: inherit; opacity: 0.7;">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php elseif ($msg == 'erro'): ?>
-            <div class="alert alert-modern alert-danger-modern alert-dismissible fade show mb-4" role="alert">
-                <strong><i class="fas fa-exclamation-triangle"></i>&nbsp; Erro!</strong> O arquivo de foto enviado não é suportado.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: inherit; opacity: 0.7;">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php endif; ?>
+        <?php $this->load->view('layout/notifications', ['notify_view' => 'produtos']); ?>
 
         <!-- Table Card -->
         <div class="my-3 p-4 rounded box-shadow">

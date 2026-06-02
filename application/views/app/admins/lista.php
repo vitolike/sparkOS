@@ -12,30 +12,7 @@
 
     <main role="main" class="container">
     
-    <div class="row">&nbsp;</div>
-    <?php if ($msg == 'adicionado'): ?>
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong><i class="fas fa-user-circle"></i>&nbsp; Novo usuário!</strong> adicionado com sucesso.
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<?php elseif ($msg == 'erro_email'): ?>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <strong><i class="fas fa-exclamation-triangle"></i>&nbsp; Erro!</strong> e-mail já existe cadastrado no sistema.
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-
-
-<?php elseif ($msg == 'atualizado'): ?>
-     <div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong><i class="fas fa-user-circle"></i>&nbsp; Usuário!</strong> atualizado com sucesso.
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div><?php endif; ?>
+    <?php $this->load->view('layout/notifications', ['notify_view' => 'admins']); ?>
     
 
       <div class="my-3 p-3 bg-white rounded box-shadow">

@@ -10,22 +10,7 @@
     
     <div role="main" class="container-fluid px-md-5">
         
-        <!-- Alerts and Toast notifications -->
-        <?php if ($msg == 'sucesso_campanha'): ?>
-            <div class="alert alert-modern alert-success-modern alert-dismissible fade show mb-4" role="alert">
-                <strong><i class="fas fa-check-circle"></i>&nbsp; Sucesso!</strong> Nova campanha de marketing e captação de leads registrada.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: inherit; opacity: 0.7;">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php elseif ($msg == 'sucesso_status'): ?>
-            <div class="alert alert-modern alert-success-modern alert-dismissible fade show mb-4" role="alert">
-                <strong><i class="fas fa-check-circle"></i>&nbsp; Sucesso!</strong> Status da campanha comercial atualizado com sucesso.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: inherit; opacity: 0.7;">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <?php endif; ?>
+        <?php $this->load->view('layout/notifications', ['notify_view' => 'marketing']); ?>
         
         <!-- Marketing Header and Global Metrics Card -->
         <div class="my-3 p-4 rounded box-shadow">

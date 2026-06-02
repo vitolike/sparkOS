@@ -10,6 +10,29 @@
     
     <main role="main" class="container">
         
+        <?php if ($msg == 'criado'): ?>
+            <div class="alert alert-modern alert-success-modern alert-dismissible fade show mb-4" role="alert">
+                <strong><i class="fas fa-check-circle"></i>&nbsp; Sucesso!</strong> Ordem de Serviço criada com sucesso.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: inherit; opacity: 0.7;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php elseif ($msg == 'atualizado'): ?>
+            <div class="alert alert-modern alert-success-modern alert-dismissible fade show mb-4" role="alert">
+                <strong><i class="fas fa-check-circle"></i>&nbsp; Sucesso!</strong> Ordem de Serviço atualizada com sucesso.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: inherit; opacity: 0.7;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php elseif ($msg == 'status'): ?>
+            <div class="alert alert-modern alert-success-modern alert-dismissible fade show mb-4" role="alert">
+                <strong><i class="fas fa-check-circle"></i>&nbsp; Sucesso!</strong> Status da Ordem de Serviço alterado com sucesso.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: inherit; opacity: 0.7;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
+        
         <!-- Main Details Card -->
         <div class="my-3 p-4 rounded box-shadow">
             <div class="row align-items-center mb-4">
@@ -22,8 +45,8 @@
                 </div>
                 <div class="col-md-6 text-md-right mt-3 mt-md-0">
                     <div class="d-flex justify-content-md-end gap-2 flex-wrap">
-                        <button type="button" class="btn btn-secondary mr-2"><i class="fas fa-print mr-1"></i> Imprimir</button>
-                        <button type="button" class="btn btn-secondary mr-2"><i class="fas fa-cash-register mr-1"></i> Faturar</button>
+                        <button type="button" class="btn btn-secondary mr-2" onclick="window.print()"><i class="fas fa-print mr-1"></i> Imprimir</button>
+                        <button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#modalFaturar"><i class="fas fa-cash-register mr-1"></i> Faturar</button>
                         <button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#alterarstatus"><i class="fas fa-sync mr-1"></i> Alterar Status</button>
                         <a href="<?= base_url(); ?>os/editar/<?= $query[0]->idos; ?>" class="btn btn-primary"><i class="fas fa-pen mr-1"></i> Editar OS</a>
                     </div>
@@ -118,22 +141,29 @@
                             <th scope="col">Descrição</th>
                             <th scope="col">Quantidade</th>
                             <th scope="col">Valor Unitário</th>
+                            <th scope="col">Subtotal</th>
                             <th scope="col" class="text-right">Ações</th>
                         </tr>
                     </thead>
-                    <?php if(!$linhas){ ?>
+                    <?php 
+                    $total_os = 0;
+                    if(!$linhas){ ?>
                         <tbody>
                             <tr>
-                                <td colspan="4" class="text-center py-4">Nenhum item adicionado a esta Ordem de Serviço.</td>
+                                <td colspan="5" class="text-center py-4">Nenhum item adicionado a esta Ordem de Serviço.</td>
                             </tr>
                         </tbody>
                     <?php } else { ?>
                         <tbody>
-                            <?php foreach($linhas as $l) { ?>
+                            <?php foreach($linhas as $l) { 
+                                $subtotal = (float)$l->preco * (int)$l->quantidade;
+                                $total_os += $subtotal;
+                            ?>
                                 <tr id="<?= $l->idos_linhas; ?>">  
                                     <td class="font-weight-bold"><?= $l->descricao; ?></td>
                                     <td><span class="badge badge-pill badge-warning" style="font-size: 12px;"><?= $l->quantidade; ?></span></td>
                                     <td class="font-weight-bold text-success">R$ <?= number_format((float)$l->preco, 2, ',', '.'); ?></td>
+                                    <td class="font-weight-bold">R$ <?= number_format($subtotal, 2, ',', '.'); ?></td>
                                     <td class="text-right">
                                         <a href="#" class="btn btn-danger btn-sm remove py-1 px-3">
                                             <i class="far fa-trash-alt mr-1"></i> Remover
@@ -142,6 +172,13 @@
                                 </tr>
                             <?php } ?>
                         </tbody>
+                        <tfoot>
+                            <tr class="font-weight-bold" style="font-size: 16px;">
+                                <td colspan="3" class="text-right">Valor Total da OS:</td>
+                                <td class="text-success">R$ <?= number_format($total_os, 2, ',', '.'); ?></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
                     <?php } ?>
                 </table>
             </div>
@@ -175,6 +212,53 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Atualizar Status</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Faturar -->
+    <div class="modal fade" id="modalFaturar" tabindex="-1" role="dialog" aria-labelledby="modalFaturarTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalFaturarTitle"><i class="fas fa-cash-register mr-2 text-primary"></i> Faturar Ordem de Serviço</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" role="form" action="<?= base_url(); ?>os/atualizar_status">
+                    <input type="hidden" value="<?= $query[0]->idos; ?>" name="idos" />
+                    <div class="modal-body p-4 text-center">
+                        <div class="py-3">
+                            <i class="fas fa-file-invoice" style="font-size: 48px; color: var(--primary-color); opacity: 0.6;"></i>
+                        </div>
+                        <h4 class="font-weight-bold mb-1">OS #<?= $query[0]->protocolo; ?></h4>
+                        <p class="text-muted mb-3"><?= $query[0]->nome_cliente; ?></p>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-muted">Valor Total:</span>
+                            <span class="font-weight-bold" style="font-size: 24px; color: var(--success-color);">
+                                R$ <?= number_format($total_os, 2, ',', '.'); ?>
+                            </span>
+                        </div>
+                        <hr>
+                        <p class="text-muted" style="font-size: 13px;">
+                            <i class="fas fa-info-circle mr-1"></i>
+                            Para faturar, marque a OS como <strong>FINALIZADO</strong> e registre o pagamento.
+                        </p>
+                        <div class="form-group text-left">
+                            <label for="faturar_status">Alterar Status para:</label>
+                            <select id="faturar_status" class="form-control" name="status" required>
+                                <option value="FINALIZADO">FINALIZADO</option>
+                                <option value="CANCELADO">CANCELADO</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-success"><i class="fas fa-check mr-1"></i> Confirmar Faturamento</button>
                     </div>
                 </form>
             </div>
