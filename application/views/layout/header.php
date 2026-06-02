@@ -65,12 +65,31 @@
             <a class="menu-item <?= $appname == 'Dashboard' ? 'active' : ''; ?>" href="<?= base_url(); ?>app/home">
                 <i class="fas fa-th-large"></i> Dashboard
             </a>
+
+            <div class="menu-section-label">CRM</div>
             <a class="menu-item <?= $appname == 'Clientes' ? 'active' : ''; ?>" href="<?= base_url(); ?>clientes/lista">
                 <i class="fas fa-users"></i> Clientes
             </a>
             <a class="menu-item <?= $appname == 'CRM / Funil' ? 'active' : ''; ?>" href="<?= base_url(); ?>crm/lista">
                 <i class="fas fa-filter"></i> CRM / Funil
             </a>
+            <a class="menu-item <?= $appname == 'Marketing / Campanhas' ? 'active' : ''; ?>" href="<?= base_url(); ?>marketing/lista">
+                <i class="fas fa-bullhorn"></i> Marketing / ROI
+            </a>
+            <a class="menu-item <?= $appname == 'Propostas & Contratos' ? 'active' : ''; ?>" href="<?= base_url(); ?>contratos/lista">
+                <i class="fas fa-file-signature"></i> Propostas & Contratos
+            </a>
+            <a class="menu-item <?= $appname == 'Help Desk / Tickets' ? 'active' : ''; ?>" href="<?= base_url(); ?>helpdesk/lista">
+                <i class="fas fa-headset"></i> Help Desk / Tickets
+            </a>
+            <a class="menu-item <?= $appname == 'Automações & Workflows' ? 'active' : ''; ?>" href="<?= base_url(); ?>automacoes/lista">
+                <i class="fas fa-bolt"></i> Automações / Workflows
+            </a>
+            <a class="menu-item <?= $appname == 'Gestão de Riscos' ? 'active' : ''; ?>" href="<?= base_url(); ?>riscos/lista/dashboard">
+                <i class="fas fa-shield-alt"></i> Gestão de Riscos (GRC)
+            </a>
+
+            <div class="menu-section-label">Operação</div>
             <a class="menu-item <?= $appname == 'Ordens de Serviço' ? 'active' : ''; ?>" href="<?= base_url(); ?>os/lista">
                 <i class="fas fa-file-invoice"></i> Ordens de Serviço
             </a>
@@ -80,23 +99,6 @@
             <a class="menu-item <?= $appname == 'Serviços' ? 'active' : ''; ?>" href="<?= base_url(); ?>servicos/lista">
                 <i class="fas fa-tools"></i> Serviços
             </a>
-            <a class="menu-item <?= $appname == 'Help Desk / Tickets' ? 'active' : ''; ?>" href="<?= base_url(); ?>helpdesk/lista">
-                <i class="fas fa-headset"></i> Help Desk / Tickets
-            </a>
-            <a class="menu-item <?= $appname == 'Marketing / Campanhas' ? 'active' : ''; ?>" href="<?= base_url(); ?>marketing/lista">
-                <i class="fas fa-bullhorn"></i> Marketing / ROI
-            </a>
-            <a class="menu-item <?= $appname == 'Propostas & Contratos' ? 'active' : ''; ?>" href="<?= base_url(); ?>contratos/lista">
-                <i class="fas fa-file-signature"></i> Propostas & Contratos
-            </a>
-            <a class="menu-item <?= $appname == 'Automações & Workflows' ? 'active' : ''; ?>" href="<?= base_url(); ?>automacoes/lista">
-                <i class="fas fa-bolt"></i> Automações / Workflows
-            </a>
-            <a class="menu-item <?= $appname == 'Gestão de Riscos' ? 'active' : ''; ?>" href="<?= base_url(); ?>riscos/lista/dashboard">
-                <i class="fas fa-shield-alt"></i> Gestão de Riscos (GRC)
-            </a>
-
-            <div class="menu-section-label">Operacional</div>
             <a class="menu-item <?= $appname == 'Equipamentos' ? 'active' : ''; ?>" href="<?= base_url(); ?>equipamentos/lista">
                 <i class="fas fa-server"></i> Equipamentos
             </a>
@@ -109,6 +111,8 @@
             <a class="menu-item <?= $appname == 'Checklists' ? 'active' : ''; ?>" href="<?= base_url(); ?>checklists/lista">
                 <i class="fas fa-tasks"></i> Checklists
             </a>
+
+            <div class="menu-section-label">Logística</div>
             <a class="menu-item <?= $appname == 'Estoque' ? 'active' : ''; ?>" href="<?= base_url(); ?>estoque/lista">
                 <i class="fas fa-warehouse"></i> Estoque
             </a>
@@ -126,14 +130,45 @@
             <a class="menu-item <?= $appname == 'Custos' ? 'active' : ''; ?>" href="<?= base_url(); ?>custos/lista">
                 <i class="fas fa-coins"></i> Custos
             </a>
+            <a class="menu-item <?= $appname == 'Contas a Receber' ? 'active' : ''; ?>" href="<?= base_url(); ?>contasareceber/lista">
+                <i class="fas fa-hand-holding-usd"></i> Contas a Receber
+            </a>
+            <a class="menu-item <?= $appname == 'Conciliação' ? 'active' : ''; ?>" href="<?= base_url(); ?>conciliacao/lista">
+                <i class="fas fa-balance-scale"></i> Conciliação Bancária
+            </a>
+
+            <div class="menu-section-label">Fiscal</div>
+            <a class="menu-item <?= $appname == 'Cadastro Fiscal' ? 'active' : ''; ?>" href="<?= base_url(); ?>cadastrofiscal/lista">
+                <i class="fas fa-id-card"></i> Cadastro Fiscal
+            </a>
+            <a class="menu-item <?= $appname == 'Tributação' ? 'active' : ''; ?>" href="<?= base_url(); ?>tributacao/lista">
+                <i class="fas fa-calculator"></i> Tributação
+            </a>
+            <a class="menu-item <?= $appname == 'NFS-e' ? 'active' : ''; ?>" href="<?= base_url(); ?>nfse/lista">
+                <i class="fas fa-file-invoice"></i> NFS-e
+            </a>
+            <a class="menu-item <?= $appname == 'Retenções' ? 'active' : ''; ?>" href="<?= base_url(); ?>retencoes/lista">
+                <i class="fas fa-handcuffs"></i> Retenções
+            </a>
+            <a class="menu-item <?= $appname == 'Relatórios Fiscais' ? 'active' : ''; ?>" href="<?= base_url(); ?>relatoriosfiscais/lista">
+                <i class="fas fa-file-alt"></i> Relatórios Fiscais
+            </a>
+
+            <div class="menu-section-label">Portal</div>
+            <a class="menu-item <?= $appname == 'Portal' ? 'active' : ''; ?>" href="<?= base_url(); ?>portal/lista">
+                <i class="fas fa-globe"></i> Portal de Acessos
+            </a>
 
             <div class="menu-section-label">Analytics</div>
+            <a class="menu-item <?= $appname == 'KPIs' ? 'active' : ''; ?>" href="<?= base_url(); ?>kpis/lista">
+                <i class="fas fa-chart-line"></i> KPIs / Metas
+            </a>
             <a class="menu-item <?= $appname == 'Relatórios' ? 'active' : ''; ?>" href="<?= base_url(); ?>relatorios/lista">
                 <i class="fas fa-chart-bar"></i> Relatórios
             </a>
 
             <div class="menu-divider my-3"></div>
-            
+
             <a class="menu-item <?= $appname == 'Definições' ? 'active' : ''; ?>" href="<?= base_url(); ?>definicoes">
                 <i class="fas fa-cogs"></i> Definições
             </a>
