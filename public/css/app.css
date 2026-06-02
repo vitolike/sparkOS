@@ -199,6 +199,16 @@ body {
   border-radius: 4px 12px 12px 4px;
 }
 
+.menu-section-label {
+  padding: 12px 20px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
 .menu-divider {
   height: 1px;
   background-color: var(--border-color);

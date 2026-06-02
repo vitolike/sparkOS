@@ -55,6 +55,17 @@ $messages = [
         'sucesso_resolvido' => ['success', 'fa-check-circle', 'Sucesso!', 'Evento de compliance resolvido. Níveis de risco operacional reduzidos.'],
         'sucesso_recalculo' => ['success', 'fa-check-circle', 'Sucesso!', 'Score de risco do usuário recalculado e ajustado com sucesso.'],
     ],
+    'riscos' => [
+        'novo' => ['success', 'fa-check-circle', 'Sucesso!', 'Registro adicionado com sucesso.'],
+        'update' => ['success', 'fa-check-circle', 'Sucesso!', 'Registro atualizado com sucesso.'],
+        'novo_sucesso' => ['success', 'fa-check-circle', 'Sucesso!', 'Registro adicionado com sucesso.'],
+        'sucesso_update' => ['success', 'fa-check-circle', 'Sucesso!', 'Registro atualizado com sucesso.'],
+        'deletar' => ['success', 'fa-trash-alt', 'Sucesso!', 'Registro removido com sucesso.'],
+        'erro' => ['danger', 'fa-exclamation-triangle', 'Erro!', 'Erro ao processar a operação. Verifique os dados e tente novamente.'],
+        'status' => ['success', 'fa-check-circle', 'Sucesso!', 'Status atualizado com sucesso.'],
+        'resolvido' => ['success', 'fa-check-circle', 'Sucesso!', 'Incidente resolvido com sucesso.'],
+        'valor_adicionado' => ['success', 'fa-chart-line', 'Sucesso!', 'Valor do KRI registrado com sucesso.'],
+    ],
 ];
 
 if (isset($msg) && isset($messages[$notify_view][$msg])):

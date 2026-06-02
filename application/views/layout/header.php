@@ -92,10 +92,46 @@
             <a class="menu-item <?= $appname == 'Automações & Workflows' ? 'active' : ''; ?>" href="<?= base_url(); ?>automacoes/lista">
                 <i class="fas fa-bolt"></i> Automações / Workflows
             </a>
-            <a class="menu-item <?= $appname == 'Compliance & Riscos' ? 'active' : ''; ?>" href="<?= base_url(); ?>compliance/lista">
-                <i class="fas fa-shield-alt"></i> Compliance & Riscos
+            <a class="menu-item <?= $appname == 'Gestão de Riscos' ? 'active' : ''; ?>" href="<?= base_url(); ?>riscos/lista/dashboard">
+                <i class="fas fa-shield-alt"></i> Gestão de Riscos (GRC)
             </a>
-            
+
+            <div class="menu-section-label">Operacional</div>
+            <a class="menu-item <?= $appname == 'Equipamentos' ? 'active' : ''; ?>" href="<?= base_url(); ?>equipamentos/lista">
+                <i class="fas fa-server"></i> Equipamentos
+            </a>
+            <a class="menu-item <?= $appname == 'SLA' ? 'active' : ''; ?>" href="<?= base_url(); ?>sla/lista">
+                <i class="fas fa-clock"></i> SLA / Acordos
+            </a>
+            <a class="menu-item <?= $appname == 'Agenda' ? 'active' : ''; ?>" href="<?= base_url(); ?>agenda/lista">
+                <i class="fas fa-calendar-alt"></i> Agenda
+            </a>
+            <a class="menu-item <?= $appname == 'Checklists' ? 'active' : ''; ?>" href="<?= base_url(); ?>checklists/lista">
+                <i class="fas fa-tasks"></i> Checklists
+            </a>
+            <a class="menu-item <?= $appname == 'Estoque' ? 'active' : ''; ?>" href="<?= base_url(); ?>estoque/lista">
+                <i class="fas fa-warehouse"></i> Estoque
+            </a>
+            <a class="menu-item <?= $appname == 'Peças' ? 'active' : ''; ?>" href="<?= base_url(); ?>pecas/lista">
+                <i class="fas fa-cogs"></i> Peças
+            </a>
+
+            <div class="menu-section-label">Financeiro</div>
+            <a class="menu-item <?= $appname == 'Orçamentos' ? 'active' : ''; ?>" href="<?= base_url(); ?>orcamentos/lista">
+                <i class="fas fa-file-invoice-dollar"></i> Orçamentos
+            </a>
+            <a class="menu-item <?= $appname == 'Faturamento' ? 'active' : ''; ?>" href="<?= base_url(); ?>faturamento/lista">
+                <i class="fas fa-credit-card"></i> Faturamento
+            </a>
+            <a class="menu-item <?= $appname == 'Custos' ? 'active' : ''; ?>" href="<?= base_url(); ?>custos/lista">
+                <i class="fas fa-coins"></i> Custos
+            </a>
+
+            <div class="menu-section-label">Analytics</div>
+            <a class="menu-item <?= $appname == 'Relatórios' ? 'active' : ''; ?>" href="<?= base_url(); ?>relatorios/lista">
+                <i class="fas fa-chart-bar"></i> Relatórios
+            </a>
+
             <div class="menu-divider my-3"></div>
             
             <a class="menu-item <?= $appname == 'Definições' ? 'active' : ''; ?>" href="<?= base_url(); ?>definicoes">

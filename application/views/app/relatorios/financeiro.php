@@ -1,0 +1,15 @@
+<div class="nav-scroller box-shadow mb-4"><div class="container"><nav class="nav nav-underline"><a class="nav-link" href="<?= base_url(); ?>app/home"><i class="fas fa-home"></i> Dashboard</a><a class="nav-link" href="<?= base_url(); ?>relatorios/lista"><i class="fas fa-chart-bar"></i> Relatórios</a><a class="nav-link active" href="#"><i class="fas fa-chart-pie"></i> Financeiro</a></nav></div></div>
+<div role="main" class="container-fluid px-md-5">
+<div class="my-3 p-4 rounded box-shadow"><h5 class="card-title mb-1"><i class="fas fa-chart-pie mr-2 text-success"></i> <b>Relatório Financeiro</b></h5></div>
+<div class="row mb-4">
+<div class="col-md-3"><div class="p-3 rounded box-shadow" style="background: white;"><span class="text-muted d-block" style="font-size: 10px;">FATURAS PENDENTES</span><h3 class="font-weight-bold mb-0" style="color: #f59e0b;">R$ <?= number_format($faturas_pendentes, 2, ',', '.'); ?></h3></div></div>
+<div class="col-md-3"><div class="p-3 rounded box-shadow" style="background: white;"><span class="text-muted d-block" style="font-size: 10px;">FATURAS RECEBIDAS</span><h3 class="font-weight-bold mb-0" style="color: #059669;">R$ <?= number_format($faturas_pagas, 2, ',', '.'); ?></h3></div></div>
+<div class="col-md-3"><div class="p-3 rounded box-shadow" style="background: white;"><span class="text-muted d-block" style="font-size: 10px;">CUSTOS DO MÊS</span><h3 class="font-weight-bold mb-0" style="color: #dc2626;">R$ <?= number_format($total_custos, 2, ',', '.'); ?></h3></div></div>
+<div class="col-md-3"><div class="p-3 rounded box-shadow" style="background: white;"><span class="text-muted d-block" style="font-size: 10px;">ORÇAMENTOS APROVADOS</span><h3 class="font-weight-bold mb-0" style="color: #6366f1;">R$ <?= number_format($total_orcamentos, 2, ',', '.'); ?></h3></div></div>
+</div>
+<div class="row">
+<div class="col-md-6 mb-4"><div class="p-4 rounded box-shadow" style="background: white;"><h6 class="card-title mb-3"><i class="fas fa-chart-line mr-2 text-primary"></i> Faturamento por Mês</h6><table class="table table-sm"><thead><tr><th>Mês</th><th class="text-right">Total</th></tr></thead><tbody><?php foreach ($faturas_por_mes as $f): ?><tr><td><?= $f->mes; ?></td><td class="text-right font-weight-bold">R$ <?= number_format($f->total, 2, ',', '.'); ?></td></tr><?php endforeach; ?></tbody></table></div></div>
+<div class="col-md-6 mb-4"><div class="p-4 rounded box-shadow" style="background: white;"><h6 class="card-title mb-3"><i class="fas fa-chart-bar mr-2 text-primary"></i> Custos por Categoria (Mês)</h6><table class="table table-sm"><thead><tr><th>Categoria</th><th class="text-right">Total</th></tr></thead><tbody><?php foreach ($custos_por_categoria as $c): ?><tr><td><?= $c->nome ?: 'Sem categoria'; ?></td><td class="text-right font-weight-bold" style="color: #dc2626;">R$ <?= number_format($c->total, 2, ',', '.'); ?></td></tr><?php endforeach; ?></tbody></table></div></div>
+</div>
+<p class="text-muted text-center"><i class="fas fa-info-circle mr-1"></i> Relatório gerado em <?= date('d/m/Y H:i'); ?></p>
+</div>

@@ -721,8 +721,935 @@ LOCK TABLES `vendedores_comissoes` WRITE;
 INSERT INTO `vendedores_comissoes` VALUES (1,1,1,15000.00,5.00,750.00,'A PAGAR','2026-06-02 00:35:04');
 /*!40000 ALTER TABLE `vendedores_comissoes` ENABLE KEYS */;
 UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+--
+-- Table structure for table `riscos_categorias`
+--
 
+DROP TABLE IF EXISTS `riscos_categorias`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `riscos_categorias` (
+  `idcategoria` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) NOT NULL,
+  `cor` varchar(7) DEFAULT '#6366f1',
+  PRIMARY KEY (`idcategoria`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `riscos_categorias`
+--
+
+LOCK TABLES `riscos_categorias` WRITE;
+/*!40000 ALTER TABLE `riscos_categorias` DISABLE KEYS */;
+INSERT INTO `riscos_categorias` VALUES (1,'Segurança da Informação','#ef4444'),(2,'Continuidade de Negócios','#f59e0b'),(3,'Compliance Regulatório','#6366f1'),(4,'Financeiro','#10b981'),(5,'Operacional','#8b5cf6'),(6,'Fornecedores','#ec4899'),(7,'Recursos Humanos','#14b8a6'),(8,'Reputação','#f97316');
+/*!40000 ALTER TABLE `riscos_categorias` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `riscos_apetite`
+--
+
+DROP TABLE IF EXISTS `riscos_apetite`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `riscos_apetite` (
+  `idapetite` int(11) NOT NULL AUTO_INCREMENT,
+  `categoria` varchar(255) DEFAULT NULL,
+  `nivel_aceitavel` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`idapetite`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `riscos_apetite`
+--
+
+LOCK TABLES `riscos_apetite` WRITE;
+/*!40000 ALTER TABLE `riscos_apetite` DISABLE KEYS */;
+INSERT INTO `riscos_apetite` VALUES (1,'Segurança da Informação','BAIXO'),(2,'Continuidade de Negócios','BAIXO'),(3,'Compliance Regulatório','BAIXO'),(4,'Financeiro','MEDIO'),(5,'Operacional','MEDIO'),(6,'Fornecedores','ALTO'),(7,'Recursos Humanos','MEDIO'),(8,'Reputação','BAIXO');
+/*!40000 ALTER TABLE `riscos_apetite` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `riscos_riscos`
+--
+
+DROP TABLE IF EXISTS `riscos_riscos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `riscos_riscos` (
+  `idrisco` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(50) DEFAULT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `descricao` text,
+  `idcategoria` int(11) DEFAULT NULL,
+  `area_responsavel` varchar(255) DEFAULT NULL,
+  `proprietario` varchar(255) DEFAULT NULL,
+  `data_identificacao` date DEFAULT NULL,
+  `probabilidade` int(11) DEFAULT NULL,
+  `impacto` int(11) DEFAULT NULL,
+  `score_automatico` int(11) DEFAULT NULL,
+  `nivel_risco` varchar(20) DEFAULT NULL,
+  `status` varchar(30) DEFAULT 'IDENTIFICADO',
+  `criado_em` datetime DEFAULT NULL,
+  `criado_por` varchar(255) DEFAULT NULL,
+  `alterado_em` datetime DEFAULT NULL,
+  PRIMARY KEY (`idrisco`),
+  KEY `idcategoria` (`idcategoria`),
+  CONSTRAINT `riscos_riscos_ibfk_1` FOREIGN KEY (`idcategoria`) REFERENCES `riscos_categorias` (`idcategoria`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `riscos_riscos`
+--
+
+LOCK TABLES `riscos_riscos` WRITE;
+/*!40000 ALTER TABLE `riscos_riscos` DISABLE KEYS */;
+INSERT INTO `riscos_riscos` VALUES (1,'RISK-001','Vazamento de dados sensíveis','Possibilidade de exposição não autorizada de dados de clientes e informações confidenciais.',1,'TI','João Silva','2026-01-15',4,5,20,'CRITICO','IDENTIFICADO',NOW(),'admin',NULL),(2,'RISK-002','Ataque ransomware','Risco de infecção por ransomware que pode criptografar dados críticos da empresa.',1,'TI','Maria Souza','2026-02-01',4,5,20,'CRITICO','IDENTIFICADO',NOW(),'admin',NULL),(3,'RISK-003','Falha em backup/restore','Procedimentos de backup não testados podem resultar em perda de dados durante incidentes.',1,'TI','João Silva','2026-01-20',3,5,15,'ALTO','MONITORANDO',NOW(),'admin',NULL),(4,'RISK-004','Interrupção de energia elétrica','Queda prolongada de energia pode paralisar operações e causar perda de dados.',2,'Infraestrutura','Pedro Alves','2026-03-01',3,4,12,'ALTO','IDENTIFICADO',NOW(),'admin',NULL),(5,'RISK-005','Descumprimento LGPD','Sanções por não conformidade com a Lei Geral de Proteção de Dados.',3,'Jurídico','Ana Costa','2026-01-10',3,5,15,'ALTO','MONITORANDO',NOW(),'admin',NULL);
+/*!40000 ALTER TABLE `riscos_riscos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `riscos_controles`
+--
+
+DROP TABLE IF EXISTS `riscos_controles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `riscos_controles` (
+  `idcontrole` int(11) NOT NULL AUTO_INCREMENT,
+  `idrisco` int(11) DEFAULT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `descricao` text,
+  `tipo` varchar(20) DEFAULT 'PREVENTIVO',
+  `efetividade` varchar(10) DEFAULT 'MEDIA',
+  `frequencia` varchar(20) DEFAULT 'DIARIA',
+  `responsavel` varchar(255) DEFAULT NULL,
+  `evidencias` text,
+  `status` varchar(20) DEFAULT 'ATIVO',
+  `data_implementacao` date DEFAULT NULL,
+  `proxima_revisao` date DEFAULT NULL,
+  `criado_em` datetime DEFAULT NULL,
+  PRIMARY KEY (`idcontrole`),
+  KEY `idrisco` (`idrisco`),
+  CONSTRAINT `riscos_controles_ibfk_1` FOREIGN KEY (`idrisco`) REFERENCES `riscos_riscos` (`idrisco`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `riscos_controles`
+--
+
+LOCK TABLES `riscos_controles` WRITE;
+/*!40000 ALTER TABLE `riscos_controles` DISABLE KEYS */;
+INSERT INTO `riscos_controles` VALUES (1,1,'Firewall e IDS/IPS','Firewall de última geração com sistema de detecção de intrusão.','PREVENTIVO','ALTA','CONTINUO','TI','Relatórios mensais de segurança','ATIVO','2026-01-20','2026-07-20',NOW()),(2,1,'Controle de acesso MFA','Autenticação multifator para todos os sistemas críticos.','PREVENTIVO','ALTA','CONTINUO','TI','Logs de autenticação','ATIVO','2026-02-01','2026-08-01',NOW()),(3,2,'Antivírus e EDR','Solução de proteção de endpoints com resposta a incidentes.','PREVENTIVO','MEDIA','CONTINUO','TI','Relatórios EDR','ATIVO','2026-02-15','2026-08-15',NOW()),(4,3,'Teste trimestral de backup','Procedimento de restore testado a cada 90 dias.','DETECTIVO','ALTA','TRIMESTRAL','TI','Relatórios de teste','ATIVO','2026-03-01','2026-06-01',NOW());
+/*!40000 ALTER TABLE `riscos_controles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `riscos_planos_acao`
+--
+
+DROP TABLE IF EXISTS `riscos_planos_acao`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `riscos_planos_acao` (
+  `idplano` int(11) NOT NULL AUTO_INCREMENT,
+  `idrisco` int(11) DEFAULT NULL,
+  `idcontrole` int(11) DEFAULT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `descricao` text,
+  `tipo` varchar(20) DEFAULT 'CORRETIVA',
+  `responsavel` varchar(255) DEFAULT NULL,
+  `prazo` date DEFAULT NULL,
+  `status` varchar(20) DEFAULT 'PENDENTE',
+  `percentual` int(11) DEFAULT '0',
+  `observacoes` text,
+  `criado_em` datetime DEFAULT NULL,
+  `concluido_em` datetime DEFAULT NULL,
+  PRIMARY KEY (`idplano`),
+  KEY `idrisco` (`idrisco`),
+  KEY `idcontrole` (`idcontrole`),
+  CONSTRAINT `riscos_planos_acao_ibfk_1` FOREIGN KEY (`idrisco`) REFERENCES `riscos_riscos` (`idrisco`) ON DELETE SET NULL,
+  CONSTRAINT `riscos_planos_acao_ibfk_2` FOREIGN KEY (`idcontrole`) REFERENCES `riscos_controles` (`idcontrole`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `riscos_planos_acao`
+--
+
+LOCK TABLES `riscos_planos_acao` WRITE;
+/*!40000 ALTER TABLE `riscos_planos_acao` DISABLE KEYS */;
+INSERT INTO `riscos_planos_acao` VALUES (1,1,2,'Implementar MFA para todos os usuários','Expandir autenticação multifator para todos os sistemas internos e externos.','CORRETIVA','João Silva','2026-06-30','EM ANDAMENTO',60,'Faltam sistemas legados',NOW(),NULL),(2,2,3,'Atualizar política de backups','Revisar e documentar política de backup incluindo periodicidade e responsabilidades.','PREVENTIVA','Maria Souza','2026-05-15','CONCLUIDO',100,'Política publicada',NOW(),NOW()),(3,5,NULL,'Adequação LGPD','Mapear dados pessoais e implementar medidas de privacidade.','CORRETIVA','Ana Costa','2026-09-30','PENDENTE',15,'Aguardando consultoria jurídica',NOW(),NULL);
+/*!40000 ALTER TABLE `riscos_planos_acao` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `riscos_kris`
+--
+
+DROP TABLE IF EXISTS `riscos_kris`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `riscos_kris` (
+  `idkri` int(11) NOT NULL AUTO_INCREMENT,
+  `idrisco` int(11) DEFAULT NULL,
+  `nome` varchar(255) NOT NULL,
+  `descricao` text,
+  `unidade` varchar(10) DEFAULT '%',
+  `valor_atual` decimal(10,2) DEFAULT '0.00',
+  `limite_verde` decimal(10,2) DEFAULT '30.00',
+  `limite_amarelo` decimal(10,2) DEFAULT '60.00',
+  `limite_vermelho` decimal(10,2) DEFAULT '80.00',
+  `periodicidade` varchar(20) DEFAULT 'MENSAL',
+  `diretriz` varchar(20) DEFAULT 'MAIOR_MELHOR',
+  `status` varchar(20) DEFAULT 'ATIVO',
+  `criado_em` datetime DEFAULT NULL,
+  PRIMARY KEY (`idkri`),
+  KEY `idrisco` (`idrisco`),
+  CONSTRAINT `riscos_kris_ibfk_1` FOREIGN KEY (`idrisco`) REFERENCES `riscos_riscos` (`idrisco`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `riscos_kris`
+--
+
+LOCK TABLES `riscos_kris` WRITE;
+/*!40000 ALTER TABLE `riscos_kris` DISABLE KEYS */;
+INSERT INTO `riscos_kris` VALUES (1,1,'Tentativas de invasão bloqueadas','Percentual de tentativas de invasão bloqueadas pelo firewall.','%',95.00,30.00,60.00,80.00,'MENSAL','MAIOR_MELHOR','ATIVO',NOW()),(2,1,'Taxa de autenticação MFA','Percentual de acessos utilizando MFA.','%',72.00,30.00,60.00,80.00,'MENSAL','MAIOR_MELHOR','ATIVO',NOW()),(3,3,'Tempo de recuperação (RTO)','Tempo médio de recuperação em horas após incidente.','h',28.00,12.00,24.00,48.00,'MENSAL','MENOR_MELHOR','ATIVO',NOW());
+/*!40000 ALTER TABLE `riscos_kris` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `riscos_kris_historico`
+--
+
+DROP TABLE IF EXISTS `riscos_kris_historico`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `riscos_kris_historico` (
+  `idhistorico` int(11) NOT NULL AUTO_INCREMENT,
+  `idkri` int(11) DEFAULT NULL,
+  `valor` decimal(10,2) NOT NULL,
+  `data_registro` datetime DEFAULT NULL,
+  `observacao` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`idhistorico`),
+  KEY `idkri` (`idkri`),
+  CONSTRAINT `riscos_kris_historico_ibfk_1` FOREIGN KEY (`idkri`) REFERENCES `riscos_kris` (`idkri`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `riscos_incidentes`
+--
+
+DROP TABLE IF EXISTS `riscos_incidentes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `riscos_incidentes` (
+  `idincidente` int(11) NOT NULL AUTO_INCREMENT,
+  `idrisco` int(11) DEFAULT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `descricao` text,
+  `causa_raiz` text,
+  `impacto_financeiro` decimal(12,2) DEFAULT '0.00',
+  `tipo` varchar(20) DEFAULT 'INCIDENTE',
+  `severidade` varchar(10) DEFAULT 'MEDIO',
+  `status` varchar(20) DEFAULT 'ABERTO',
+  `evidencias` text,
+  `licoes_aprendidas` text,
+  `data_ocorrencia` datetime DEFAULT NULL,
+  `data_resolucao` datetime DEFAULT NULL,
+  `criado_em` datetime DEFAULT NULL,
+  `criado_por` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`idincidente`),
+  KEY `idrisco` (`idrisco`),
+  CONSTRAINT `riscos_incidentes_ibfk_1` FOREIGN KEY (`idrisco`) REFERENCES `riscos_riscos` (`idrisco`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `riscos_incidentes`
+--
+
+LOCK TABLES `riscos_incidentes` WRITE;
+/*!40000 ALTER TABLE `riscos_incidentes` DISABLE KEYS */;
+INSERT INTO `riscos_incidentes` VALUES (1,1,'Acesso não autorizado ao sistema CRM','Detectado acesso suspeito vindo de IP externo ao CRM da empresa.','Senha fraca de usuário terceirizado',0.00,'INCIDENTE','ALTO','RESOLVIDO','Logs de acesso','Revisar política de senhas e implementar MFA obrigatório','2026-04-10 14:30:00','2026-04-10 16:45:00',NOW(),'admin'),(2,2,'E-mail de phishing detectado','Funcionário recebeu e-mail fraudulento com aparência de comunicação interna.','Falta de treinamento em segurança',5000.00,'INCIDENTE','MEDIO','ABERTO','E-mail encaminhado','Iniciar campanha de conscientização','2026-05-20 09:15:00',NULL,NOW(),'admin');
+/*!40000 ALTER TABLE `riscos_incidentes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `riscos_compliance`
+--
+
+DROP TABLE IF EXISTS `riscos_compliance`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `riscos_compliance` (
+  `idcompliance` int(11) NOT NULL AUTO_INCREMENT,
+  `idrisco` int(11) DEFAULT NULL,
+  `regulamento` varchar(255) NOT NULL,
+  `descricao` text,
+  `obrigacao` text,
+  `area_responsavel` varchar(255) DEFAULT NULL,
+  `nivel_conformidade` int(11) DEFAULT '0',
+  `ultima_avaliacao` date DEFAULT NULL,
+  `proxima_avaliacao` date DEFAULT NULL,
+  `status` varchar(20) DEFAULT 'MONITORANDO',
+  `criado_em` datetime DEFAULT NULL,
+  PRIMARY KEY (`idcompliance`),
+  KEY `idrisco` (`idrisco`),
+  CONSTRAINT `riscos_compliance_ibfk_1` FOREIGN KEY (`idrisco`) REFERENCES `riscos_riscos` (`idrisco`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `riscos_compliance`
+--
+
+LOCK TABLES `riscos_compliance` WRITE;
+/*!40000 ALTER TABLE `riscos_compliance` DISABLE KEYS */;
+INSERT INTO `riscos_compliance` VALUES (1,5,'Lei Geral de Proteção de Dados (LGPD)','Lei 13.709/2018 - Proteção de dados pessoais','Implementar DPO, mapear dados, adequar processos','Jurídico',65,'2026-03-15','2026-09-15','MONITORANDO',NOW());
+/*!40000 ALTER TABLE `riscos_compliance` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `riscos_auditoria`
+--
+
+DROP TABLE IF EXISTS `riscos_auditoria`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `riscos_auditoria` (
+  `idauditoria` int(11) NOT NULL AUTO_INCREMENT,
+  `idrisco` int(11) DEFAULT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `escopo` text,
+  `tipo` varchar(20) DEFAULT 'INTERNA',
+  `achados` text,
+  `nao_conformidades` text,
+  `recomendacoes` text,
+  `status` varchar(20) DEFAULT 'PLANEJADA',
+  `responsavel` varchar(255) DEFAULT NULL,
+  `data_inicio` date DEFAULT NULL,
+  `data_fim` date DEFAULT NULL,
+  `criado_em` datetime DEFAULT NULL,
+  PRIMARY KEY (`idauditoria`),
+  KEY `idrisco` (`idrisco`),
+  CONSTRAINT `riscos_auditoria_ibfk_1` FOREIGN KEY (`idrisco`) REFERENCES `riscos_riscos` (`idrisco`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `riscos_auditoria`
+--
+
+LOCK TABLES `riscos_auditoria` WRITE;
+/*!40000 ALTER TABLE `riscos_auditoria` DISABLE KEYS */;
+INSERT INTO `riscos_auditoria` VALUES (1,5,'Auditoria Interna LGPD','Avaliar conformidade com a LGPD em todos os departamentos.','INTERNA','Ausência de registro de tratamento de dados pessoais.','3 não conformidades identificadas','Criar política de privacidade e nomear DPO','EM ANDAMENTO','Ana Costa','2026-04-01','2026-04-30',NOW());
+/*!40000 ALTER TABLE `riscos_auditoria` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `riscos_fornecedores`
+--
+
+DROP TABLE IF EXISTS `riscos_fornecedores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `riscos_fornecedores` (
+  `idfornecedor` int(11) NOT NULL AUTO_INCREMENT,
+  `idrisco` int(11) DEFAULT NULL,
+  `nome` varchar(255) NOT NULL,
+  `cnpj` varchar(20) DEFAULT NULL,
+  `categoria` varchar(255) DEFAULT NULL,
+  `nivel_risco` varchar(20) DEFAULT 'BAIXO',
+  `score_risco` int(11) DEFAULT '0',
+  `due_diligence` text,
+  `data_avaliacao` date DEFAULT NULL,
+  `proxima_avaliacao` date DEFAULT NULL,
+  `status` varchar(20) DEFAULT 'ATIVO',
+  `criado_em` datetime DEFAULT NULL,
+  PRIMARY KEY (`idfornecedor`),
+  KEY `idrisco` (`idrisco`),
+  CONSTRAINT `riscos_fornecedores_ibfk_1` FOREIGN KEY (`idrisco`) REFERENCES `riscos_riscos` (`idrisco`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `riscos_fornecedores`
+--
+
+LOCK TABLES `riscos_fornecedores` WRITE;
+/*!40000 ALTER TABLE `riscos_fornecedores` DISABLE KEYS */;
+INSERT INTO `riscos_fornecedores` VALUES (1,1,'CloudTech Serviços Ltda','11.222.333/0001-44','Provedor de Nuvem','ALTO',72,'Due diligence concluída em jan/2026 - Certificações ISO 27001 vigentes','2026-01-15','2026-07-15','ATIVO',NOW());
+/*!40000 ALTER TABLE `riscos_fornecedores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `riscos_bcp`
+--
+
+DROP TABLE IF EXISTS `riscos_bcp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `riscos_bcp` (
+  `idbcp` int(11) NOT NULL AUTO_INCREMENT,
+  `idrisco` int(11) DEFAULT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `tipo` varchar(10) DEFAULT 'BIA',
+  `descricao` text,
+  `impacto_negocio` text,
+  `mtd_horas` int(11) DEFAULT NULL,
+  `rpo_horas` int(11) DEFAULT NULL,
+  `rto_horas` int(11) DEFAULT NULL,
+  `recursos_criticos` text,
+  `plano_recuperacao` text,
+  `responsavel` varchar(255) DEFAULT NULL,
+  `ultimo_teste` date DEFAULT NULL,
+  `proximo_teste` date DEFAULT NULL,
+  `status` varchar(20) DEFAULT 'ATIVO',
+  `criado_em` datetime DEFAULT NULL,
+  PRIMARY KEY (`idbcp`),
+  KEY `idrisco` (`idrisco`),
+  CONSTRAINT `riscos_bcp_ibfk_1` FOREIGN KEY (`idrisco`) REFERENCES `riscos_riscos` (`idrisco`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `riscos_bcp`
+--
+
+LOCK TABLES `riscos_bcp` WRITE;
+/*!40000 ALTER TABLE `riscos_bcp` DISABLE KEYS */;
+INSERT INTO `riscos_bcp` VALUES (1,4,'BIA - Infraestrutura de TI','BIA','Análise de impacto nos negócios para infraestrutura crítica de TI.','Interrupção total das operações por mais de 24h',48,4,12,'Servidores, switches, firewall, nobreak','Ativar datacenter secundário em até 12h','Pedro Alves','2026-03-01','2026-09-01','ATIVO',NOW());
+/*!40000 ALTER TABLE `riscos_bcp` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `riscos_crises`
+--
+
+DROP TABLE IF EXISTS `riscos_crises`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `riscos_crises` (
+  `idcrise` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(255) NOT NULL,
+  `descricao` text,
+  `tipo` varchar(20) DEFAULT 'OPERACIONAL',
+  `nivel` varchar(10) DEFAULT 'MEDIO',
+  `comite` text,
+  `escalonamento` text,
+  `comunicacao` text,
+  `acoes_tomadas` text,
+  `status` varchar(20) DEFAULT 'MONITORANDO',
+  `data_inicio` datetime DEFAULT NULL,
+  `data_fim` datetime DEFAULT NULL,
+  `criado_em` datetime DEFAULT NULL,
+  PRIMARY KEY (`idcrise`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `riscos_comites`
+--
+
+DROP TABLE IF EXISTS `riscos_comites`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `riscos_comites` (
+  `idcomite` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) NOT NULL,
+  `descricao` text,
+  `membros` text,
+  `periodicidade` varchar(20) DEFAULT 'MENSAL',
+  `status` varchar(20) DEFAULT 'ATIVO',
+  `ultima_reuniao` date DEFAULT NULL,
+  `proxima_reuniao` date DEFAULT NULL,
+  `criado_em` datetime DEFAULT NULL,
+  PRIMARY KEY (`idcomite`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `riscos_comites`
+--
+
+LOCK TABLES `riscos_comites` WRITE;
+/*!40000 ALTER TABLE `riscos_comites` DISABLE KEYS */;
+INSERT INTO `riscos_comites` VALUES (1,'Comitê de Segurança da Informação','Comitê responsável pela governança de segurança da informação.','João Silva, Maria Souza, Ana Costa, Pedro Alves','MENSAL','ATIVO','2026-05-15','2026-06-15',NOW());
+/*!40000 ALTER TABLE `riscos_comites` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `riscos_politicas`
+--
+
+DROP TABLE IF EXISTS `riscos_politicas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `riscos_politicas` (
+  `idpolitica` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(255) NOT NULL,
+  `descricao` text,
+  `versao` varchar(10) DEFAULT '1.0',
+  `area` varchar(255) DEFAULT NULL,
+  `responsavel` varchar(255) DEFAULT NULL,
+  `data_aprovacao` date DEFAULT NULL,
+  `data_revisao` date DEFAULT NULL,
+  `conteudo` longtext,
+  `status` varchar(20) DEFAULT 'APROVADA',
+  `criado_em` datetime DEFAULT NULL,
+  PRIMARY KEY (`idpolitica`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `riscos_politicas`
+--
+
+LOCK TABLES `riscos_politicas` WRITE;
+/*!40000 ALTER TABLE `riscos_politicas` DISABLE KEYS */;
+INSERT INTO `riscos_politicas` VALUES (1,'Política de Segurança da Informação','Diretrizes corporativas para segurança da informação e proteção de dados.','2.1','TI','João Silva','2026-01-10','2026-07-10','<p>Política completa de segurança da informação...</p>','APROVADA',NOW()),(2,'Política de Backup e Recuperação','Procedimentos para backup e recuperação de dados corporativos.','1.0','TI','Maria Souza','2026-03-01','2026-09-01','<p>Procedimentos de backup...</p>','APROVADA',NOW());
+/*!40000 ALTER TABLE `riscos_politicas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `equipamentos_categorias`
+--
+
+DROP TABLE IF EXISTS `equipamentos_categorias`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `equipamentos_categorias` (
+  `idcategoria` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `descricao` text,
+  `criado_em` datetime NOT NULL,
+  PRIMARY KEY (`idcategoria`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+LOCK TABLES `equipamentos_categorias` WRITE;
+/*!40000 ALTER TABLE `equipamentos_categorias` DISABLE KEYS */;
+INSERT INTO `equipamentos_categorias` VALUES (1,'Servidor','Servidores e infraestrutura de rede',NOW()),(2,'Workstation','Estações de trabalho e computadores',NOW()),(3,'Impressora','Impressoras e multifuncionais',NOW()),(4,'Rede','Switches, roteadores e access points',NOW()),(5,'Periférico','Teclados, mouses, monitores',NOW()),(6,'Outro','Outros equipamentos',NOW());
+/*!40000 ALTER TABLE `equipamentos_categorias` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `equipamentos`
+--
+
+DROP TABLE IF EXISTS `equipamentos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `equipamentos` (
+  `idequipamento` int(11) NOT NULL AUTO_INCREMENT,
+  `clientesid` int(11) DEFAULT NULL,
+  `idcategoria` int(11) DEFAULT NULL,
+  `tipo` varchar(100) DEFAULT NULL,
+  `marca` varchar(100) DEFAULT NULL,
+  `modelo` varchar(100) DEFAULT NULL,
+  `numero_serie` varchar(100) DEFAULT NULL,
+  `patrimonio` varchar(50) DEFAULT NULL,
+  `especificacoes` text,
+  `data_instalacao` date DEFAULT NULL,
+  `data_garantia` date DEFAULT NULL,
+  `status` varchar(30) DEFAULT 'ATIVO',
+  `observacoes` text,
+  `criado_em` datetime NOT NULL,
+  `alterado_em` datetime DEFAULT NULL,
+  PRIMARY KEY (`idequipamento`),
+  KEY `clientesid` (`clientesid`),
+  KEY `idcategoria` (`idcategoria`),
+  CONSTRAINT `equipamentos_ibfk_1` FOREIGN KEY (`clientesid`) REFERENCES `clientes` (`clientesid`) ON DELETE SET NULL,
+  CONSTRAINT `equipamentos_ibfk_2` FOREIGN KEY (`idcategoria`) REFERENCES `equipamentos_categorias` (`idcategoria`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `sla_acordos`
+--
+
+DROP TABLE IF EXISTS `sla_acordos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sla_acordos` (
+  `idsla` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(255) NOT NULL,
+  `descricao` text,
+  `tipo` varchar(30) DEFAULT 'INTERNO',
+  `prioridade` varchar(20) DEFAULT 'MEDIA',
+  `tempo_resposta_h` decimal(5,1) DEFAULT '4.0',
+  `tempo_resolucao_h` decimal(5,1) DEFAULT '24.0',
+  `horario_funcionamento` varchar(100) DEFAULT '08:00-18:00 Seg-Sex',
+  `penalidades` text,
+  `cliente_id` int(11) DEFAULT NULL,
+  `status` varchar(20) DEFAULT 'ATIVO',
+  `criado_em` datetime NOT NULL,
+  PRIMARY KEY (`idsla`),
+  KEY `cliente_id` (`cliente_id`),
+  CONSTRAINT `sla_acordos_ibfk_1` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`clientesid`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+LOCK TABLES `sla_acordos` WRITE;
+/*!40000 ALTER TABLE `sla_acordos` DISABLE KEYS */;
+INSERT INTO `sla_acordos` VALUES (1,'SLA Premium - Suporte 4h','Atendimento prioritário com resposta em até 4 horas e resolução em 24 horas úteis.','EXTERNO','CRITICA',4.0,24.0,'24h Seg-Dom','Multa de 2% sobre o valor do contrato por hora excedente.',NULL,'ATIVO',NOW()),(2,'SLA Standard - Suporte 8h','Atendimento padrão com resposta em até 8 horas e resolução em 48 horas úteis.','EXTERNO','MEDIA',8.0,48.0,'08:00-18:00 Seg-Sex','Multa de 1% sobre o valor mensal por descumprimento.',NULL,'ATIVO',NOW()),(3,'SLA Interno TI','Acordo interno para manutenção de infraestrutura e suporte a funcionários.','INTERNO','ALTA',2.0,8.0,'08:00-20:00 Seg-Sáb','',NULL,'ATIVO',NOW());
+/*!40000 ALTER TABLE `sla_acordos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `agenda_eventos`
+--
+
+DROP TABLE IF EXISTS `agenda_eventos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `agenda_eventos` (
+  `idevento` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(255) NOT NULL,
+  `descricao` text,
+  `tipo` varchar(50) DEFAULT 'VISITA_TECNICA',
+  `data_inicio` datetime NOT NULL,
+  `data_fim` datetime DEFAULT NULL,
+  `admin_id` int(11) DEFAULT NULL,
+  `os_id` int(11) DEFAULT NULL,
+  `cliente_id` int(11) DEFAULT NULL,
+  `equipamento_id` int(11) DEFAULT NULL,
+  `local` varchar(255) DEFAULT NULL,
+  `cor` varchar(7) DEFAULT '#6366f1',
+  `status` varchar(20) DEFAULT 'AGENDADO',
+  `criado_em` datetime NOT NULL,
+  PRIMARY KEY (`idevento`),
+  KEY `admin_id` (`admin_id`),
+  KEY `os_id` (`os_id`),
+  KEY `cliente_id` (`cliente_id`),
+  CONSTRAINT `agenda_eventos_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`adminid`) ON DELETE SET NULL,
+  CONSTRAINT `agenda_eventos_ibfk_2` FOREIGN KEY (`os_id`) REFERENCES `os` (`idos`) ON DELETE SET NULL,
+  CONSTRAINT `agenda_eventos_ibfk_3` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`clientesid`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `checklists_modelos`
+--
+
+DROP TABLE IF EXISTS `checklists_modelos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `checklists_modelos` (
+  `idchecklist` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(255) NOT NULL,
+  `descricao` text,
+  `tipo` varchar(50) DEFAULT 'INSTALACAO',
+  `status` varchar(20) DEFAULT 'ATIVO',
+  `criado_em` datetime NOT NULL,
+  PRIMARY KEY (`idchecklist`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+LOCK TABLES `checklists_modelos` WRITE;
+/*!40000 ALTER TABLE `checklists_modelos` DISABLE KEYS */;
+INSERT INTO `checklists_modelos` VALUES (1,'Instalação de Servidor','Checklist para instalação e configuração de novos servidores.','INSTALACAO','ATIVO',NOW()),(2,'Manutenção Preventiva','Checklist de manutenção preventiva mensal em equipamentos.','MANUTENCAO','ATIVO',NOW()),(3,'Vistoria Técnica','Checklist para vistoria técnica in loco.','VISTORIA','ATIVO',NOW());
+/*!40000 ALTER TABLE `checklists_modelos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `checklists_itens`
+--
+
+DROP TABLE IF EXISTS `checklists_itens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `checklists_itens` (
+  `iditem` int(11) NOT NULL AUTO_INCREMENT,
+  `idchecklist` int(11) NOT NULL,
+  `descricao` varchar(500) NOT NULL,
+  `ordem` int(11) DEFAULT '0',
+  `obrigatorio` tinyint(1) DEFAULT '1',
+  `criado_em` datetime NOT NULL,
+  PRIMARY KEY (`iditem`),
+  KEY `idchecklist` (`idchecklist`),
+  CONSTRAINT `checklists_itens_ibfk_1` FOREIGN KEY (`idchecklist`) REFERENCES `checklists_modelos` (`idchecklist`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+LOCK TABLES `checklists_itens` WRITE;
+/*!40000 ALTER TABLE `checklists_itens` DISABLE KEYS */;
+INSERT INTO `checklists_itens` (`idchecklist`, `descricao`, `ordem`, `obrigatorio`, `criado_em`) VALUES (1,'Verificar especificações técnicas do servidor',1,1,NOW()),(1,'Instalar sistema operacional e atualizações',2,1,NOW()),(1,'Configurar rede e firewall',3,1,NOW()),(1,'Testar conectividade e serviços',4,1,NOW()),(1,'Documentar configurações realizadas',5,0,NOW()),(2,'Verificar temperatura e refrigeração',1,1,NOW()),(2,'Limpar filtros de ar e ventoinhas',2,1,NOW()),(2,'Verificar integridade de cabos',3,0,NOW()),(2,'Testar nobreak e estabilizador',4,1,NOW()),(2,'Executar backup de configuração',5,0,NOW());
+/*!40000 ALTER TABLE `checklists_itens` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `checklists_execucoes`
+--
+
+DROP TABLE IF EXISTS `checklists_execucoes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `checklists_execucoes` (
+  `idexecucao` int(11) NOT NULL AUTO_INCREMENT,
+  `idchecklist` int(11) NOT NULL,
+  `titulo` varchar(255) DEFAULT NULL,
+  `os_id` int(11) DEFAULT NULL,
+  `admin_id` int(11) DEFAULT NULL,
+  `cliente_id` int(11) DEFAULT NULL,
+  `equipamento_id` int(11) DEFAULT NULL,
+  `data_execucao` datetime DEFAULT NULL,
+  `resultado` varchar(20) DEFAULT 'PENDENTE',
+  `observacoes` text,
+  `criado_em` datetime NOT NULL,
+  PRIMARY KEY (`idexecucao`),
+  KEY `idchecklist` (`idchecklist`),
+  KEY `os_id` (`os_id`),
+  CONSTRAINT `checklists_execucoes_ibfk_1` FOREIGN KEY (`idchecklist`) REFERENCES `checklists_modelos` (`idchecklist`) ON DELETE CASCADE,
+  CONSTRAINT `checklists_execucoes_ibfk_2` FOREIGN KEY (`os_id`) REFERENCES `os` (`idos`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `checklists_respostas`
+--
+
+DROP TABLE IF EXISTS `checklists_respostas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `checklists_respostas` (
+  `idresposta` int(11) NOT NULL AUTO_INCREMENT,
+  `idexecucao` int(11) NOT NULL,
+  `iditem` int(11) NOT NULL,
+  `conforme` tinyint(1) DEFAULT NULL,
+  `observacao` text,
+  `criado_em` datetime NOT NULL,
+  PRIMARY KEY (`idresposta`),
+  KEY `idexecucao` (`idexecucao`),
+  KEY `iditem` (`iditem`),
+  CONSTRAINT `checklists_respostas_ibfk_1` FOREIGN KEY (`idexecucao`) REFERENCES `checklists_execucoes` (`idexecucao`) ON DELETE CASCADE,
+  CONSTRAINT `checklists_respostas_ibfk_2` FOREIGN KEY (`iditem`) REFERENCES `checklists_itens` (`iditem`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `estoques`
+--
+
+DROP TABLE IF EXISTS `estoques`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `estoques` (
+  `idestoque` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `descricao` text,
+  `tipo` varchar(30) DEFAULT 'PRINCIPAL',
+  `endereco` varchar(255) DEFAULT NULL,
+  `responsavel` varchar(100) DEFAULT NULL,
+  `status` varchar(20) DEFAULT 'ATIVO',
+  `criado_em` datetime NOT NULL,
+  PRIMARY KEY (`idestoque`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+LOCK TABLES `estoques` WRITE;
+/*!40000 ALTER TABLE `estoques` DISABLE KEYS */;
+INSERT INTO `estoques` VALUES (1,'Estoque Principal','Armazém central da empresa','PRINCIPAL','Rua Principal, 100','Victor Oliveira','ATIVO',NOW());
+/*!40000 ALTER TABLE `estoques` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `estoque_itens`
+--
+
+DROP TABLE IF EXISTS `estoque_itens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `estoque_itens` (
+  `iditem` int(11) NOT NULL AUTO_INCREMENT,
+  `idestoque` int(11) NOT NULL,
+  `produtosid` int(11) NOT NULL,
+  `quantidade` decimal(10,2) DEFAULT '0.00',
+  `quantidade_minima` decimal(10,2) DEFAULT '0.00',
+  `localizacao` varchar(100) DEFAULT NULL,
+  `criado_em` datetime NOT NULL,
+  PRIMARY KEY (`iditem`),
+  KEY `idestoque` (`idestoque`),
+  KEY `produtosid` (`produtosid`),
+  CONSTRAINT `estoque_itens_ibfk_1` FOREIGN KEY (`idestoque`) REFERENCES `estoques` (`idestoque`) ON DELETE CASCADE,
+  CONSTRAINT `estoque_itens_ibfk_2` FOREIGN KEY (`produtosid`) REFERENCES `produtos` (`produtosid`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `pecas_categorias`
+--
+
+DROP TABLE IF EXISTS `pecas_categorias`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pecas_categorias` (
+  `idcategoria` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `criado_em` datetime NOT NULL,
+  PRIMARY KEY (`idcategoria`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+LOCK TABLES `pecas_categorias` WRITE;
+/*!40000 ALTER TABLE `pecas_categorias` DISABLE KEYS */;
+INSERT INTO `pecas_categorias` VALUES (1,'Hardware',NOW()),(2,'Rede',NOW()),(3,'Elétrica',NOW()),(4,'Limpeza',NOW()),(5,'Ferramentas',NOW());
+/*!40000 ALTER TABLE `pecas_categorias` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pecas`
+--
+
+DROP TABLE IF EXISTS `pecas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pecas` (
+  `idpeca` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(50) NOT NULL,
+  `nome` varchar(255) NOT NULL,
+  `descricao` text,
+  `idcategoria` int(11) DEFAULT NULL,
+  `fabricante` varchar(100) DEFAULT NULL,
+  `modelo_compativel` varchar(255) DEFAULT NULL,
+  `quantidade` decimal(10,2) DEFAULT '0.00',
+  `quantidade_minima` decimal(10,2) DEFAULT '0.00',
+  `preco_custo` decimal(10,2) DEFAULT '0.00',
+  `preco_venda` decimal(10,2) DEFAULT '0.00',
+  `unidade` varchar(20) DEFAULT 'un',
+  `localizacao` varchar(100) DEFAULT NULL,
+  `status` varchar(20) DEFAULT 'ATIVO',
+  `criado_em` datetime NOT NULL,
+  PRIMARY KEY (`idpeca`),
+  KEY `idcategoria` (`idcategoria`),
+  CONSTRAINT `pecas_ibfk_1` FOREIGN KEY (`idcategoria`) REFERENCES `pecas_categorias` (`idcategoria`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+LOCK TABLES `pecas` WRITE;
+/*!40000 ALTER TABLE `pecas` DISABLE KEYS */;
+INSERT INTO `pecas` (`codigo`, `nome`, `descricao`, `idcategoria`, `fabricante`, `quantidade`, `quantidade_minima`, `preco_custo`, `preco_venda`, `unidade`, `criado_em`) VALUES ('PEC-001','Fonte ATX 500W','Fonte de alimentação 500W real',1,'Corsair',10,3,149.90,249.90,'un',NOW()),('PEC-002','Cabo de Rede CAT6 3m','Cabo de rede blindado CAT6 3 metros',2,'Intelbras',50,10,8.50,19.90,'un',NOW()),('PEC-003','SSD 240GB SATA','SSD Kingston 240GB SATA III',1,'Kingston',15,5,179.90,279.90,'un',NOW()),('PEC-004','Pasta Térmica 5g','Pasta térmica para processadores',1,'Arctic',20,5,12.90,29.90,'un',NOW());
+/*!40000 ALTER TABLE `pecas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `orcamentos`
+--
+
+DROP TABLE IF EXISTS `orcamentos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `orcamentos` (
+  `idorcamento` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(30) NOT NULL,
+  `titulo` varchar(255) DEFAULT NULL,
+  `clientesid` int(11) DEFAULT NULL,
+  `descricao` text,
+  `itens` longtext,
+  `valor_total` decimal(10,2) DEFAULT '0.00',
+  `desconto` decimal(10,2) DEFAULT '0.00',
+  `valor_final` decimal(10,2) DEFAULT '0.00',
+  `validade` date DEFAULT NULL,
+  `status` varchar(30) DEFAULT 'RASCUNHO',
+  `responsavel` varchar(100) DEFAULT NULL,
+  `observacoes` text,
+  `criado_em` datetime NOT NULL,
+  `criado_por` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idorcamento`),
+  KEY `clientesid` (`clientesid`),
+  CONSTRAINT `orcamentos_ibfk_1` FOREIGN KEY (`clientesid`) REFERENCES `clientes` (`clientesid`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `faturamento_faturas`
+--
+
+DROP TABLE IF EXISTS `faturamento_faturas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `faturamento_faturas` (
+  `idfatura` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(30) NOT NULL,
+  `clientesid` int(11) DEFAULT NULL,
+  `os_id` int(11) DEFAULT NULL,
+  `contrato_id` int(11) DEFAULT NULL,
+  `descricao` text,
+  `valor` decimal(10,2) DEFAULT '0.00',
+  `data_emissao` date DEFAULT NULL,
+  `data_vencimento` date DEFAULT NULL,
+  `data_pagamento` date DEFAULT NULL,
+  `forma_pagamento` varchar(30) DEFAULT 'BOLETO',
+  `status` varchar(20) DEFAULT 'PENDENTE',
+  `observacoes` text,
+  `criado_em` datetime NOT NULL,
+  PRIMARY KEY (`idfatura`),
+  KEY `clientesid` (`clientesid`),
+  KEY `os_id` (`os_id`),
+  CONSTRAINT `faturamento_faturas_ibfk_1` FOREIGN KEY (`clientesid`) REFERENCES `clientes` (`clientesid`) ON DELETE SET NULL,
+  CONSTRAINT `faturamento_faturas_ibfk_2` FOREIGN KEY (`os_id`) REFERENCES `os` (`idos`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `custos_categorias`
+--
+
+DROP TABLE IF EXISTS `custos_categorias`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `custos_categorias` (
+  `idcategoria` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `tipo_padrao` varchar(30) DEFAULT 'VARIAVEL',
+  `criado_em` datetime NOT NULL,
+  PRIMARY KEY (`idcategoria`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+LOCK TABLES `custos_categorias` WRITE;
+/*!40000 ALTER TABLE `custos_categorias` DISABLE KEYS */;
+INSERT INTO `custos_categorias` VALUES (1,'Material de Escritório','VARIAVEL',NOW()),(2,'Ferramentas','VARIAVEL',NOW()),(3,'Transporte','VARIAVEL',NOW()),(4,'Aluguel','FIXO',NOW()),(5,'Energia','FIXO',NOW()),(6,'Software','FIXO',NOW()),(7,'Terceirizados','VARIAVEL',NOW()),(8,'Manutenção','VARIAVEL',NOW()),(9,'Marketing','VARIAVEL',NOW());
+/*!40000 ALTER TABLE `custos_categorias` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `custos_lancamentos`
+--
+
+DROP TABLE IF EXISTS `custos_lancamentos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `custos_lancamentos` (
+  `idcusto` int(11) NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(255) NOT NULL,
+  `idcategoria` int(11) DEFAULT NULL,
+  `tipo` varchar(30) DEFAULT 'VARIAVEL',
+  `valor` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `data_ocorrencia` date DEFAULT NULL,
+  `os_id` int(11) DEFAULT NULL,
+  `fornecedor` varchar(100) DEFAULT NULL,
+  `forma_pagamento` varchar(30) DEFAULT 'DINHEIRO',
+  `status` varchar(20) DEFAULT 'PAGO',
+  `observacoes` text,
+  `criado_em` datetime NOT NULL,
+  PRIMARY KEY (`idcusto`),
+  KEY `idcategoria` (`idcategoria`),
+  KEY `os_id` (`os_id`),
+  CONSTRAINT `custos_lancamentos_ibfk_1` FOREIGN KEY (`idcategoria`) REFERENCES `custos_categorias` (`idcategoria`) ON DELETE SET NULL,
+  CONSTRAINT `custos_lancamentos_ibfk_2` FOREIGN KEY (`os_id`) REFERENCES `os` (`idos`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
