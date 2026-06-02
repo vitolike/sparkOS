@@ -56,10 +56,10 @@
                                     <td><?= $prop->cidade; ?></td>
                                     <td class="font-weight-bold text-violet" style="color: #a78bfa;"><?= $prop->uf; ?></td>
                                     <td class="text-right">
-                                        <a href="<?= base_url(); ?>clientes/editar_cliente/<?= $prop->clientesid; ?>" class="btn btn-success btn-sm py-1 px-2" style="padding: 6px 12px !important; margin-right: 4px;">
-                                            <i class="fas fa-user-edit"></i>
+                                        <a href="<?= base_url(); ?>clientes/editar_cliente/<?= $prop->clientesid; ?>" class="btn btn-sm" title="Visualizar" style="padding: 6px 12px !important; margin-right: 4px; background: #6366f1; color: white; border: none;">
+                                            <i class="fas fa-user mr-1"></i> Perfil
                                         </a>
-                                        <button type="button" class="btn btn-danger btn-sm remove py-1 px-2" style="padding: 6px 12px !important;">
+                                        <button type="button" class="btn btn-danger btn-sm remove py-1 px-2" title="Excluir" style="padding: 6px 12px !important;">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>  
                                     </td>
