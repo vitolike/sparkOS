@@ -65,7 +65,8 @@ class Contratos extends CI_Controller {
         );
         
         if ($this->db->insert('contratos', $data)) {
-            redirect('contratos/lista/sucesso_contrato');
+            $insert_id = $this->db->insert_id();
+            redirect('contratos/detalhes/'.$insert_id.'/sucesso_contrato');
         } else {
             redirect('contratos/lista/erro');
         }
@@ -85,12 +86,41 @@ class Contratos extends CI_Controller {
             // Trigger automatic execution workflow audit
             $this->db->query("UPDATE automacoes SET execucoes = execucoes + 1 WHERE gatilho LIKE '%GANHO%' OR gatilho LIKE '%Venda%'");
             
-            redirect('contratos/lista/sucesso_assinatura');
+            redirect('contratos/detalhes/'.$id.'/sucesso_assinatura');
         } else {
             redirect('contratos/lista/erro');
         }
     }
     
+    public function detalhes($id = null, $msg = null) {
+        $this->login_model->verifica_sessao();
+
+        if (!$id) {
+            redirect('contratos/lista');
+        }
+
+        $query['sysname'] = $this->login_model->sysname();
+        $query['appname'] = 'Detalhes do Contrato';
+        $query['msg'] = $msg;
+
+        $this->db->select('contratos.*, clientes.nome as nome_cliente, clientes.sobrenome as sobrenome_cliente, clientes.email, clientes.telefone, clientes.documento, clientes.tipo_documento');
+        $this->db->join('clientes', 'clientes.clientesid = contratos.cliente_id');
+        $this->db->where('idcontrato', $id);
+        $query['contrato'] = $this->db->get('contratos')->row();
+
+        if (!$query['contrato']) {
+            redirect('contratos/lista');
+        }
+
+        $this->db->where('contrato_id', $id);
+        $this->db->order_by('data_vencimento', 'DESC');
+        $query['faturas'] = $this->db->get('financeiro_faturas')->result();
+
+        $this->load->view('layout/header', $query);
+        $this->load->view('app/contratos/detalhes', $query);
+        $this->load->view('layout/footer');
+    }
+
     public function atualizar_status($id = null, $status = null) {
         $this->login_model->verifica_sessao();
         
@@ -102,7 +132,7 @@ class Contratos extends CI_Controller {
         $this->db->where('idcontrato', $id);
         
         if ($this->db->update('contratos', $data)) {
-            redirect('contratos/lista/sucesso_status');
+            redirect('contratos/detalhes/'.$id.'/sucesso_status');
         } else {
             redirect('contratos/lista/erro');
         }

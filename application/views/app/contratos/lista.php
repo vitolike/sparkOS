@@ -127,6 +127,9 @@
                                             <?php endif; ?>
                                         </td>
                                         <td class="text-right">
+                                            <a href="<?= base_url(); ?>contratos/detalhes/<?= $c->idcontrato; ?>" class="btn btn-info btn-sm py-1 px-2 mr-1" style="font-size: 11.5px !important; height: 28px !important;">
+                                                <i class="fas fa-search mr-1"></i>
+                                            </a>
                                             <?php if ($c->assinatura_eletronica == 'PENDENTE'): ?>
                                                 <a href="<?= base_url(); ?>contratos/assinar/<?= $c->idcontrato; ?>" class="btn btn-primary btn-sm py-1 px-2 mr-1" style="font-size: 11.5px !important; height: 28px !important;">
                                                     <i class="fas fa-edit mr-1"></i> Assinar
