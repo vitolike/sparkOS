@@ -17,8 +17,8 @@
                     <td style="font-size: 12px;"><?= $b->responsavel ?: '-'; ?></td>
                     <td><span class="badge badge-pill badge-<?= $b->status == 'ATIVO' ? 'success' : 'warning'; ?>" style="font-size: 9px;"><?= $b->status; ?></span></td>
                     <td class="text-right">
-                        <button class="btn btn-sm btn-outline-primary py-1 px-2 btn-edit-bcp" data-id="<?= $b->idbcp; ?>" style="font-size: 11px;"><i class="fas fa-edit"></i></button>
-                        <a href="<?= base_url(); ?>riscos/delete_bcp/<?= $b->idbcp; ?>" class="btn btn-sm btn-outline-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir?');"><i class="fas fa-trash"></i></a>
+                        <button class="btn btn-sm btn-primary py-1 px-2 btn-edit-bcp" data-id="<?= $b->idbcp; ?>" style="font-size: 11px;"><i class="fas fa-edit"></i></button>
+                        <a href="<?= base_url(); ?>riscos/delete_bcp/<?= $b->idbcp; ?>" class="btn btn-sm btn-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir?');"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 <?php endforeach; ?>

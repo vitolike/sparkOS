@@ -15,8 +15,8 @@
                     <td style="font-size: 11px;"><?= date('d/m/Y H:i', strtotime($c->data_inicio)); ?></td>
                     <td><span class="badge badge-pill badge-<?= $c->status == 'RESOLVIDO' ? 'success' : ($c->status == 'EM_ANDAMENTO' ? 'danger' : 'warning'); ?>" style="font-size: 9px;"><?= $c->status; ?></span></td>
                     <td class="text-right">
-                        <button class="btn btn-sm btn-outline-primary py-1 px-2 btn-edit-crise" data-id="<?= $c->idcrise; ?>" style="font-size: 11px;"><i class="fas fa-edit"></i></button>
-                        <a href="<?= base_url(); ?>riscos/delete_crise/<?= $c->idcrise; ?>" class="btn btn-sm btn-outline-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir?');"><i class="fas fa-trash"></i></a>
+                        <button class="btn btn-sm btn-primary py-1 px-2 btn-edit-crise" data-id="<?= $c->idcrise; ?>" style="font-size: 11px;"><i class="fas fa-edit"></i></button>
+                        <a href="<?= base_url(); ?>riscos/delete_crise/<?= $c->idcrise; ?>" class="btn btn-sm btn-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir?');"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 <?php endforeach; ?>

@@ -7,7 +7,7 @@
 <div class="col-md-6 mb-4"><div class="p-4 rounded box-shadow" style="background: white;">
 <h6 class="card-title mb-3"><i class="fas fa-list mr-2 text-primary"></i> Itens do Checklist</h6>
 <table class="table table-sm"><thead><tr><th>#</th><th>Item</th><th>Obrig.</th><th>Ações</th></tr></thead>
-<tbody><?php foreach ($itens as $i => $item): ?><tr><td><?= $item->ordem; ?></td><td><?= $item->descricao; ?></td><td><?= $item->obrigatorio ? '<span class="text-danger">Sim</span>' : '<span class="text-muted">Não</span>'; ?></td><td><a href="<?= base_url(); ?>checklists/delete_item/<?= $item->iditem; ?>" class="btn btn-sm btn-outline-danger py-0 px-1" onclick="return confirm('Excluir item?');"><i class="fas fa-trash"></i></a></td></tr><?php endforeach; ?></tbody></table>
+<tbody><?php foreach ($itens as $i => $item): ?><tr><td><?= $item->ordem; ?></td><td><?= $item->descricao; ?></td><td><?= $item->obrigatorio ? '<span class="text-danger">Sim</span>' : '<span class="text-muted">Não</span>'; ?></td><td><a href="<?= base_url(); ?>checklists/delete_item/<?= $item->iditem; ?>" class="btn btn-sm btn-danger py-0 px-1" onclick="return confirm('Excluir item?');"><i class="fas fa-trash"></i></a></td></tr><?php endforeach; ?></tbody></table>
 <button class="btn btn-primary btn-sm mt-2" data-toggle="modal" data-target="#modalAddItem"><i class="fas fa-plus mr-1"></i> Adicionar Item</button>
 </div></div>
 

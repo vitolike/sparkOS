@@ -17,8 +17,8 @@
                     <td style="font-size: 11px;"><?= $p->data_revisao ? date('d/m/Y', strtotime($p->data_revisao)) : '-'; ?></td>
                     <td><span class="badge badge-pill badge-<?= $p->status == 'APROVADA' ? 'success' : ($p->status == 'REVISAO' ? 'warning' : 'info'); ?>" style="font-size: 9px;"><?= $p->status; ?></span></td>
                     <td class="text-right">
-                        <button class="btn btn-sm btn-outline-primary py-1 px-2 btn-edit-politica" data-id="<?= $p->idpolitica; ?>" style="font-size: 11px;"><i class="fas fa-edit"></i></button>
-                        <a href="<?= base_url(); ?>riscos/delete_politica/<?= $p->idpolitica; ?>" class="btn btn-sm btn-outline-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir?');"><i class="fas fa-trash"></i></a>
+                        <button class="btn btn-sm btn-primary py-1 px-2 btn-edit-politica" data-id="<?= $p->idpolitica; ?>" style="font-size: 11px;"><i class="fas fa-edit"></i></button>
+                        <a href="<?= base_url(); ?>riscos/delete_politica/<?= $p->idpolitica; ?>" class="btn btn-sm btn-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir?');"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 <?php endforeach; ?>

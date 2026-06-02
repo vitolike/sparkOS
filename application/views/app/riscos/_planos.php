@@ -26,10 +26,10 @@
                         <span class="badge badge-pill badge-<?= $p->status == 'CONCLUIDO' ? 'success' : ($p->status == 'EM_ANDAMENTO' ? 'primary' : ($p->status == 'CANCELADO' ? 'danger' : 'warning')); ?>" style="font-size: 9px;"><?= str_replace('_', ' ', $p->status); ?></span>
                     </td>
                     <td class="text-right">
-                        <a href="<?= base_url(); ?>riscos/update_plano_status/<?= $p->idplano; ?>/EM_ANDAMENTO" class="btn btn-sm btn-outline-primary py-1 px-2" style="font-size: 11px;" title="Iniciar"><i class="fas fa-play"></i></a>
-                        <a href="<?= base_url(); ?>riscos/update_plano_status/<?= $p->idplano; ?>/CONCLUIDO" class="btn btn-sm btn-outline-success py-1 px-2" style="font-size: 11px;" title="Concluir"><i class="fas fa-check"></i></a>
-                        <button class="btn btn-sm btn-outline-info py-1 px-2 btn-edit-plano" data-id="<?= $p->idplano; ?>" style="font-size: 11px;"><i class="fas fa-edit"></i></button>
-                        <a href="<?= base_url(); ?>riscos/delete_plano/<?= $p->idplano; ?>" class="btn btn-sm btn-outline-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir?');"><i class="fas fa-trash"></i></a>
+                        <a href="<?= base_url(); ?>riscos/update_plano_status/<?= $p->idplano; ?>/EM_ANDAMENTO" class="btn btn-sm btn-primary py-1 px-2" style="font-size: 11px;" title="Iniciar"><i class="fas fa-play"></i></a>
+                        <a href="<?= base_url(); ?>riscos/update_plano_status/<?= $p->idplano; ?>/CONCLUIDO" class="btn btn-sm btn-success py-1 px-2" style="font-size: 11px;" title="Concluir"><i class="fas fa-check"></i></a>
+                        <button class="btn btn-sm btn-info py-1 px-2 btn-edit-plano" data-id="<?= $p->idplano; ?>" style="font-size: 11px;"><i class="fas fa-edit"></i></button>
+                        <a href="<?= base_url(); ?>riscos/delete_plano/<?= $p->idplano; ?>" class="btn btn-sm btn-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir?');"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 <?php endforeach; ?>

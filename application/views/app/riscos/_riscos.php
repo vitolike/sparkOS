@@ -36,8 +36,8 @@
                     <td style="font-size: 12px;"><?= $r->area_responsavel ?: '-'; ?></td>
                     <td><span class="badge badge-pill badge-<?= $r->status == 'IDENTIFICADO' ? 'info' : ($r->status == 'EM_TRATAMENTO' ? 'warning' : ($r->status == 'MONITORANDO' ? 'primary' : 'success')); ?>" style="font-size: 9px;"><?= $r->status; ?></span></td>
                     <td class="text-right">
-                        <button class="btn btn-sm btn-outline-primary py-1 px-2 btn-edit-risco" data-id="<?= $r->idrisco; ?>" style="font-size: 11px;" title="Editar"><i class="fas fa-edit"></i></button>
-                        <a href="<?= base_url(); ?>riscos/delete_risco/<?= $r->idrisco; ?>" class="btn btn-sm btn-outline-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir este risco?');" title="Excluir"><i class="fas fa-trash"></i></a>
+                        <button class="btn btn-sm btn-primary py-1 px-2 btn-edit-risco" data-id="<?= $r->idrisco; ?>" style="font-size: 11px;" title="Editar"><i class="fas fa-edit"></i></button>
+                        <a href="<?= base_url(); ?>riscos/delete_risco/<?= $r->idrisco; ?>" class="btn btn-sm btn-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir este risco?');" title="Excluir"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 <?php endforeach; ?>

@@ -8,7 +8,7 @@
 <div class="d-flex justify-content-between align-items-start mb-3"><div><h6 class="font-weight-bold mb-1" style="font-size: 15px;"><?= $m->titulo; ?></h6><span class="badge badge-pill badge-info" style="font-size: 9px;"><?= $m->tipo; ?></span> <span class="text-muted" style="font-size: 11px;"><?= $m->total_itens; ?> itens</span></div></div>
 <p class="text-muted" style="font-size: 12px;"><?= $m->descricao ?: ''; ?></p>
 <div class="d-flex justify-content-between mt-3">
-<a href="<?= base_url(); ?>checklists/modelo/<?= $m->idchecklist; ?>" class="btn btn-outline-primary btn-sm py-1 px-3" style="font-size: 11px;"><i class="fas fa-list mr-1"></i> Gerenciar</a>
+<a href="<?= base_url(); ?>checklists/modelo/<?= $m->idchecklist; ?>" class="btn btn-primary btn-sm py-1 px-3" style="font-size: 11px;"><i class="fas fa-list mr-1"></i> Gerenciar</a>
 <a href="<?= base_url(); ?>checklists/executar/<?= $m->idchecklist; ?>" class="btn btn-success btn-sm py-1 px-3" style="font-size: 11px;"><i class="fas fa-play mr-1"></i> Executar</a>
 </div></div></div><?php endforeach; ?></div></div>
 

@@ -22,9 +22,9 @@
                     <td style="font-size: 11px;"><?= $k->periodicidade; ?></td>
                     <td><span class="badge badge-pill badge-<?= $k->status == 'ATIVO' ? 'success' : 'secondary'; ?>" style="font-size: 9px;"><?= $k->status; ?></span></td>
                     <td class="text-right">
-                        <button class="btn btn-sm btn-outline-success py-1 px-2 btn-add-kri-valor" data-id="<?= $k->idkri; ?>" data-nome="<?= $k->nome; ?>" style="font-size: 11px;" title="Registrar Valor"><i class="fas fa-plus-circle"></i></button>
-                        <button class="btn btn-sm btn-outline-primary py-1 px-2 btn-edit-kri" data-id="<?= $k->idkri; ?>" style="font-size: 11px;"><i class="fas fa-edit"></i></button>
-                        <a href="<?= base_url(); ?>riscos/delete_kri/<?= $k->idkri; ?>" class="btn btn-sm btn-outline-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir KRI?');"><i class="fas fa-trash"></i></a>
+                        <button class="btn btn-sm btn-success py-1 px-2 btn-add-kri-valor" data-id="<?= $k->idkri; ?>" data-nome="<?= $k->nome; ?>" style="font-size: 11px;" title="Registrar Valor"><i class="fas fa-plus-circle"></i></button>
+                        <button class="btn btn-sm btn-primary py-1 px-2 btn-edit-kri" data-id="<?= $k->idkri; ?>" style="font-size: 11px;"><i class="fas fa-edit"></i></button>
+                        <a href="<?= base_url(); ?>riscos/delete_kri/<?= $k->idkri; ?>" class="btn btn-sm btn-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir KRI?');"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 <?php endforeach; ?>

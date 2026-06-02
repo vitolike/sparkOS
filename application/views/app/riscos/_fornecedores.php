@@ -17,8 +17,8 @@
                     <td><span class="badge badge-pill badge-risco-<?= $f->nivel_risco; ?>"><?= $f->nivel_risco; ?></span></td>
                     <td><span class="badge badge-pill badge-<?= $f->status == 'ATIVO' ? 'success' : 'secondary'; ?>" style="font-size: 9px;"><?= $f->status; ?></span></td>
                     <td class="text-right">
-                        <button class="btn btn-sm btn-outline-primary py-1 px-2 btn-edit-fornecedor" data-id="<?= $f->idfornecedor; ?>" style="font-size: 11px;"><i class="fas fa-edit"></i></button>
-                        <a href="<?= base_url(); ?>riscos/delete_fornecedor/<?= $f->idfornecedor; ?>" class="btn btn-sm btn-outline-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir?');"><i class="fas fa-trash"></i></a>
+                        <button class="btn btn-sm btn-primary py-1 px-2 btn-edit-fornecedor" data-id="<?= $f->idfornecedor; ?>" style="font-size: 11px;"><i class="fas fa-edit"></i></button>
+                        <a href="<?= base_url(); ?>riscos/delete_fornecedor/<?= $f->idfornecedor; ?>" class="btn btn-sm btn-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir?');"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 <?php endforeach; ?>

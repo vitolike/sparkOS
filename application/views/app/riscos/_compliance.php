@@ -24,8 +24,8 @@
                     <td style="font-size: 11px;"><?= $c->proxima_avaliacao ? date('d/m/Y', strtotime($c->proxima_avaliacao)) : '-'; ?></td>
                     <td><span class="badge badge-pill badge-<?= $c->status == 'CONFORME' ? 'success' : ($c->status == 'NAO_CONFORME' ? 'danger' : 'warning'); ?>" style="font-size: 9px;"><?= $c->status; ?></span></td>
                     <td class="text-right">
-                        <button class="btn btn-sm btn-outline-primary py-1 px-2 btn-edit-compliance" data-id="<?= $c->idcompliance; ?>" style="font-size: 11px;"><i class="fas fa-edit"></i></button>
-                        <a href="<?= base_url(); ?>riscos/delete_compliance/<?= $c->idcompliance; ?>" class="btn btn-sm btn-outline-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir?');"><i class="fas fa-trash"></i></a>
+                        <button class="btn btn-sm btn-primary py-1 px-2 btn-edit-compliance" data-id="<?= $c->idcompliance; ?>" style="font-size: 11px;"><i class="fas fa-edit"></i></button>
+                        <a href="<?= base_url(); ?>riscos/delete_compliance/<?= $c->idcompliance; ?>" class="btn btn-sm btn-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir?');"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 <?php endforeach; ?>

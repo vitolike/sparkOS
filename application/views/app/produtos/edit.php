@@ -74,7 +74,7 @@
 		<?php else: ?><img src="<?= base_url(); ?>public/uploads/<?= $query[0]->foto; ?>" class="rounded mx-auto d-block img-fluid" width="250" height="250">
 		<?php endif; ?> 
 		<p>&nbsp;</p>
-			<center><a class="btn btn-outline-primary" data-toggle="modal" data-target="#imagem"><i class="fas fa-image"></i>&nbsp;&nbsp;Adicionar/Editar Imagem</a></center>
+			<center><a class="btn btn-primary" data-toggle="modal" data-target="#imagem"><i class="fas fa-image"></i>&nbsp;&nbsp;Adicionar/Editar Imagem</a></center>
     </div>
     <div class="col">
       <div class="form-group">

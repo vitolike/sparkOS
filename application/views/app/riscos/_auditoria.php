@@ -23,8 +23,8 @@
                     </td>
                     <td><span class="badge badge-pill badge-<?= $a->status == 'CONCLUIDA' ? 'success' : ($a->status == 'EM_ANDAMENTO' ? 'primary' : ($a->status == 'PLANEJADA' ? 'info' : 'warning')); ?>" style="font-size: 9px;"><?= $a->status; ?></span></td>
                     <td class="text-right">
-                        <button class="btn btn-sm btn-outline-primary py-1 px-2 btn-edit-auditoria" data-id="<?= $a->idauditoria; ?>" style="font-size: 11px;"><i class="fas fa-edit"></i></button>
-                        <a href="<?= base_url(); ?>riscos/delete_auditoria/<?= $a->idauditoria; ?>" class="btn btn-sm btn-outline-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir?');"><i class="fas fa-trash"></i></a>
+                        <button class="btn btn-sm btn-primary py-1 px-2 btn-edit-auditoria" data-id="<?= $a->idauditoria; ?>" style="font-size: 11px;"><i class="fas fa-edit"></i></button>
+                        <a href="<?= base_url(); ?>riscos/delete_auditoria/<?= $a->idauditoria; ?>" class="btn btn-sm btn-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir?');"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 <?php endforeach; ?>

@@ -6,7 +6,7 @@
 <div class="col-md-4 mb-4"><div class="p-4 rounded box-shadow h-100" style="background: white;">
 <div class="d-flex align-items-center mb-3"><div class="p-3 rounded-lg mr-3" style="background: rgba(99,102,241,0.08); color: #6366f1; border-radius: 12px;"><i class="fas fa-warehouse fa-lg"></i></div><div><h6 class="font-weight-bold mb-0"><?= $e->nome; ?></h6><span class="text-muted" style="font-size: 11px;"><?= $e->tipo; ?></span></div></div>
 <p class="text-muted" style="font-size: 12px;"><?= $e->descricao ?: ''; ?></p>
-<a href="<?= base_url(); ?>estoque/itens/<?= $e->idestoque; ?>" class="btn btn-outline-primary btn-sm btn-block"><i class="fas fa-boxes mr-1"></i> Ver Itens</a>
+<a href="<?= base_url(); ?>estoque/itens/<?= $e->idestoque; ?>" class="btn btn-primary btn-sm btn-block"><i class="fas fa-boxes mr-1"></i> Ver Itens</a>
 </div></div><?php endforeach; ?></div></div>
 
 <div class="modal fade" id="modalAdd" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title"><i class="fas fa-warehouse mr-2 text-primary"></i> Novo Almoxarifado</h5><button type="button" class="close" data-dismiss="modal"><span>&times;</span></button></div><form method="post" action="<?= base_url(); ?>estoque/adicionar"><div class="modal-body p-4">

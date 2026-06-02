@@ -16,8 +16,8 @@
                     <td style="font-size: 11px;"><?= $c->proxima_reuniao ? date('d/m/Y', strtotime($c->proxima_reuniao)) : '-'; ?></td>
                     <td><span class="badge badge-pill badge-<?= $c->status == 'ATIVO' ? 'success' : 'secondary'; ?>" style="font-size: 9px;"><?= $c->status; ?></span></td>
                     <td class="text-right">
-                        <button class="btn btn-sm btn-outline-primary py-1 px-2 btn-edit-comite" data-id="<?= $c->idcomite; ?>" style="font-size: 11px;"><i class="fas fa-edit"></i></button>
-                        <a href="<?= base_url(); ?>riscos/delete_comite/<?= $c->idcomite; ?>" class="btn btn-sm btn-outline-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir?');"><i class="fas fa-trash"></i></a>
+                        <button class="btn btn-sm btn-primary py-1 px-2 btn-edit-comite" data-id="<?= $c->idcomite; ?>" style="font-size: 11px;"><i class="fas fa-edit"></i></button>
+                        <a href="<?= base_url(); ?>riscos/delete_comite/<?= $c->idcomite; ?>" class="btn btn-sm btn-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir?');"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 <?php endforeach; ?>

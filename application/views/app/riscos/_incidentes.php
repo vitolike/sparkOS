@@ -17,10 +17,10 @@
                     <td><span class="badge badge-pill badge-<?= $inc->status == 'ABERTO' ? 'danger' : ($inc->status == 'EM_ANALISE' ? 'warning' : 'success'); ?>" style="font-size: 9px;"><?= $inc->status; ?></span></td>
                     <td class="text-right">
                         <?php if ($inc->status != 'RESOLVIDO'): ?>
-                            <a href="<?= base_url(); ?>riscos/resolver_incidente/<?= $inc->idincidente; ?>" class="btn btn-sm btn-outline-success py-1 px-2" style="font-size: 11px;" title="Resolver"><i class="fas fa-check"></i></a>
+                            <a href="<?= base_url(); ?>riscos/resolver_incidente/<?= $inc->idincidente; ?>" class="btn btn-sm btn-success py-1 px-2" style="font-size: 11px;" title="Resolver"><i class="fas fa-check"></i></a>
                         <?php endif; ?>
-                        <button class="btn btn-sm btn-outline-primary py-1 px-2 btn-edit-incidente" data-id="<?= $inc->idincidente; ?>" style="font-size: 11px;"><i class="fas fa-edit"></i></button>
-                        <a href="<?= base_url(); ?>riscos/delete_incidente/<?= $inc->idincidente; ?>" class="btn btn-sm btn-outline-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir?');"><i class="fas fa-trash"></i></a>
+                        <button class="btn btn-sm btn-primary py-1 px-2 btn-edit-incidente" data-id="<?= $inc->idincidente; ?>" style="font-size: 11px;"><i class="fas fa-edit"></i></button>
+                        <a href="<?= base_url(); ?>riscos/delete_incidente/<?= $inc->idincidente; ?>" class="btn btn-sm btn-danger py-1 px-2" style="font-size: 11px;" onclick="return confirm('Excluir?');"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 <?php endforeach; ?>
