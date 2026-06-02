@@ -1,91 +1,235 @@
-/* CSS Document */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --input-padding-x: .75rem;
-  --input-padding-y: .75rem;
+  --primary-color: #6366f1; /* indigo-500 */
+  --primary-hover: #4f46e5; /* indigo-600 */
+  --bg-app: #f8fafc; /* slate-50 */
+  --border-color: #e2e8f0; /* slate-200 */
+  --text-main: #0f172a; /* slate-900 */
+  --text-muted: #64748b; /* slate-500 */
 }
 
-html,
-body {
+* {
+  box-sizing: border-box;
+}
+
+html, body {
   height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Outfit', sans-serif;
+  overflow: hidden;
+  background-color: var(--bg-app);
 }
 
+/* Beautiful dynamic background with soft indigo glows for light theme */
 body {
-  display: -ms-flexbox;
-  display: -webkit-box;
   display: flex;
-  -ms-flex-align: center;
-  -ms-flex-pack: center;
-  -webkit-box-align: center;
   align-items: center;
-  -webkit-box-pack: center;
   justify-content: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #C8C8C8;
-  
-}
-
-.form-signin {
-  width: 100%;
-  max-width: 420px;
-  padding: 15px;
-  margin: 0 auto;
-  font-size:12px;
-}
-
-.form-label-group {
   position: relative;
-  margin-bottom: 1rem;
+  background: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+              radial-gradient(circle at 90% 80%, rgba(165, 180, 252, 0.08) 0%, transparent 40%),
+              var(--bg-app);
 }
 
-.form-label-group > input,
-.form-label-group > label {
-  padding: var(--input-padding-y) var(--input-padding-x);
-}
-
-.form-label-group > label {
+/* Glow decoration elements - subtle for light theme */
+.bg-glow-1 {
   position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
+  top: 25%;
+  left: 20%;
+  width: 300px;
+  height: 300px;
+  background: var(--primary-color);
+  filter: blur(120px);
+  opacity: 0.06;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatOrb 12s infinite alternate;
+}
+
+.bg-glow-2 {
+  position: absolute;
+  bottom: 25%;
+  right: 20%;
+  width: 350px;
+  height: 350px;
+  background: #a5b4fc;
+  filter: blur(140px);
+  opacity: 0.06;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatOrb 15s infinite alternate-reverse;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(50px, -40px) scale(1.1); }
+}
+
+.login-container {
   width: 100%;
-  margin-bottom: 0; /* Override default `<label>` margin */
-  line-height: 1.5;
-  color: #495057;
-  border: 1px solid transparent;
-  border-radius: .25rem;
-  transition: all .1s ease-in-out;
+  max-width: 440px;
+  padding: 24px;
+  z-index: 10;
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.form-label-group input::-webkit-input-placeholder {
-  color: transparent;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.form-label-group input:-ms-input-placeholder {
-  color: transparent;
+/* Clean Slate Glassmorphism Card matching dashboard */
+.login-card {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.03), 0 10px 10px -5px rgba(0, 0, 0, 0.02),
+              inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  text-align: center;
 }
 
-.form-label-group input::-ms-input-placeholder {
-  color: transparent;
+.brand-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--primary-color), #4f46e5);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 32px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.2);
+  animation: pulseGlow 3s infinite alternate;
 }
 
-.form-label-group input::-moz-placeholder {
-  color: transparent;
+@keyframes pulseGlow {
+  0% { box-shadow: 0 8px 20px rgba(99, 102, 241, 0.15); }
+  100% { box-shadow: 0 8px 30px rgba(79, 70, 229, 0.3); }
 }
 
-.form-label-group input::placeholder {
-  color: transparent;
+.login-card h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
 }
 
-.form-label-group input:not(:placeholder-shown) {
-  padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
-  padding-bottom: calc(var(--input-padding-y) / 3);
+.login-card h1 b {
+  background: linear-gradient(to right, var(--primary-color), #4f46e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.form-label-group input:not(:placeholder-shown) ~ label {
-  padding-top: calc(var(--input-padding-y) / 3);
-  padding-bottom: calc(var(--input-padding-y) / 3);
-  font-size: 10px;
-  color: #777;
+.login-card p.subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+/* Stylized Form elements - matches app.css inputs */
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 16px;
+  transition: color 0.3s;
+  z-index: 5;
+}
+
+.form-control-modern {
+  width: 100%;
+  padding: 16px 16px 16px 48px;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  color: var(--text-main);
+  font-size: 15px;
+  font-weight: 400;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.form-control-modern::placeholder {
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+.form-control-modern:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+
+.form-control-modern:focus + .input-icon {
+  color: var(--primary-color);
+}
+
+/* Modern Gradient Button - matches indigo button scheme */
+.btn-modern {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--primary-color), #4f46e5);
+  border: none;
+  border-radius: 14px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.15);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(99, 102, 241, 0.25);
+  filter: brightness(1.05);
+}
+
+.btn-modern:active {
+  transform: translateY(1px);
+}
+
+.copyright {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 32px;
+}
+
+/* Custom Alert modifications - clean light alerts */
+.alert-modern {
+  border-radius: 14px;
+  border: none;
+  font-size: 13px;
+  text-align: left;
+  padding: 14px 20px;
+  margin-bottom: 24px;
+}
+
+.alert-danger-modern {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fee2e2;
+}
+
+.alert-success-modern {
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #d1fae5;
 }

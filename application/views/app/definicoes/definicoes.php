@@ -1,10 +1,8 @@
-    <div class="nav-scroller bg-white box-shadow ">
+    <div class="nav-scroller box-shadow mb-4">
     <div class="container">
       <nav class="nav nav-underline">
-        <a class="nav-link active red-text" href="<?= base_url(); ?>app/home"><i class="fas fa-home navbar-text"></i></a>
-         <a class="nav-link active red-text" onclick="history.back()"><i class="fas fa-arrow-left navbar-text"></i></a>
-
-       
+        <a class="nav-link" href="<?= base_url(); ?>app/home"><i class="fas fa-home"></i> Dashboard</a>
+        <a class="nav-link active" onclick="history.back()"><i class="fas fa-arrow-left"></i> Voltar</a>
       </nav>
       </div>
     </div>

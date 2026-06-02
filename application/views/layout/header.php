@@ -1,105 +1,140 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><?php echo $sysname.' - '. $appname ?></title>
-<link href="<?= base_url(); ?>public/css/app.css" rel="stylesheet">
-
-<link rel="stylesheet" type="text/css" href="<?= base_url(); ?>public/css/bootstrap.min.css"/>
-<link rel="stylesheet" type="text/css" href="<?= base_url(); ?>public/css/all.min.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.js"></script>
-<link rel="stylesheet" href="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.css" />
-
-<link href="<?= base_url(); ?>public/css/fontawesome-all.css" rel="stylesheet">
-<script type="text/javascript" src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
-<script src="https://code.jquery.com/jquery-1.8.2.js"></script>
-<script src="https://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" />
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?= base_url(); ?>public/js/qrcode.js"></script>
-
-
- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title><?php echo $sysname . ' - ' . $appname; ?></title>
+    
+    <!-- Google Fonts: Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>public/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>public/css/all.min.css"/>
+    <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>public/css/fontawesome-all.css" />
+    <link rel="stylesheet" type="text/css" href="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>public/css/app.css">
+    
+    <!-- Scripts (Safe head loading for legacy view compatibility) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://lipis.github.io/bootstrap-sweetalert/dist/sweetalert.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="<?= base_url(); ?>public/js/qrcode.js"></script>
 </head>
-
-
-		  
-		  
 <body class="bg-app">
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
- <div class="container">
-    <ul class="nav navbar-nav pull-sm-left">
-    <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-plus navbar-text"></i>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-								<li><a class="dropdown-item"  href="<?= base_url(); ?>definicoes"><i class="fas fa-cogs"></i> Definições</a></li>
 
-								<li><a class="dropdown-item"  href="<?= base_url(); ?>admins/lista"><i class="fas fa-user-cog"></i> Usuários/Tecnicos</a></li>
-                                
-                                <li><a class="dropdown-item"  href="<?= base_url(); ?>clientes/lista"><i class="fas fa-users"></i> Clientes</a></li>
-                                
-                                <li><a class="dropdown-item"  href="<?= base_url(); ?>produtos/lista"><i class="fas fa-store"></i> Produtos</a></li>
-                                
-                                 <li><a class="dropdown-item"  href="<?= base_url(); ?>servicos/lista"><i class="fas fa-screwdriver"></i> Serviços</a></li>
-                                 
-                                 <li><a class="dropdown-item"  href="<?= base_url(); ?>os/lista"><i class="fas fa-sticky-note"></i> Ordens de Serviço</a></li>
-                                
-                              
-                            </ul>
-                        </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-logo mx-auto logo-fonte">
-      <li class="nav-item">
-        <a class="navbar-brand logo" href="<?= base_url(); ?>app"><i class="fab fa-codepen fa-2x "></i></a>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav pull-sm-right">
-       <li class="nav-item">
-            <a class="nav-link" data-toggle="modal" data-target="#system-info" href="#"><i class="fas fa-info-circle navbar-text"></i></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?= base_url(); ?>auth/sair"><i class="fas fa-sign-out-alt navbar-text"></i> Sair</a>
-          </li>
+    <!-- Topbar (Sticky Header) -->
+    <nav class="navbar navbar-expand-md fixed-top">
+        <div class="container-fluid px-4">
+            <!-- Sidebar Toggle Hamburger -->
+            <button class="navbar-toggle-btn mr-3" id="sidebarToggleBtn" type="button">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <!-- Brand Logo -->
+            <a class="navbar-brand logo d-flex align-items-center" href="<?= base_url(); ?>app">
+                <i class="fab fa-codepen mr-2" style="font-size: 24px;"></i>
+                <span class="font-weight-bold" style="letter-spacing: -0.5px;"><?= $sysname; ?></span>
+            </a>
+            
+            <!-- Right Actions -->
+            <div class="ml-auto d-flex align-items-center">
+                <button class="action-icon-btn mr-3" data-toggle="modal" data-target="#system-info" title="Sobre o sistema">
+                    <i class="fas fa-info-circle"></i>
+                </button>
+                <a class="btn-logout" href="<?= base_url(); ?>auth/sair">
+                    <i class="fas fa-sign-out-alt"></i> Sair
+                </a>
+            </div>
+        </div>
+    </nav>
 
-    </ul>
-  </div>
-</nav>
-
-
-
-        
-      
-    
-    <!-- Modal -->
-<div class="modal fade" id="system-info" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title"><i class="fas fa-info-circle navbar-text"></i>&nbsp;Sobre o sistema</h5>
-      </div>
-      <div class="modal-body">
-      
-      <p> <?php echo  (ENVIRONMENT === 'development') ?  '<strong>Versão do Framework: </strong>' . CI_VERSION . '' : '' ?></p>
-      
-      <p><strong>Chave do Produto:</strong> <?php echo $this->config->item('key_id'); ?></p>
-      
-      <p><strong>Versão:</strong> <?php echo $this->config->item('sys_ver'); ?></p>
-    
-        Criado por Victor Oliveira. Codigo Aberto (link <a href="https://github.com/vitolike/sparkOS">github</a>)
-		  <p>&nbsp;</p>
-		  
-		  <p>Nós ajude doando R$5 &nbsp;
-<!-- INICIO DO BOTAO PAGSEGURO --><a href="javascript:void(0)" onclick="PagSeguroLightbox('9578ADE9080827DAA43A9F9DD12AF5D9'); return false;"><img src="//assets.pagseguro.com.br/ps-integration-assets/botoes/pagamentos/205x30-pagar-preto.gif" alt="Pague com PagSeguro - é rápido, grátis e seguro!" /></a><script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script><!-- FIM DO BOTAO PAGSEGURO --></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary btn-lg btn-block" data-dismiss="modal">Fechar</button>
-      </div>
+    <!-- Slide-out Sidebar Panel Drawer -->
+    <div class="app-sidebar" id="appSidebar">
+        <div class="sidebar-header d-flex align-items-center justify-content-between p-4">
+            <span class="sidebar-title">Menu Principal</span>
+            <button class="close-sidebar-btn" id="closeSidebarBtn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="sidebar-menu px-3">
+            <a class="menu-item <?= $appname == 'Dashboard' ? 'active' : ''; ?>" href="<?= base_url(); ?>app/home">
+                <i class="fas fa-th-large"></i> Dashboard
+            </a>
+            <a class="menu-item <?= $appname == 'Clientes' ? 'active' : ''; ?>" href="<?= base_url(); ?>clientes/lista">
+                <i class="fas fa-users"></i> Clientes
+            </a>
+            <a class="menu-item <?= $appname == 'CRM / Funil' ? 'active' : ''; ?>" href="<?= base_url(); ?>crm/lista">
+                <i class="fas fa-filter"></i> CRM / Funil
+            </a>
+            <a class="menu-item <?= $appname == 'Ordens de Serviço' ? 'active' : ''; ?>" href="<?= base_url(); ?>os/lista">
+                <i class="fas fa-file-invoice"></i> Ordens de Serviço
+            </a>
+            <a class="menu-item <?= $appname == 'Produtos' ? 'active' : ''; ?>" href="<?= base_url(); ?>produtos/lista">
+                <i class="fas fa-box-open"></i> Produtos
+            </a>
+            <a class="menu-item <?= $appname == 'Serviços' ? 'active' : ''; ?>" href="<?= base_url(); ?>servicos/lista">
+                <i class="fas fa-tools"></i> Serviços
+            </a>
+            <a class="menu-item <?= $appname == 'Help Desk / Tickets' ? 'active' : ''; ?>" href="<?= base_url(); ?>helpdesk/lista">
+                <i class="fas fa-headset"></i> Help Desk / Tickets
+            </a>
+            <a class="menu-item <?= $appname == 'Marketing / Campanhas' ? 'active' : ''; ?>" href="<?= base_url(); ?>marketing/lista">
+                <i class="fas fa-bullhorn"></i> Marketing / ROI
+            </a>
+            <a class="menu-item <?= $appname == 'Propostas & Contratos' ? 'active' : ''; ?>" href="<?= base_url(); ?>contratos/lista">
+                <i class="fas fa-file-signature"></i> Propostas & Contratos
+            </a>
+            <a class="menu-item <?= $appname == 'Automações & Workflows' ? 'active' : ''; ?>" href="<?= base_url(); ?>automacoes/lista">
+                <i class="fas fa-bolt"></i> Automações / Workflows
+            </a>
+            <a class="menu-item <?= $appname == 'Compliance & Riscos' ? 'active' : ''; ?>" href="<?= base_url(); ?>compliance/lista">
+                <i class="fas fa-shield-alt"></i> Compliance & Riscos
+            </a>
+            
+            <div class="menu-divider my-3"></div>
+            
+            <a class="menu-item <?= $appname == 'Definições' ? 'active' : ''; ?>" href="<?= base_url(); ?>definicoes">
+                <i class="fas fa-cogs"></i> Definições
+            </a>
+            <a class="menu-item <?= $appname == 'Administradores' ? 'active' : ''; ?>" href="<?= base_url(); ?>admins/lista">
+                <i class="fas fa-user-cog"></i> Usuários / Técnicos
+            </a>
+        </div>
     </div>
-  </div>
-</div>
-</html>
+
+    <!-- Sidebar Overlay Backdrop -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Wrapper of Dashboard Panel Content -->
+    <div class="app-content-wrapper">
+
+    <!-- Modal Sobre o Sistema -->
+    <div class="modal fade" id="system-info" tabindex="-1" role="dialog" aria-labelledby="systemInfoTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="systemInfoTitle"><i class="fas fa-info-circle mr-2 text-primary"></i> Sobre o sistema</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="mb-3"> <?php echo (ENVIRONMENT === 'development') ? '<strong>Versão do Framework:</strong> ' . CI_VERSION : '' ?></p>
+                    <p class="mb-3"><strong>Chave do Produto:</strong> <code><?php echo $this->config->item('key_id'); ?></code></p>
+                    <p class="mb-3"><strong>Versão do Sistema:</strong> <span class="badge badge-pill badge-success"><?php echo $this->config->item('sys_ver'); ?></span></p>
+                    <hr class="my-3" style="border-color: var(--border-color);">
+                    <p class="text-muted mb-0" style="font-size: 13px;">
+                        Criado por Victor Oliveira. Código Aberto (disponível no <a href="https://github.com/vitolike/sparkOS" target="_blank" class="font-weight-bold">GitHub</a>).
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-block py-2" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
