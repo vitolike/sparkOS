@@ -48,6 +48,7 @@ body {
 
 .navbar-brand.logo:hover i {
   transform: rotate(15deg) scale(1.1);
+  color: var(--primary-color);
 }
 
 /* Navbar Toggle Hamburger Button */

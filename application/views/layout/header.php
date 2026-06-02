@@ -36,7 +36,7 @@
             </button>
             
             <!-- Brand Logo -->
-            <a class="navbar-brand logo d-flex align-items-center" href="<?= base_url(); ?>app">
+            <a class="navbar-brand logo d-flex align-items-center" href="<?= base_url(); ?>app/home">
                 <i class="fab fa-codepen mr-2" style="font-size: 24px;"></i>
                 <span class="font-weight-bold" style="letter-spacing: -0.5px;"><?= $sysname; ?></span>
             </a>
